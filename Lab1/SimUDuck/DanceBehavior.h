@@ -10,7 +10,7 @@ struct IDanceBehavior
 	virtual void Dance() = 0;
 };
 
-class DanceWaltz : public IDanceBehavior
+class CDanceWaltz : public IDanceBehavior
 {
 public:
 	void Dance() override
@@ -19,7 +19,7 @@ public:
 	}
 };
 
-class DanceMinuet : public IDanceBehavior
+class CDanceMinuet : public IDanceBehavior
 {
 public:
 	void Dance() override
@@ -28,7 +28,7 @@ public:
 	}
 };
 
-class DanceNoWay : public IDanceBehavior
+class CDanceNoWay : public IDanceBehavior
 {
 public:
 	void Dance() override {}

@@ -9,7 +9,7 @@ struct IQuackBehavior
 	virtual void Quack() = 0;
 };
 
-class QuackBehavior : public IQuackBehavior
+class CQuackBehavior : public IQuackBehavior
 {
 public:
 	void Quack() override
@@ -18,7 +18,7 @@ public:
 	}
 };
 
-class SqueakBehavior : public IQuackBehavior
+class CSqueakBehavior : public IQuackBehavior
 {
 public:
 	void Quack() override
@@ -27,7 +27,7 @@ public:
 	}
 };
 
-class MuteQuackBehavior : public IQuackBehavior
+class CMuteQuackBehavior : public IQuackBehavior
 {
 public:
 	void Quack() override {}

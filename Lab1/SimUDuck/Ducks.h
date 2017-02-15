@@ -7,10 +7,10 @@
 #include "FlyBehavior.h"
 #include "DanceBehavior.h"
 
-class Duck
+class CDuck
 {
 public:
-	Duck(
+	CDuck(
 		std::unique_ptr<IFlyBehavior> && flyBehavior
 		, std::unique_ptr<IQuackBehavior> && quackBehavior
 		, std::unique_ptr<IDanceBehavior> && danceBehavior
@@ -48,21 +48,21 @@ public:
 		m_danceBehavior = std::move(danceBehavior);
 	}
 	virtual void Display() const = 0;
-	virtual ~Duck() {};
+	virtual ~CDuck() {};
 private:
 	std::unique_ptr<IFlyBehavior> m_flyBehavior;
 	std::unique_ptr<IQuackBehavior> m_quackBehavior;
 	std::unique_ptr<IDanceBehavior> m_danceBehavior;
 };
 
-class MallardDuck : public Duck
+class CMallardDuck : public CDuck
 {
 public:
-	MallardDuck()
-		: Duck(
-			std::make_unique<FlyWithWings>()
-			, std::make_unique<QuackBehavior>()
-			, std::make_unique<DanceWaltz>()
+	CMallardDuck()
+		: CDuck(
+			std::make_unique<CFlyWithWings>()
+			, std::make_unique<CQuackBehavior>()
+			, std::make_unique<CDanceWaltz>()
 		)
 	{
 	}
@@ -73,14 +73,14 @@ public:
 	}
 };
 
-class RedheadDuck : public Duck
+class CRedheadDuck : public CDuck
 {
 public:
-	RedheadDuck()
-		: Duck(
-			std::make_unique<FlyWithWings>()
-			, std::make_unique<QuackBehavior>()
-			, std::make_unique<DanceMinuet>()
+	CRedheadDuck()
+		: CDuck(
+			std::make_unique<CFlyWithWings>()
+			, std::make_unique<CQuackBehavior>()
+			, std::make_unique<CDanceMinuet>()
 			)
 	{
 	}
@@ -90,14 +90,14 @@ public:
 	}
 };
 
-class DeckoyDuck : public Duck
+class CDeckoyDuck : public CDuck
 {
 public:
-	DeckoyDuck()
-		: Duck(
-			std::make_unique<FlyNoWay>()
-			, std::make_unique<MuteQuackBehavior>()
-			, std::make_unique<DanceNoWay>()
+	CDeckoyDuck()
+		: CDuck(
+			std::make_unique<CFlyNoWay>()
+			, std::make_unique<CMuteQuackBehavior>()
+			, std::make_unique<CDanceNoWay>()
 		)
 	{
 	}
@@ -107,14 +107,14 @@ public:
 	}
 };
 
-class RubberDuck : public Duck
+class CRubberDuck : public CDuck
 {
 public:
-	RubberDuck()
-		: Duck(
-			std::make_unique<FlyNoWay>()
-			, std::make_unique<QuackBehavior>()
-			, std::make_unique<DanceNoWay>()
+	CRubberDuck()
+		: CDuck(
+			std::make_unique<CFlyNoWay>()
+			, std::make_unique<CQuackBehavior>()
+			, std::make_unique<CDanceNoWay>()
 		)
 	{
 	}
@@ -124,14 +124,14 @@ public:
 	}
 };
 
-class ModelDuck : public Duck
+class CModelDuck : public CDuck
 {
 public:
-	ModelDuck()
-		: Duck(
-			std::make_unique<FlyNoWay>()
-			, std::make_unique<QuackBehavior>()
-			, std::make_unique<DanceNoWay>()
+	CModelDuck()
+		: CDuck(
+			std::make_unique<CFlyNoWay>()
+			, std::make_unique<CQuackBehavior>()
+			, std::make_unique<CDanceNoWay>()
 			)
 	{
 	}

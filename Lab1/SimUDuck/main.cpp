@@ -7,12 +7,12 @@
 
 using namespace std;
 
-void DrawDuck(Duck const& duck)
+void DrawDuck(CDuck const& duck)
 {
 	duck.Display();
 }
 
-void PlayWithDuck(Duck & duck)
+void PlayWithDuck(CDuck & duck)
 {
 	duck.Quack();
 	duck.Dance();
@@ -26,16 +26,18 @@ void PlayWithDuck(Duck & duck)
 
 void main()
 {
-	MallardDuck mallarDuck;
+	CMallardDuck mallarDuck;
 	PlayWithDuck(mallarDuck);
-	RedheadDuck redheadDuck;
+	CRedheadDuck redheadDuck;
 	PlayWithDuck(redheadDuck);
-	RubberDuck rubberDuck;
+	CRubberDuck rubberDuck;
 	PlayWithDuck(rubberDuck);
-	DeckoyDuck deckoyDuck;
+	CDeckoyDuck deckoyDuck;
 	PlayWithDuck(deckoyDuck);
-	ModelDuck modelDuck;
+	CModelDuck modelDuck;
 	PlayWithDuck(modelDuck);
-	modelDuck.SetFlyBehavior(make_unique<FlyWithWings>());
+	modelDuck.SetFlyBehavior(make_unique<CFlyWithWings>());
 	PlayWithDuck(modelDuck);
+	PlayWithDuck(modelDuck);
+	PlayWithDuck(mallarDuck);
 }
