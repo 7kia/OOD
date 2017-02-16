@@ -150,9 +150,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="DanceBehavior.h" />
     <ClInclude Include="Ducks.h" />
     <ClInclude Include="FlyBehavior.h" />
