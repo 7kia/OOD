@@ -57,7 +57,7 @@ class CMallardDuck : public CDuck
 public:
 	CMallardDuck()
 		: CDuck(
-			FlyBehaviorTypes::FlyWithWings
+			FlyBehaviorTypes::FlyWithWings()
 			, QuackBehaviorTypes::Quack
 			, DanceBehaviorTypes::DanceWaltz
 		)

@@ -8,9 +8,15 @@ typedef std::function<void()> FlyBehavior;
 
 namespace FlyBehaviorTypes
 {
-	void FlyWithWings()
+	FlyBehavior FlyWithWings()
 	{
-		std::cout << "I'm flying with wings!" << std::endl;
+		size_t flightsCount = 0;
+		return [=]() mutable
+		{
+			std::cout << "I'm flying with wings!" << std::endl
+				<< "It's my " << ++flightsCount << " flight" << std::endl;
+
+		};
 	}
 
 	void FlyNoWay() {}
