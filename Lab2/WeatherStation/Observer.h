@@ -2,6 +2,7 @@
 
 #include <set>
 #include <functional>
+#include <map>
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -26,7 +27,7 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T> & observer) = 0;
+	virtual void RegisterObserver(IObserver<T> & observer, unsigned int priority = 0) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T> & observer) = 0;
 };
@@ -38,23 +39,46 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType & observer) override
+	void RegisterObserver(ObserverType & observer, unsigned int priority = 0) override
 	{
-		m_observers.insert(&observer);
+		for (auto iter = m_priority.begin(); iter != m_priority.end(); ++iter)
+		{
+			if (iter->second == &observer)
+			{
+				break;
+			}
+		}
+		m_observers.emplace(&observer);
+		m_priority.emplace(priority, &observer);
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto & observer : m_observers)
+		for (auto iter = m_priority.rbegin(); iter != m_priority.rend(); ++iter)
 		{
-			observer->Update(data);
+			std::cout << "Priority = " << iter->first << std::endl;
+			iter->second->Update(data);
 		}
 	}
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		m_observers.erase(&observer);
+		auto iterObserver = std::find(m_observers.begin(), m_observers.end(), &observer);
+
+		if (iterObserver != m_observers.end())
+		{
+			m_observers.erase(iterObserver);
+			for (auto iter = m_priority.begin(); iter != m_priority.end(); ++iter)
+			{
+				if (iter->second == &observer)
+				{
+					m_priority.erase(iter);
+					break;
+				}
+			}
+		}
+		
 	}
 
 protected:
@@ -64,4 +88,5 @@ protected:
 
 private:
 	std::set<ObserverType *> m_observers;
+	std::multimap<unsigned int, ObserverType *> m_priority;
 };
