@@ -86,7 +86,7 @@ protected:
 	// в котором возвращать информацию об изменениях в объекте
 	virtual T GetChangedData()const = 0;
 
-private:
+//private:// For test
 	std::set<ObserverType *> m_observers;
 	std::multimap<unsigned int, ObserverType *> m_priority;
 };
