@@ -55,7 +55,9 @@ public:
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto iter = m_priority.rbegin(); iter != m_priority.rend(); ++iter)
+
+		auto copyPriority = m_priority;
+		for (auto iter = copyPriority.rbegin(); iter != copyPriority.rend(); ++iter)
 		{
 			std::cout << "Priority = " << iter->first << std::endl;
 			iter->second->Update(data);
