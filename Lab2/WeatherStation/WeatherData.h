@@ -13,7 +13,7 @@ struct SWeatherInfo
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
-	std::string nameStation;
+	std::string stationName;
 };
 
 class CDisplay: public IObserver<SWeatherInfo>
@@ -107,8 +107,8 @@ private:
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
-	CWeatherData(const std::string name = "")
-		: m_nameStation(name)
+	CWeatherData(const std::string & name = "")
+		: m_stationName(name)
 	{
 
 	}
@@ -145,7 +145,7 @@ public:
 
 	std::string GetName() const
 	{
-		return m_nameStation;
+		return m_stationName;
 	}
 protected:
 	SWeatherInfo GetChangedData()const override
@@ -154,7 +154,7 @@ protected:
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
-		info.nameStation = GetName();
+		info.stationName = GetName();
 		return info;
 	}
 private:
@@ -162,5 +162,5 @@ private:
 	double m_humidity = 0.0;	
 	double m_pressure = 760.0;	
 
-	std::string m_nameStation;
+	std::string m_stationName;
 };

@@ -3,7 +3,7 @@
 #include <set>
 #include <functional>
 #include <map>
-
+#include <unordered_map>
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
 желающий получать уведомления от соответствующего IObservable
@@ -38,57 +38,64 @@ class CObservable : public IObservable<T>
 {
 public:
 	typedef IObserver<T> ObserverType;
-
+	typedef std::set<std::pair<unsigned int, std::set<ObserverType *>>> ObserverSet;
 	void RegisterObserver(ObserverType & observer, unsigned int priority = 0) override
 	{
-		for (auto iter = m_priority.begin(); iter != m_priority.end(); ++iter)
+		auto iter = std::find_if(m_observers.begin(), m_observers.end(), [&](auto & pair) {
+			return pair.second == &observer;
+		});
+		if (iter != m_observers.end())
 		{
-			if (iter->second == &observer)
+			return;
+		}
+		
+		ObserverSet::iterator priorityIter = m_observers.end();
+		for (ObserverSet::iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter)
+		{
+			if (iter->first == priority)
 			{
-				break;
+				auto set = iter->second;
+				set.emplace(&observer);
+				return;
 			}
 		}
-		m_observers.emplace(&observer);
-		m_priority.emplace(priority, &observer);
+
+		auto addSet = std::set<ObserverType *>();
+		addSet.emplace(&observer);
+		m_observers.emplace(std::pair<unsigned int, std::set<ObserverType *>>( priority , addSet ));		
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
 
-		auto copyPriority = m_priority;
-		for (auto iter = copyPriority.rbegin(); iter != copyPriority.rend(); ++iter)
+		auto copyObservers = m_observers;
+		for (auto iter = copyObservers.begin(); iter != copyObservers.end(); ++iter)
 		{
 			std::cout << "Priority = " << iter->first << std::endl;
-			iter->second->Update(data);
+
+			for (auto & observer : iter->second)
+			{
+				observer->Update(data);
+			}		
 		}
 	}
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		auto iterObserver = std::find(m_observers.begin(), m_observers.end(), &observer);
-
-		if (iterObserver != m_observers.end())
+		auto it = std::find_if(m_observers.begin(), m_observers.end(), [&](auto & pair) {
+			return pair.second == &observer;
+		});
+		if (it != m_observers.end())
 		{
-			m_observers.erase(iterObserver);
-			for (auto iter = m_priority.begin(); iter != m_priority.end(); ++iter)
-			{
-				if (iter->second == &observer)
-				{
-					m_priority.erase(iter);
-					break;
-				}
-			}
-		}
-		
+			m_observers.erase(it);
+		}		
 	}
-
 protected:
 	// Классы-наследники должны перегрузить данный метод, 
 	// в котором возвращать информацию об изменениях в объекте
 	virtual T GetChangedData()const = 0;
 
 //private:// For test
-	std::set<ObserverType *> m_observers;
-	std::multimap<unsigned int, ObserverType *> m_priority;
+	ObserverSet m_observers;
 };
