@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "IBeverage.h"
+#include <map>
 
 // Базовая реализация напитка, предоставляющая его описание
 class CBeverage : public IBeverage
@@ -83,18 +84,40 @@ private:
 	Type m_type;
 };
 
+
+enum class TeaType
+{
+	Green,
+	Black,
+	Carcade,
+	White,
+};
+
+static std::map<TeaType, std::string> TypeDescription
+{
+	{ TeaType::Green, "Green" }
+	,{ TeaType::Black, "Black" }
+	,{ TeaType::Carcade, "Carcade" }
+	,{ TeaType::White, "White" }
+};
 // Чай
 class CTea : public CBeverage
 {
 public:
-	CTea() 
-		:CBeverage("Tea") 
+	
+
+	CTea(TeaType type)
+		: CBeverage(TypeDescription.find(type)->second + " Tea")
+		, m_type(type)
 	{}
 
 	double GetCost() const override 
 	{
 		return 30; 
 	}
+
+private:
+	TeaType m_type;
 };
 
 // Молочный коктейль
