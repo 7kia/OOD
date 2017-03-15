@@ -36,14 +36,26 @@ public:
 class CCapuccino : public CCoffee
 {
 public:
-	CCapuccino() 
-		:CCoffee("Capuccino") 
+	enum class Type
+	{
+		OnePortion,
+		DoublePortion,
+	};
+
+	CCapuccino(Type type)
+		: CCoffee((type == Type::OnePortion) ? "Capuccino" : "Double Capuccino")
+		, m_type(type)
 	{}
 
 	double GetCost() const override 
 	{
-		return 80; 
+		double cost = (m_type == Type::OnePortion) ? 80 : 120;
+		return cost;
 	}
+
+
+private:
+	Type m_type;
 };
 
 // Латте
