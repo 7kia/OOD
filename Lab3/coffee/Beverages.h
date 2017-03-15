@@ -93,7 +93,7 @@ enum class TeaType
 	White,
 };
 
-static std::map<TeaType, std::string> TypeDescription
+static std::map<TeaType, std::string> TeaTypeDescription
 {
 	{ TeaType::Green, "Green" }
 	,{ TeaType::Black, "Black" }
@@ -107,7 +107,7 @@ public:
 	
 
 	CTea(TeaType type)
-		: CBeverage(TypeDescription.find(type)->second + " Tea")
+		: CBeverage(TeaTypeDescription.find(type)->second + " Tea")
 		, m_type(type)
 	{}
 
@@ -120,16 +120,50 @@ private:
 	TeaType m_type;
 };
 
+
+enum class MilkshakePortionType
+{
+	Small ,
+	Medium ,
+	Big ,
+};
+
+static std::map<MilkshakePortionType, std::string>  MilkshakePortionDescription
+{
+	{ MilkshakePortionType::Small, "Small" }
+	,{ MilkshakePortionType::Medium, "Medium" }
+	,{ MilkshakePortionType::Big, "Big" }
+
+};
 // Молочный коктейль
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake() 
-		:CBeverage("Milkshake") 
+	CMilkshake(MilkshakePortionType type)
+		: CBeverage(MilkshakePortionDescription.find(type)->second + " milkshake")
+		, m_type(type)
 	{}
 
 	double GetCost() const override 
 	{ 
-		return 80; 
+		double cost = 0.;
+		switch (m_type)
+		{
+		case MilkshakePortionType::Small:
+			cost = 50.;
+			break;
+		case MilkshakePortionType::Medium:
+			cost = 60.;
+			break;
+		case MilkshakePortionType::Big:
+			cost = 80.;
+			break;
+		default:
+			break;
+		}
+
+		return cost;
 	}
+private:
+	MilkshakePortionType m_type;
 };
