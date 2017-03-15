@@ -66,18 +66,39 @@ public:
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		auto iterObserver = std::find(m_observers.begin(), m_observers.end(), &observer);
+		auto iterObserver = std::find_if(
+			m_observers.begin()
+			, m_observers.end()
+			, [&](ObserverType * pObserver)
+			{
+				if (pObserver == &observer)
+				{
+					return true;
+				}
+				return false;
+			}
+		);
 
 		if (iterObserver != m_observers.end())
 		{
 			m_observers.erase(iterObserver);
-			for (auto iter = m_priority.begin(); iter != m_priority.end(); ++iter)
-			{
-				if (iter->second == &observer)
+
+			auto priorityIter = std::find_if(m_priority.begin()
+				, m_priority.end()
+				, [&](std::pair<unsigned int, ObserverType *> pair)
 				{
-					m_priority.erase(iter);
-					break;
+					if (pair.second == &observer)
+					{
+						return true;
+					}
+					return false;
 				}
+			);
+
+
+			if (priorityIter != m_priority.end())
+			{
+				m_priority.erase(priorityIter);
 			}
 		}
 		
