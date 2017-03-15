@@ -181,7 +181,6 @@ private:
 
 
 // Second task
-//сливки
 class CCream : public CCondimentDecorator
 {
 public:
@@ -196,7 +195,58 @@ protected:
 	}
 	std::string GetCondimentDescription()const override
 	{
-		return "with cream";
+		return "cream";
 	}
 };
 
+class CChocolatePieces : public CCondimentDecorator
+{
+public:
+	static const size_t MAX_COUNT = 5;
+
+public:
+	CChocolatePieces(IBeveragePtr && beverage, unsigned count)
+		: CCondimentDecorator(move(beverage))
+		, m_count((count > MAX_COUNT) ? MAX_COUNT : count)
+	{}
+
+protected:
+	double GetCondimentCost()const override
+	{
+		return 10 * m_count;
+	}
+	std::string GetCondimentDescription()const override
+	{
+		return std::to_string(m_count) + " chocolate pieces";
+	}
+private:
+	unsigned m_count;
+};
+
+
+class CLiquor : public CCondimentDecorator
+{
+public:
+	enum class Type
+	{
+		Chocolate,	// Шоколадный
+		Nut,		// Ореховый
+	};
+
+	CLiquor(IBeveragePtr && beverage, Type liquorType)
+		: CCondimentDecorator(move(beverage))
+		, m_liquorType(liquorType)
+	{}
+protected:
+	double GetCondimentCost()const override
+	{
+		return 40;
+	}
+	std::string GetCondimentDescription()const override
+	{
+		return std::string(m_liquorType == Type::Chocolate ? "Chocolate" : "Nut")
+			+ " liquor";
+	}
+private:
+	Type m_liquorType;
+};

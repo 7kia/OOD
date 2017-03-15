@@ -84,30 +84,19 @@ private:
 	Type m_type;
 };
 
-
-enum class TeaType
-{
-	Green,
-	Black,
-	Carcade,
-	White,
-};
-
-static std::map<TeaType, std::string> TeaTypeDescription
-{
-	{ TeaType::Green, "Green" }
-	,{ TeaType::Black, "Black" }
-	,{ TeaType::Carcade, "Carcade" }
-	,{ TeaType::White, "White" }
-};
-// Чай
 class CTea : public CBeverage
 {
 public:
-	
+	enum class SortType
+	{
+		Green ,
+		Black ,
+		Carcade ,
+		White ,
+	};
 
-	CTea(TeaType type)
-		: CBeverage(TeaTypeDescription.find(type)->second + " Tea")
+	CTea(SortType type)
+		: CBeverage(GetTypeDescription(type) + " Tea")
 		, m_type(type)
 	{}
 
@@ -115,32 +104,45 @@ public:
 	{
 		return 30; 
 	}
-
 private:
-	TeaType m_type;
+	static std::string GetTypeDescription(SortType sort)
+	{
+		std::string description;
+		switch (sort)
+		{
+		case SortType::Green:
+			description = "Green";
+			break;
+		case SortType::Black:
+			description = "Black";
+			break;
+		case SortType::Carcade:
+			description = "Carcade";
+			break;
+		case SortType::White:
+			description = "White";
+			break;
+		default:
+			break;
+		}
+		return description;
+	}
+private:
+	SortType m_type;
 };
 
-
-enum class MilkshakePortionType
-{
-	Small ,
-	Medium ,
-	Big ,
-};
-
-static std::map<MilkshakePortionType, std::string>  MilkshakePortionDescription
-{
-	{ MilkshakePortionType::Small, "Small" }
-	,{ MilkshakePortionType::Medium, "Medium" }
-	,{ MilkshakePortionType::Big, "Big" }
-
-};
-// Молочный коктейль
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake(MilkshakePortionType type)
-		: CBeverage(MilkshakePortionDescription.find(type)->second + " milkshake")
+	enum class PortionType
+	{
+		Small,
+		Medium,
+		Big,
+	};
+
+	CMilkshake(PortionType type)
+		: CBeverage(GetTypeDescription(type) + " milkshake")
 		, m_type(type)
 	{}
 
@@ -149,13 +151,13 @@ public:
 		double cost = 0.;
 		switch (m_type)
 		{
-		case MilkshakePortionType::Small:
+		case PortionType::Small:
 			cost = 50.;
 			break;
-		case MilkshakePortionType::Medium:
+		case PortionType::Medium:
 			cost = 60.;
 			break;
-		case MilkshakePortionType::Big:
+		case PortionType::Big:
 			cost = 80.;
 			break;
 		default:
@@ -165,5 +167,25 @@ public:
 		return cost;
 	}
 private:
-	MilkshakePortionType m_type;
+	static std::string GetTypeDescription(PortionType sort)
+	{
+		std::string description;
+		switch (sort)
+		{
+		case PortionType::Small:
+			description = "Small";
+			break;
+		case PortionType::Medium:
+			description = "Medium";
+			break;
+		case PortionType::Big:
+			description = "Big";
+			break;
+		default:
+			break;
+		}
+		return description;
+	}
+private:
+	PortionType m_type;
 };
