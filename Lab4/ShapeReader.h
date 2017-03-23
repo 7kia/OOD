@@ -6,7 +6,6 @@
 #include <memory>
 #include <boost/algorithm/string.hpp>
 
-#include "SorterShapes.h"
 #include "PictureDraft.h"
 
 class CShapeReader

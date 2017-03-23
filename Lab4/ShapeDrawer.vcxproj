@@ -169,7 +169,6 @@
     <ClCompile Include="Shapes\MyCPoint.cpp" />
     <ClCompile Include="Shapes\Rectangle.cpp" />
     <ClCompile Include="Shapes\Triangle.cpp" />
-    <ClCompile Include="SorterShapes.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +190,6 @@
     <ClInclude Include="Shapes\Rectangle.h" />
     <ClInclude Include="Shapes\Shapes.h" />
     <ClInclude Include="Shapes\Triangle.h" />
-    <ClInclude Include="SorterShapes.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

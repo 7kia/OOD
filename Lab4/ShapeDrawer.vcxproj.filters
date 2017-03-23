@@ -57,9 +57,6 @@
     <ClCompile Include="Shapes\CSolidShape.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="SorterShapes.cpp">
-      <Filter>ShapeReader</Filter>
-    </ClCompile>
     <ClCompile Include="ShapeReader.cpp">
       <Filter>ShapeReader</Filter>
     </ClCompile>
@@ -112,9 +109,6 @@
     </ClInclude>
     <ClInclude Include="Shapes\CSolidShape.h">
       <Filter>Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="SorterShapes.h">
-      <Filter>ShapeReader</Filter>
     </ClInclude>
     <ClInclude Include="ShapeReader.h">
       <Filter>ShapeReader</Filter>
