@@ -43,13 +43,11 @@ public:
 
 	float				GetPerimeter() const override;
 	float				GetArea() const override;
-	std::string			GetStringPresentation() const override;
 
 	void				Move(float dx, float dy);
 	void				Scale(float sx, float sy);
 	bool				Intersect(CRectangle const& other);
 private:
-	void				AppendProperties(std::ostream & strm) const;
 
 	void				Accept(IShapeVisitor & visitor) override;
 private:

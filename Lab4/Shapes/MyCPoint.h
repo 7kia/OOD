@@ -12,7 +12,6 @@ public:
 
 	float				GetPerimeter() const override;
 	float				GetArea() const override;
-	std::string			GetStringPresentation() const override;
 
 	void				SetPosition(sf::Vector2f position);
 	void				SetPosition(float x, float y);

@@ -1,11 +1,22 @@
 #include "stdafx.h"
 #include "IShape.h"
 
+struct SColor
+{
+	SColor(uint8_t r, uint8_t g, uint8_t b);
+	SColor(const std::string &value);
+	uint8_t red = 0;
+	uint8_t green = 0;
+	uint8_t blue = 0;
+
+	bool operator==(const SColor & other) const;
+};
+
 IShape::~IShape()
 {
 }
 
-std::ostream& operator<<(std::ostream& stream, sf::Color const& color)
+std::ostream& operator<<(std::ostream& stream, const sf::Color color)
 {
 	stream << "#" << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(color.r)
 		<< std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(color.g)

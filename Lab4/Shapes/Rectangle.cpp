@@ -131,15 +131,6 @@ float CRectangle::GetArea() const
 	return m_height * m_width;
 }
 
-std::string CRectangle::GetStringPresentation() const
-{
-	std::ostringstream strm;
-	strm << std::setprecision(3);
-
-	AppendProperties(strm);
-
-	return strm.str();
-}
 
 void CRectangle::Move(float dx, float dy)
 {
@@ -202,15 +193,6 @@ bool CRectangle::Intersect(CRectangle const & other)
 	return false;
 }
 
-void CRectangle::AppendProperties(std::ostream & strm) const
-{
-	CSolidShape::AppendProperties(strm);
-	strm << "\tLeft top point = (" << m_leftTopPoint.x << ", "
-		<< m_leftTopPoint.y << ")" << std::endl
-		<< "\tWidth = " << GetWidth() << std::endl
-		<< "\tHeigth = " << GetHeight() << std::endl;
-
-}
 
 void CRectangle::Accept(IShapeVisitor & visitor)
 {

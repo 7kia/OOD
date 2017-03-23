@@ -17,7 +17,6 @@ public:
 	void				SetOutlineColor(const sf::Color color) override;
 	sf::Color			GetOutlineColor() const override;
 protected:
-	void				AppendProperties(std::ostream & strm) const override;
 private:
 	sf::Color			m_outlineColor = DEFAULT_FILL_COLOR;
 

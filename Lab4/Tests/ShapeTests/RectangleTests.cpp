@@ -40,25 +40,25 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color_outline_color)
 {
-	BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), expectedOutlineColor);
+	VerifyColor(rectangle.GetOutlineColor(), expectedOutlineColor);
 
 	rectangle.SetOutlineColor(expectedColorForSetVectorMethod);
-	BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), expectedColorForSetVectorMethod);
+	VerifyColor(rectangle.GetOutlineColor(), expectedColorForSetVectorMethod);
 
 	rectangle.SetOutlineColor(expectedColor);
-	BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), expectedColor);
+	VerifyColor(rectangle.GetOutlineColor(), expectedColor);
 
 }
 
 BOOST_AUTO_TEST_CASE(has_color_fill_color)
 {
-	BOOST_CHECK_EQUAL(rectangle.GetFillColor(), expectedFillColor);
+	VerifyColor(rectangle.GetFillColor(), expectedFillColor);
 
 	rectangle.SetFillColor(expectedColorForSetVectorMethod);
-	BOOST_CHECK_EQUAL(rectangle.GetFillColor(), expectedColorForSetVectorMethod);
+	VerifyColor(rectangle.GetFillColor(), expectedColorForSetVectorMethod);
 
 	rectangle.SetFillColor(expectedColor);
-	BOOST_CHECK_EQUAL(rectangle.GetFillColor(), expectedColor);
+	VerifyColor(rectangle.GetFillColor(), expectedColor);
 }
 
 BOOST_AUTO_TEST_CASE(has_a_length)
@@ -76,19 +76,6 @@ BOOST_AUTO_TEST_CASE(has_a_position_which_is_left_top_point)
 	VerifyVector2f(rectangle.GetLeftTopPoint(), expectedPosition);
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Rectangle:
-	Fill color = #0a0a0a
-	Perimeter = 10
-	Area = 6
-	Outline color = #a0a0a0
-	Left top point = (1, 2)
-	Width = 2
-	Heigth = 3
-)";
-	BOOST_CHECK_EQUAL(rectangle.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -101,8 +88,8 @@ struct DefaultRectangle_
 	const sf::Color expectedFillColor;
 	const CRectangle rectangle;
 	DefaultRectangle_()
-		: expectedOutlineColor(0, 0, 0)
-		, expectedFillColor(0, 0, 0)
+		: expectedOutlineColor(0, 0, 0, 0)
+		, expectedFillColor(0, 0, 0, 0)
 	{}
 };
 
@@ -114,12 +101,12 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color_outline_color)
 {
-	BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), expectedOutlineColor);
+	VerifyColor(rectangle.GetOutlineColor(), expectedOutlineColor);
 }
 
 BOOST_AUTO_TEST_CASE(has_color_fill_color)
 {
-	BOOST_CHECK_EQUAL(rectangle.GetFillColor(), expectedFillColor);
+	VerifyColor(rectangle.GetFillColor(), expectedFillColor);
 }
 
 BOOST_AUTO_TEST_CASE(has_a_length)
@@ -137,17 +124,4 @@ BOOST_AUTO_TEST_CASE(has_a_position_which_is_left_top_point)
 	VerifyVector2f(rectangle.GetLeftTopPoint(), expectedPosition);
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Rectangle:
-	Fill color = #000000
-	Perimeter = 0
-	Area = 0
-	Outline color = #000000
-	Left top point = (0, 0)
-	Width = 0
-	Heigth = 0
-)";
-	BOOST_CHECK_EQUAL(rectangle.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()

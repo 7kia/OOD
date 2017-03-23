@@ -37,25 +37,25 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color_outline_color)
 {
-	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), expectedOutlineColor);
+	VerifyColor(triangle.GetOutlineColor(), expectedOutlineColor);
 
 	triangle.SetOutlineColor(expectedColorForSetVectorMethod);
-	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), expectedColorForSetVectorMethod);
+	VerifyColor(triangle.GetOutlineColor(), expectedColorForSetVectorMethod);
 
 	triangle.SetOutlineColor(expectedColor);
-	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), expectedColor);
+	VerifyColor(triangle.GetOutlineColor(), expectedColor);
 
 }
 
 BOOST_AUTO_TEST_CASE(has_color_fill_color)
 {
-	BOOST_CHECK_EQUAL(triangle.GetFillColor(), expectedFillColor);
+	VerifyColor(triangle.GetFillColor(), expectedFillColor);
 
 	triangle.SetFillColor(expectedColorForSetVectorMethod);
-	BOOST_CHECK_EQUAL(triangle.GetFillColor(), expectedColorForSetVectorMethod);
+	VerifyColor(triangle.GetFillColor(), expectedColorForSetVectorMethod);
 
 	triangle.SetFillColor(expectedColor);
-	BOOST_CHECK_EQUAL(triangle.GetFillColor(), expectedColor);
+	VerifyColor(triangle.GetFillColor(), expectedColor);
 
 }
 
@@ -85,27 +85,14 @@ BOOST_AUTO_TEST_CASE(has_a_third_point)
 
 BOOST_AUTO_TEST_CASE(has_a_length)
 {
-	BOOST_CHECK_EQUAL(triangle.GetPerimeter(), expectedLength);
+	BOOST_CHECK(IsEqual(triangle.GetPerimeter(), expectedLength));
 }
 
 BOOST_AUTO_TEST_CASE(has_a_area)
 {
-	BOOST_CHECK_EQUAL(triangle.GetArea(), expectedArea);
+	BOOST_CHECK(IsEqual(triangle.GetArea(), expectedArea));
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Triangle:
-	Fill color = #a0a0a0
-	Perimeter = 4.83
-	Area = 1
-	Outline color = #0a0a0aff
-	Position first point = (1, 0)
-	Position second point = (-1, 0)
-	Position third point = (0, 1)
-)";
-	BOOST_CHECK_EQUAL(triangle.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -116,12 +103,12 @@ struct DefaultTriangle_
 
 	const sf::Vector2f defaultPosition = { 0.f, 0.f };
 
-	const SColor expectedOutlineColor;
-	const SColor expectedFillColor;
+	const sf::Color expectedOutlineColor;
+	const sf::Color expectedFillColor;
 	const CTriangle triangle;
 	DefaultTriangle_()
-		: expectedOutlineColor(0, 0, 0)
-		, expectedFillColor(0, 0, 0)
+		: expectedOutlineColor(0, 0, 0, 0)
+		, expectedFillColor(0, 0, 0, 0)
 	{}
 };
 
@@ -133,8 +120,8 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color)
 {
-	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), expectedOutlineColor);
-	BOOST_CHECK_EQUAL(triangle.GetFillColor(), expectedFillColor);
+	VerifyColor(triangle.GetOutlineColor(), expectedOutlineColor);
+	VerifyColor(triangle.GetFillColor(), expectedFillColor);
 }
 
 
@@ -163,17 +150,4 @@ BOOST_AUTO_TEST_CASE(has_a_area)
 	BOOST_CHECK_EQUAL(triangle.GetArea(), expectedArea);
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Triangle:
-	Fill color = #000000ff
-	Perimeter = 0
-	Area = 0
-	Outline color = #000000ff
-	Position first point = (0, 0)
-	Position second point = (0, 0)
-	Position third point = (0, 0)
-)";
-	BOOST_CHECK_EQUAL(triangle.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()

@@ -17,7 +17,6 @@ public:
 
 	float				GetPerimeter() const override;
 	float				GetArea() const override;
-	std::string			GetStringPresentation() const override;
 
 	void				SetPositionFirstPoint(sf::Vector2f position);
 	void				SetPositionFirstPoint(float x, float y);
@@ -27,7 +26,6 @@ public:
 	void				SetPositionSecondPoint(float x, float y);
 	sf::Vector2f		GetSecondPoint() const;
 private:
-	void				AppendProperties(std::ostream & strm) const;
 
 	void				Accept(IShapeVisitor & visitor) override;
 private:

@@ -31,16 +31,6 @@ float CMyPoint::GetArea() const
 	return 0;
 }
 
-std::string CMyPoint::GetStringPresentation() const
-{
-	std::ostringstream strm;
-	strm << std::setprecision(3);
-
-	CShape::AppendProperties(strm);
-	CMyPoint::AppendProperties(strm);
-
-	return strm.str();
-}
 
 void CMyPoint::SetPosition(sf::Vector2f position)
 {
@@ -57,10 +47,6 @@ sf::Vector2f CMyPoint::GetPosition() const
 	return m_position;
 }
 
-void CMyPoint::AppendProperties(std::ostream & strm) const
-{
-	strm << "\tPosition = (" << m_position.x << ", " << m_position.y << ")" << std::endl;
-}
 
 void CMyPoint::Accept(IShapeVisitor & visitor)
 {

@@ -32,13 +32,13 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color_fill_color)
 {
-	BOOST_CHECK_EQUAL(line.GetFillColor(), expectedFillColor);
+	VerifyColor(line.GetFillColor(), expectedFillColor);
 
 	line.SetFillColor(expectedColorForSetVectorMethod);
-	BOOST_CHECK_EQUAL(line.GetFillColor(), expectedColorForSetVectorMethod);
+	VerifyColor(line.GetFillColor(), expectedColorForSetVectorMethod);
 
 	line.SetFillColor(expectedColor);
-	BOOST_CHECK_EQUAL(line.GetFillColor(), expectedColor);
+	VerifyColor(line.GetFillColor(), expectedColor);
 }
 
 BOOST_AUTO_TEST_CASE(has_first_point)
@@ -67,17 +67,6 @@ BOOST_AUTO_TEST_CASE(not_has_a_area)
 	BOOST_CHECK(IsEqual(line.GetArea(), expectedArea));
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Line:
-	Fill color = #101010ff
-	Perimeter = 1.41
-	Area = 0
-	Position first point = (0, 0)
-	Position second point = (1, 1)
-)";
-	BOOST_CHECK_EQUAL(line.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -88,7 +77,7 @@ struct DefaultLineSegment_
 	const sf::Color expectedFillColor;
 	const CLineSegment line;
 	DefaultLineSegment_()
-		: expectedFillColor(0, 0, 0)
+		: expectedFillColor(0, 0, 0, 0)
 	{}
 
 };
@@ -100,7 +89,7 @@ BOOST_AUTO_TEST_CASE(is_a_shape)
 
 BOOST_AUTO_TEST_CASE(has_color)
 {
-	BOOST_CHECK_EQUAL(line.GetFillColor(), expectedFillColor);
+	VerifyColor(line.GetFillColor(), expectedFillColor);
 }
 
 BOOST_AUTO_TEST_CASE(not_has_a_length)//"$(TargetPath)" --log_level=test_suite
@@ -113,17 +102,6 @@ BOOST_AUTO_TEST_CASE(not_has_a_area)
 	BOOST_CHECK(IsEqual(line.GetArea(), expectedArea));
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Line:
-	Fill color = #000000ff
-	Perimeter = 0
-	Area = 0
-	Position first point = (0, 0)
-	Position second point = (0, 0)
-)";
-	BOOST_CHECK_EQUAL(line.GetStringPresentation(), expectedString);
-}
 
 BOOST_AUTO_TEST_SUITE_END()
 

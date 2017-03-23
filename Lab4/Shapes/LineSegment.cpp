@@ -36,17 +36,6 @@ float CLineSegment::GetArea() const
 	return 0.0f;
 }
 
-std::string CLineSegment::GetStringPresentation() const
-{
-	std::ostringstream strm;
-	strm << std::setprecision(3);
-
-	CShape::AppendProperties(strm);
-	CLineSegment::AppendProperties(strm);
-
-	return strm.str();
-}
-
 void CLineSegment::SetPositionFirstPoint(sf::Vector2f position)
 {
 	m_firstPoint = position;
@@ -77,13 +66,6 @@ sf::Vector2f CLineSegment::GetSecondPoint() const
 	return m_secondPoint;
 }
 
-void CLineSegment::AppendProperties(std::ostream & strm) const
-{
-	strm << "\tPosition first point = (" << m_firstPoint.x << ", "
-										<< m_firstPoint.y << ")" << std::endl
-		<< "\tPosition second point = (" << m_secondPoint.x << ", " 
-										<< m_secondPoint.y << ")" << std::endl;
-}
 
 void CLineSegment::Accept(IShapeVisitor & visitor)
 {

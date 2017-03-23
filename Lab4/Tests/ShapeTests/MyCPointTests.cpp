@@ -45,16 +45,6 @@ BOOST_AUTO_TEST_CASE(has_a_position)
 	VerifyVector2f(point.GetPosition(), expectedPositionAfterAssigment);
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Point:
-	Fill color = #101010ff
-	Perimeter = 0
-	Area = 0
-	Position = (1, 2)
-)";
-	BOOST_CHECK_EQUAL(point.GetStringPresentation(), expectedString);
-}
 BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -65,7 +55,7 @@ struct DefaultMyCPoint_
 	const sf::Color expectedColor;
 	const CMyPoint point;
 	DefaultMyCPoint_()
-		: expectedColor(0, 0, 0)
+		: expectedColor(0, 0, 0, 0)
 	{}
 
 };
@@ -85,16 +75,6 @@ BOOST_AUTO_TEST_CASE(not_has_a_area)
 	BOOST_CHECK(IsEqual(point.GetArea(), expectedArea));
 }
 
-BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
-{
-	const auto expectedString = R"(Point:
-	Fill color = #000000ff
-	Perimeter = 0
-	Area = 0
-	Position = (0, 0)
-)";
-	BOOST_CHECK_EQUAL(point.GetStringPresentation(), expectedString);
-}
 
 BOOST_AUTO_TEST_SUITE_END()
 

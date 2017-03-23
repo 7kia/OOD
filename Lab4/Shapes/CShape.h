@@ -17,7 +17,6 @@ public:
 
 	std::string					GetType() const;// for render
 
-	void						AppendProperties(std::ostream & strm) const override;
 
 protected:
 	sf::Color					m_fillColor;

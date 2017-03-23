@@ -43,15 +43,6 @@ float CTriangle::GetArea() const
 								* (halfPerimeter - lengthThirdLine));
 }
 
-std::string CTriangle::GetStringPresentation() const
-{
-	std::ostringstream strm;
-	strm << std::setprecision(3);
-
-	AppendProperties(strm);
-
-	return strm.str();
-}
 
 void CTriangle::SetPositionFirstPoint(sf::Vector2f position)
 {
@@ -105,16 +96,6 @@ sf::Vector2f CTriangle::GetThirdPoint() const
 	return m_secondLine.GetSecondPoint();
 }
 
-void CTriangle::AppendProperties(std::ostream & strm) const
-{
-	CSolidShape::AppendProperties(strm);
-	strm << "\tPosition first point = (" << m_firstLine.GetFirstPoint().x << ", "
-										<< m_firstLine.GetFirstPoint().y << ")" << std::endl
-		<< "\tPosition second point = (" << m_firstLine.GetSecondPoint().x << ", " 
-										<< m_firstLine.GetSecondPoint().y << ")" << std::endl
-		<< "\tPosition third point = (" << m_secondLine.GetSecondPoint().x << ", " 
-										<< m_secondLine.GetSecondPoint().y << ")" << std::endl;
-}
 
 void CTriangle::Accept(IShapeVisitor & visitor)
 {

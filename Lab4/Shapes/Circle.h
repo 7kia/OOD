@@ -18,7 +18,6 @@ public:
 
 	float				GetPerimeter() const override;
 	float				GetArea() const override;
-	std::string			GetStringPresentation() const override;
 
 	void				SetRadius(float radius);
 	float				GetRadius() const;
@@ -27,7 +26,6 @@ public:
 	void				SetPositionCenter(sf::Vector2f position);
 	sf::Vector2f		GetPosition() const;
 private:
-	void				AppendProperties(std::ostream & strm) const;
 
 	void				Accept(IShapeVisitor & visitor) override;
 private:
