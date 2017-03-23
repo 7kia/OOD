@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Painter.h"
 
 CPainter::CPainter(const std::shared_ptr<ISFMLShapeFactory> pFactory)

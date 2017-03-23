@@ -8,18 +8,18 @@ class CShape :
 	public IShape
 {
 public:
-	CShape(const std::string & type, SColor color);
+	CShape(const std::string & type, const sf::Color color);
 	~CShape();
 
-	void						SetFillColor(SColor color);
+	void						SetFillColor(const sf::Color color);
 	void						SetFillColor(uint8_t r, uint8_t g, uint8_t b);
-	SColor						GetFillColor() const;
+	sf::Color					GetFillColor() const;
 
 	std::string					GetType() const;// for render
 
 	void						AppendProperties(std::ostream & strm) const override;
 
 protected:
-	SColor						m_fillColor;
+	sf::Color					m_fillColor;
 	std::string					m_type;
 };

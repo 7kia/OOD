@@ -2,7 +2,11 @@
 #include "CSolidShape.h"
 
 
-CSolidShape::CSolidShape(const std::string & type, SColor fillColor, SColor boundColor)
+CSolidShape::CSolidShape(
+	const std::string & type
+	, const sf::Color fillColor
+	, const sf::Color boundColor
+)
 	: CShape(type, fillColor)
 	, m_outlineColor(boundColor)
 {
@@ -13,19 +17,12 @@ CSolidShape::~CSolidShape()
 }
 
 
-void CSolidShape::SetOutlineColor(uint8_t r, uint8_t g, uint8_t b)
-{
-	m_outlineColor.red = r;
-	m_outlineColor.green = g;
-	m_outlineColor.blue = b;
-}
-
-void CSolidShape::SetOutlineColor(SColor color)
+void CSolidShape::SetOutlineColor(const sf::Color color)
 {
 	m_outlineColor = color;
 }
 
-SColor CSolidShape::GetOutlineColor() const
+sf::Color CSolidShape::GetOutlineColor() const
 {
 	return m_outlineColor;
 }

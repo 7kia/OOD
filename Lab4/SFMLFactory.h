@@ -35,7 +35,7 @@ public:
 	void						Visit(const CTriangle & triangle) override;
 	void						Visit(const CRectangle & rectangle) override;
 	void						Visit(const CCircle & circle) override;
-	void						Visit(const MyCPoint & point) override;
+	void						Visit(const CMyPoint & point) override;
 	//--------------------------------------------
 	// ISFMLShapeFactory
 	SFMLShapePtr				CreateShape(const CShapePtr & shape) override;

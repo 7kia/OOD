@@ -8,8 +8,12 @@ CCircle::CCircle()
 {
 }
 
-CCircle::CCircle(sf::Vector2f center, float radius,
-				SColor fillColor, SColor outlineColor)
+CCircle::CCircle(
+	const sf::Vector2f center
+	, float radius
+	, const sf::Color fillColor
+	, const sf::Color outlineColor
+)
 	: CSolidShape("Circle", fillColor, outlineColor)
 	, m_positionCenter(center)
 	, m_radius(radius)

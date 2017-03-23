@@ -10,8 +10,13 @@ class CTriangle final:
 {
 public:
 	CTriangle();
-	CTriangle(sf::Vector2f firstPoint, sf::Vector2f secondPoint, sf::Vector2f thirdPoint,
-				SColor fillColor, SColor outlineColor);
+	CTriangle(
+		const sf::Vector2f firstPoint
+		, const sf::Vector2f secondPoint
+		, const sf::Vector2f thirdPoint
+		, const sf::Color fillColor
+		, const sf::Color outlineColor
+	);
 	~CTriangle();
 
 	float				GetPerimeter() const override;

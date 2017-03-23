@@ -3,66 +3,66 @@
 
 
 
-MyCPoint::MyCPoint()
+CMyPoint::CMyPoint()
 	: CShape("Point", DEFAULT_COLOR)
 {
 }
 
 
-MyCPoint::MyCPoint(sf::Vector2f position, SColor color)
+CMyPoint::CMyPoint(sf::Vector2f position, const sf::Color color)
 	: CShape("Point", color)
 	, m_position(position)
 {
 }
 
 
-MyCPoint::~MyCPoint()
+CMyPoint::~CMyPoint()
 {
 }
 
 
-float MyCPoint::GetPerimeter() const
-{
-	return 0;
-}
-
-float MyCPoint::GetArea() const
+float CMyPoint::GetPerimeter() const
 {
 	return 0;
 }
 
-std::string MyCPoint::GetStringPresentation() const
+float CMyPoint::GetArea() const
+{
+	return 0;
+}
+
+std::string CMyPoint::GetStringPresentation() const
 {
 	std::ostringstream strm;
 	strm << std::setprecision(3);
 
 	CShape::AppendProperties(strm);
-	MyCPoint::AppendProperties(strm);
+	CMyPoint::AppendProperties(strm);
 
 	return strm.str();
 }
 
-void MyCPoint::SetPosition(sf::Vector2f position)
+void CMyPoint::SetPosition(sf::Vector2f position)
 {
 	m_position = position;
 }
 
-void MyCPoint::SetPosition(float x, float y)
+void CMyPoint::SetPosition(float x, float y)
 {
 	m_position = sf::Vector2f(x, y);
 }
 
-sf::Vector2f MyCPoint::GetPosition() const
+sf::Vector2f CMyPoint::GetPosition() const
 {
 	return m_position;
 }
 
-void MyCPoint::AppendProperties(std::ostream & strm) const
+void CMyPoint::AppendProperties(std::ostream & strm) const
 {
 	strm << "\tPosition = (" << m_position.x << ", " << m_position.y << ")" << std::endl;
 }
 
-void MyCPoint::Accept(IShapeVisitor & visitor)
+void CMyPoint::Accept(IShapeVisitor & visitor)
 {
 	visitor.Visit(*this);
 }

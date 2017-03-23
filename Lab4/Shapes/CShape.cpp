@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CShape.h"
 
-CShape::CShape(const std::string & type, SColor color)
+CShape::CShape(const std::string & type, const sf::Color color)
 	: m_type(type)
 	, m_fillColor(color)
 {
@@ -12,19 +12,12 @@ CShape::~CShape()
 {
 }
 
-void CShape::SetFillColor(SColor color)
+void CShape::SetFillColor(const sf::Color color)
 {
 	m_fillColor = color;
 }
 
-void CShape::SetFillColor(uint8_t r, uint8_t g, uint8_t b)
-{
-	m_fillColor.red = r;
-	m_fillColor.green = g;
-	m_fillColor.blue = b;
-}
-
-SColor CShape::GetFillColor() const
+sf::Color CShape::GetFillColor() const
 {
 	return m_fillColor;
 }
@@ -75,14 +68,6 @@ SColor::SColor(const std::string & value)
 bool SColor::operator==(const SColor & other) const
 {
 	return (red == other.red) && (blue == other.blue) && (green == other.green);
-}
-
-std::ostream& operator<<(std::ostream& stream, SColor const& color)
-{
-	stream << "#" << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(color.red)
-		<< std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(color.green)
-		<< std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(color.blue);
-	return stream;
 }
 
 std::ostream & operator<<(std::ostream & stream, sf::Vector2f const & vector)

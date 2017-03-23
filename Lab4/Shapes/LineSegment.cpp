@@ -8,7 +8,11 @@ CLineSegment::CLineSegment()
 }
 
 
-CLineSegment::CLineSegment(sf::Vector2f firstPoint, sf::Vector2f secondPoint, SColor color)
+CLineSegment::CLineSegment(
+	const sf::Vector2f firstPoint
+	, const sf::Vector2f secondPoint
+	, const sf::Color color
+)
 	: CShape("Line", color)
 	, m_firstPoint(firstPoint)
 	, m_secondPoint(secondPoint)
@@ -53,7 +57,7 @@ void CLineSegment::SetPositionFirstPoint(float x, float y)
 	m_firstPoint = sf::Vector2f(x, y);
 }
 
-sf::Vector2f CLineSegment::GetPositiionFirstPoint() const
+sf::Vector2f CLineSegment::GetFirstPoint() const
 {
 	return m_firstPoint;
 }
@@ -68,7 +72,7 @@ void CLineSegment::SetPositionSecondPoint(float x, float y)
 	m_secondPoint = sf::Vector2f(x, y);
 }
 
-sf::Vector2f CLineSegment::GetPositiionSecondPoint() const
+sf::Vector2f CLineSegment::GetSecondPoint() const
 {
 	return m_secondPoint;
 }

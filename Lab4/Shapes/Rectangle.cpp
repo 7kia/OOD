@@ -14,8 +14,13 @@ CRectangle::CRectangle()
 {
 }
 
-CRectangle::CRectangle(sf::Vector2f leftTopPoint, float width, float height,
-						SColor fillColor, SColor outlineColor)
+CRectangle::CRectangle(
+	const sf::Vector2f leftTopPoint
+	, float width
+	, float height
+	, const sf::Color fillColor
+	, const sf::Color outlineColor
+)
 	: CSolidShape("Rectangle", fillColor, outlineColor)
 	, m_leftTopPoint(leftTopPoint)
 {

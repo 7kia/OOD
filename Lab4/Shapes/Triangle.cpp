@@ -7,8 +7,13 @@ CTriangle::CTriangle()
 {
 }
 
-CTriangle::CTriangle(sf::Vector2f firstPoint, sf::Vector2f secondPoint, sf::Vector2f thirdPoint,
-					SColor fillColor, SColor outlineColor)
+CTriangle::CTriangle(
+	const sf::Vector2f firstPoint
+	, const sf::Vector2f secondPoint
+	, const sf::Vector2f thirdPoint
+	, const sf::Color fillColor
+	, const sf::Color outlineColor
+)
 	: CSolidShape("Triangle", fillColor, outlineColor)
 	, m_firstLine(firstPoint, secondPoint, outlineColor)
 	, m_secondLine(secondPoint, thirdPoint, outlineColor)
@@ -87,28 +92,28 @@ void CTriangle::SetPositionThirdPoint(float x, float y)
 
 sf::Vector2f CTriangle::GetFirstPoint() const
 {
-	return m_firstLine.GetPositiionFirstPoint();
+	return m_firstLine.GetFirstPoint();
 }
 
 sf::Vector2f CTriangle::GetSecondPoint() const
 {
-	return m_firstLine.GetPositiionSecondPoint();
+	return m_firstLine.GetSecondPoint();
 }
 
 sf::Vector2f CTriangle::GetThirdPoint() const
 {
-	return m_secondLine.GetPositiionSecondPoint();
+	return m_secondLine.GetSecondPoint();
 }
 
 void CTriangle::AppendProperties(std::ostream & strm) const
 {
 	CSolidShape::AppendProperties(strm);
-	strm << "\tPosition first point = (" << m_firstLine.GetPositiionFirstPoint().x << ", "
-										<< m_firstLine.GetPositiionFirstPoint().y << ")" << std::endl
-		<< "\tPosition second point = (" << m_firstLine.GetPositiionSecondPoint().x << ", " 
-										<< m_firstLine.GetPositiionSecondPoint().y << ")" << std::endl
-		<< "\tPosition third point = (" << m_secondLine.GetPositiionSecondPoint().x << ", " 
-										<< m_secondLine.GetPositiionSecondPoint().y << ")" << std::endl;
+	strm << "\tPosition first point = (" << m_firstLine.GetFirstPoint().x << ", "
+										<< m_firstLine.GetFirstPoint().y << ")" << std::endl
+		<< "\tPosition second point = (" << m_firstLine.GetSecondPoint().x << ", " 
+										<< m_firstLine.GetSecondPoint().y << ")" << std::endl
+		<< "\tPosition third point = (" << m_secondLine.GetSecondPoint().x << ", " 
+										<< m_secondLine.GetSecondPoint().y << ")" << std::endl;
 }
 
 void CTriangle::Accept(IShapeVisitor & visitor)

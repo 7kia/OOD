@@ -66,20 +66,11 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PictureDraft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Painter\ConvertShape.cpp">
-      <Filter>Source Files\Painter</Filter>
-    </ClCompile>
-    <ClCompile Include="Painter\ShapeVisitor.cpp">
+    <ClCompile Include="Painter\Painter.cpp">
       <Filter>Source Files\Painter</Filter>
     </ClCompile>
     <ClCompile Include="SFMLFactory.cpp">
-      <Filter>Source Files\Painter</Filter>
-    </ClCompile>
-    <ClCompile Include="Painter\Painter.cpp">
-      <Filter>Source Files\Painter</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,14 +131,8 @@
     <ClInclude Include="Painter\Painter.h">
       <Filter>Source Files\Painter</Filter>
     </ClInclude>
-    <ClInclude Include="Painter\ConvertShape.h">
-      <Filter>Source Files\Painter</Filter>
-    </ClInclude>
-    <ClInclude Include="Painter\ShapeVisitor.h">
-      <Filter>Source Files\Painter</Filter>
-    </ClInclude>
     <ClInclude Include="SFMLFactory.h">
-      <Filter>Source Files\Painter</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -69,23 +69,23 @@ void CShapeReader::ReadShapes(std::istream & file)
 	while (getline(file, stringFromFile))
 	{
 		argumnents = SplitWords(stringFromFile);
-		if (argumnents[0] == COMMANDS_NAME[static_cast<int>(IdCommand::Point)])
+		if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Point)])
 		{
 			AddPoint(argumnents);
 		}
-		else if (argumnents[0] == COMMANDS_NAME[static_cast<int>(IdCommand::LineSegment)])
+		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::LineSegment)])
 		{
 			AddLineSegment(argumnents);
 		}
-		else if (argumnents[0] == COMMANDS_NAME[static_cast<int>(IdCommand::Triangle)])
+		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Triangle)])
 		{
 			AddTriangle(argumnents);
 		}
-		else if (argumnents[0] == COMMANDS_NAME[static_cast<int>(IdCommand::Rectangle)])
+		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Rectangle)])
 		{
 			AddRectangle(argumnents);
 		}
-		else if (argumnents[0] == COMMANDS_NAME[static_cast<int>(IdCommand::Circle)])
+		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Circle)])
 		{
 			AddCircle(argumnents);
 		}
@@ -100,10 +100,10 @@ void CShapeReader::ReadShapes(std::istream & file)
 
 void CShapeReader::CheckAmountArguments(const listArguments & arguments, IdCommand id)
 {
-	if (arguments.size() != AMOUNT_ARGUMENTS_FOR_COMMAND[static_cast<int>(id)])
+	if (arguments.size() != AMOUNT_ARGUMENTS_FOR_COMMAND[size_t(id)])
 	{
 		throw invalid_argument(MESSAGE_INCORRECT_AMOUNT_ARGUMENTS
-			+ to_string(AMOUNT_ARGUMENTS_FOR_COMMAND[static_cast<int>(id)]));
+			+ to_string(AMOUNT_ARGUMENTS_FOR_COMMAND[size_t(id)]) + " now " + to_string(arguments.size()));
 	}
 }
 
@@ -111,11 +111,11 @@ void CShapeReader::AddPoint(const listArguments & arguments)
 {
 	CheckAmountArguments(arguments, IdCommand::Point);
 
-	std::unique_ptr<MyCPoint> addPoint(new MyCPoint);
+	std::unique_ptr<CMyPoint> addPoint(new CMyPoint);
 	addPoint->SetPosition(stof(arguments[1]), stof(arguments[2]));
-	addPoint->SetFillColor(arguments[3]);
+	addPoint->SetFillColor(ToColor(arguments[3]));
 
-	m_draft.AddShape(move(addPoint));
+	m_draft.push_back(move(addPoint));
 }
 
 void CShapeReader::AddLineSegment(const listArguments & arguments)
@@ -125,9 +125,9 @@ void CShapeReader::AddLineSegment(const listArguments & arguments)
 	std::unique_ptr<CLineSegment> addLine(new CLineSegment);
 	addLine->SetPositionFirstPoint(stof(arguments[1]), stof(arguments[2]));
 	addLine->SetPositionSecondPoint(stof(arguments[3]), stof(arguments[4]));
-	addLine->SetFillColor(arguments[5]);
+	addLine->SetFillColor(ToColor(arguments[5]));
 
-	m_draft.AddShape(move(addLine));
+	m_draft.push_back(move(addLine));
 }
 
 void CShapeReader::AddTriangle(const listArguments & arguments)
@@ -138,10 +138,10 @@ void CShapeReader::AddTriangle(const listArguments & arguments)
 	addTriangle->SetPositionFirstPoint(stof(arguments[1]), stof(arguments[2]));
 	addTriangle->SetPositionSecondPoint(stof(arguments[3]), stof(arguments[4]));
 	addTriangle->SetPositionThirdPoint(stof(arguments[5]), stof(arguments[6]));
-	addTriangle->SetFillColor(arguments[7]);
-	addTriangle->SetOutlineColor(arguments[8]);
+	addTriangle->SetFillColor(ToColor(arguments[7]));
+	addTriangle->SetOutlineColor(ToColor(arguments[8]));
 
-	m_draft.AddShape(move(addTriangle));
+	m_draft.push_back(move(addTriangle));
 }
 
 void CShapeReader::AddRectangle(const listArguments & arguments)
@@ -152,10 +152,10 @@ void CShapeReader::AddRectangle(const listArguments & arguments)
 	addRectangle->SetLeftTopPoint(stof(arguments[1]), stof(arguments[2]));
 	addRectangle->SetWidth(stof(arguments[3]));
 	addRectangle->SetHeight(stof(arguments[4]));
-	addRectangle->SetFillColor(arguments[5]);
-	addRectangle->SetOutlineColor(arguments[6]);
+	addRectangle->SetFillColor(ToColor(arguments[5]));
+	addRectangle->SetOutlineColor(ToColor(arguments[6]));
 
-	m_draft.AddShape(move(addRectangle));
+	m_draft.push_back(move(addRectangle));
 }
 
 void CShapeReader::AddCircle(const listArguments & arguments)
@@ -165,10 +165,10 @@ void CShapeReader::AddCircle(const listArguments & arguments)
 	std::unique_ptr<CCircle> addCircle(new CCircle);
 	addCircle->SetPositionCenter(stof(arguments[1]), stof(arguments[2]));
 	addCircle->SetRadius(stof(arguments[3]));
-	addCircle->SetFillColor(arguments[4]);
-	addCircle->SetOutlineColor(arguments[5]);
+	addCircle->SetFillColor(ToColor(arguments[4]));
+	addCircle->SetOutlineColor(ToColor(arguments[5]));
 
-	m_draft.AddShape(move(addCircle));
+	m_draft.push_back(move(addCircle));
 }
 
 bool CShapeReader::IsCommand(const std::string & word)

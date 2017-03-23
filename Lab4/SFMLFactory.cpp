@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "SFMLFactory.h"
 
 
@@ -11,14 +12,13 @@ void CSFMLShapeFactory::Visit(const CLineSegment & data)
 {
 	std::shared_ptr<sf::RectangleShape> line(new sf::RectangleShape);
 
-	SColor color = data.GetFillColor();
-	line->setFillColor(sf::Color(color.red, color.green, color.blue));
+	line->setFillColor(data.GetFillColor());
 	line->setSize(sf::Vector2f(THIKNESS_LINE, data.GetPerimeter()));
 	line->setOrigin(ORIGIN_LINE);
-	line->setPosition(data.GetPositiionFirstPoint());
+	line->setPosition(data.GetFirstPoint());
 
-	sf::Vector2f coordinateSecondPointInZeroSystemCoordinates = data.GetPositiionSecondPoint();
-	coordinateSecondPointInZeroSystemCoordinates -= data.GetPositiionFirstPoint();
+	sf::Vector2f coordinateSecondPointInZeroSystemCoordinates = data.GetSecondPoint();
+	coordinateSecondPointInZeroSystemCoordinates -= data.GetFirstPoint();
 
 	float angle = (atan2(coordinateSecondPointInZeroSystemCoordinates.x,
 		coordinateSecondPointInZeroSystemCoordinates.y))
@@ -39,11 +39,9 @@ void CSFMLShapeFactory::Visit(const CRectangle & data)
 {
 	std::shared_ptr<sf::RectangleShape> rectangle(new sf::RectangleShape);
 
-	SColor fillColor = data.GetFillColor();
-	rectangle->setFillColor(sf::Color(fillColor.red, fillColor.green, fillColor.blue));
+	rectangle->setFillColor(data.GetFillColor());
 
-	SColor outlineColor = data.GetOutlineColor();
-	rectangle->setOutlineColor(sf::Color(outlineColor.red, outlineColor.green, outlineColor.blue));
+	rectangle->setOutlineColor(data.GetOutlineColor());
 	rectangle->setOutlineThickness(THIKNESS_LINE);
 
 	rectangle->setSize(sf::Vector2f(data.GetWidth(), data.GetHeight()));
@@ -54,12 +52,11 @@ void CSFMLShapeFactory::Visit(const CRectangle & data)
 }
 
 
-void CSFMLShapeFactory::Visit(const MyCPoint & data)
+void CSFMLShapeFactory::Visit(const CMyPoint & data)
 {
 	std::shared_ptr<sf::CircleShape> circle(new sf::CircleShape);
 
-	SColor fillColor = data.GetFillColor();
-	circle->setFillColor(sf::Color(fillColor.red, fillColor.green, fillColor.blue));
+	circle->setFillColor(data.GetFillColor());
 
 	circle->setOrigin(RADIUS_POINT / 2, RADIUS_POINT / 2);
 	circle->setPosition(data.GetPosition());
@@ -74,11 +71,9 @@ void CSFMLShapeFactory::Visit(const CCircle & data)
 {
 	std::shared_ptr<sf::CircleShape> circle(new sf::CircleShape);
 
-	SColor fillColor = data.GetFillColor();
-	circle->setFillColor(sf::Color(fillColor.red, fillColor.green, fillColor.blue));
+	circle->setFillColor(data.GetFillColor());
 
-	SColor outlineColor = data.GetOutlineColor();
-	circle->setOutlineColor(sf::Color(outlineColor.red, outlineColor.green, outlineColor.blue));
+	circle->setOutlineColor(data.GetOutlineColor());
 	circle->setOutlineThickness(THIKNESS_LINE);
 	circle->setOrigin(data.GetRadius() / 2.f, data.GetRadius() / 2.f);
 	circle->setPosition(data.GetPosition());
@@ -99,11 +94,9 @@ void CSFMLShapeFactory::Visit(const CTriangle & data)
 	triangle->setPoint(1, data.GetSecondPoint());
 	triangle->setPoint(2, data.GetThirdPoint());
 
-	SColor fillColor = data.GetFillColor();
-	triangle->setFillColor(sf::Color(fillColor.red, fillColor.green, fillColor.blue));
+	triangle->setFillColor(data.GetFillColor());
 
-	SColor outlineColor = data.GetOutlineColor();
-	triangle->setOutlineColor(sf::Color(outlineColor.red, outlineColor.green, outlineColor.blue));
+	triangle->setOutlineColor(data.GetOutlineColor());
 	triangle->setOutlineThickness(THIKNESS_LINE);
 
 	m_acceptShape = std::move(triangle);

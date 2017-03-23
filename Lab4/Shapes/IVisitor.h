@@ -2,7 +2,7 @@
 
 class CCircle;
 class CLineSegment;
-class MyCPoint;
+class CMyPoint;
 class CRectangle;
 class CTriangle;
 
@@ -13,6 +13,6 @@ public:
 	virtual void	Visit(const CTriangle & triangle) = 0;
 	virtual void	Visit(const CRectangle & rectangle) = 0;
 	virtual void	Visit(const CCircle & circle) = 0;
-	virtual void	Visit(const MyCPoint & point) = 0;
+	virtual void	Visit(const CMyPoint & point) = 0;
 	virtual			~IShapeVisitor() = default;
 };

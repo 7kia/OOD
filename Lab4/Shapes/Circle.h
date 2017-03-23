@@ -8,8 +8,12 @@ class CCircle final :
 {
 public:
 	CCircle();
-	CCircle(sf::Vector2f center, float radius,
-			SColor fillColor, SColor outlineColor);
+	CCircle(
+		const sf::Vector2f center
+		, float radius
+		, const sf::Color fillColor
+		, const sf::Color outlineColor
+	);
 	~CCircle();
 
 	float				GetPerimeter() const override;

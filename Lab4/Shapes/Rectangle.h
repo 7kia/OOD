@@ -10,8 +10,13 @@ class CRectangle final :// was exported from lab 3 Rectangle
 {
 public:
 	CRectangle();
-	CRectangle(sf::Vector2f leftTopPoint, float width, float height,
-				SColor fillColor, SColor outlineColor);
+	CRectangle(
+		const sf::Vector2f leftTopPoint
+		, float width
+		, float height
+		, const sf::Color fillColor
+		, const sf::Color outlineColor
+	);
 	~CRectangle();
 
 	void				SetLeftTopPoint(sf::Vector2f leftTopPoint);

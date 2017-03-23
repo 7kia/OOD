@@ -2,13 +2,13 @@
 
 #include "CShape.h"
 
-class MyCPoint final:
+class CMyPoint final:
 	public CShape
 {
 public:
-	MyCPoint();
-	MyCPoint(sf::Vector2f position, SColor color);
-	~MyCPoint();
+	CMyPoint();
+	CMyPoint(sf::Vector2f position, const sf::Color color);
+	~CMyPoint();
 
 	float				GetPerimeter() const override;
 	float				GetArea() const override;

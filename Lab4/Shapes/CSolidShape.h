@@ -7,16 +7,19 @@ class CSolidShape :
 	public CShape
 {
 public:
-	CSolidShape(const std::string & type, SColor boundColor, SColor fillColor);
+	CSolidShape(
+		const std::string & type
+		, const sf::Color fillColor
+		, const sf::Color boundColor
+	);
 	~CSolidShape();
 
-	void				SetOutlineColor(uint8_t r, uint8_t g, uint8_t b) override;
-	void				SetOutlineColor(SColor color) override;
-	SColor				GetOutlineColor() const override;
+	void				SetOutlineColor(const sf::Color color) override;
+	sf::Color			GetOutlineColor() const override;
 protected:
 	void				AppendProperties(std::ostream & strm) const override;
 private:
-	SColor				m_outlineColor = DEFAULT_FILL_COLOR;
+	sf::Color			m_outlineColor = DEFAULT_FILL_COLOR;
 
 };
 

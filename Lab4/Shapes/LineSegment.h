@@ -8,7 +8,11 @@ class CLineSegment final :
 {
 public:
 	CLineSegment();
-	CLineSegment(sf::Vector2f firstPoint, sf::Vector2f secondPoint, SColor color);
+	CLineSegment(
+		const sf::Vector2f firstPoint
+		, const sf::Vector2f secondPoint
+		, const sf::Color color
+	);
 	~CLineSegment();
 
 	float				GetPerimeter() const override;
@@ -17,11 +21,11 @@ public:
 
 	void				SetPositionFirstPoint(sf::Vector2f position);
 	void				SetPositionFirstPoint(float x, float y);
-	sf::Vector2f		GetPositiionFirstPoint() const;
+	sf::Vector2f		GetFirstPoint() const;
 
 	void				SetPositionSecondPoint(sf::Vector2f position);
 	void				SetPositionSecondPoint(float x, float y);
-	sf::Vector2f		GetPositiionSecondPoint() const;
+	sf::Vector2f		GetSecondPoint() const;
 private:
 	void				AppendProperties(std::ostream & strm) const;
 
