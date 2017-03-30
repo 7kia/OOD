@@ -161,12 +161,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShapeReader.cpp" />
     <ClCompile Include="Shapes\CShape.cpp" />
-    <ClCompile Include="Shapes\CSolidShape.cpp" />
     <ClCompile Include="Shapes\Circle.cpp" />
     <ClCompile Include="Shapes\IShape.cpp" />
-    <ClCompile Include="Shapes\ISolidShape.cpp" />
-    <ClCompile Include="Shapes\LineSegment.cpp" />
-    <ClCompile Include="Shapes\MyCPoint.cpp" />
     <ClCompile Include="Shapes\Rectangle.cpp" />
     <ClCompile Include="Shapes\Triangle.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -179,14 +175,9 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="ShapeReader.h" />
     <ClInclude Include="Shapes\CShape.h" />
-    <ClInclude Include="Shapes\CSolidShape.h" />
-    <ClInclude Include="Shapes\IAccepter.h" />
     <ClInclude Include="Shapes\IVisitor.h" />
     <ClInclude Include="Shapes\Circle.h" />
     <ClInclude Include="Shapes\IShape.h" />
-    <ClInclude Include="Shapes\ISolidShape.h" />
-    <ClInclude Include="Shapes\LineSegment.h" />
-    <ClInclude Include="Shapes\MyCPoint.h" />
     <ClInclude Include="Shapes\Rectangle.h" />
     <ClInclude Include="Shapes\Shapes.h" />
     <ClInclude Include="Shapes\Triangle.h" />

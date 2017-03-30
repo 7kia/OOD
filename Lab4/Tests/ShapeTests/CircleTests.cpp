@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Shapes\Circle.h"
+#include "..\..\Shapes\Circle.h"
 
 
 struct Circle_
@@ -32,10 +32,6 @@ struct Circle_
 };
 
 BOOST_FIXTURE_TEST_SUITE(Circle, Circle_)
-BOOST_AUTO_TEST_CASE(is_a_shape)
-{
-	BOOST_CHECK(static_cast<const CShape*>(&circle));
-}
 
 BOOST_AUTO_TEST_CASE(has_color_outline_color)
 {
@@ -72,19 +68,10 @@ BOOST_AUTO_TEST_CASE(has_a_position)
 {
 	VerifyVector2f(circle.GetPosition(), expectedPosition);
 
-	circle.SetPositionCenter(expectedPositionAfterAssigment);
+	circle.SetPosition(expectedPositionAfterAssigment);
 	VerifyVector2f(circle.GetPosition(), expectedPositionAfterAssigment);
 }
 
-BOOST_AUTO_TEST_CASE(has_a_length)
-{
-	BOOST_CHECK(IsEqual(circle.GetPerimeter(), expectedLength));
-}
-
-BOOST_AUTO_TEST_CASE(has_a_area)
-{
-	BOOST_CHECK(IsEqual(circle.GetArea(), expectedArea));
-}
 
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -126,14 +113,5 @@ BOOST_AUTO_TEST_CASE(has_a_position)
 	VerifyVector2f(circle.GetPosition(), expectedPosition);
 }
 
-BOOST_AUTO_TEST_CASE(has_a_length)
-{
-	BOOST_CHECK_EQUAL(circle.GetPerimeter(), expectedLength);
-}
-
-BOOST_AUTO_TEST_CASE(has_a_area)
-{
-	BOOST_CHECK_EQUAL(circle.GetArea(), expectedArea);
-}
 
 BOOST_AUTO_TEST_SUITE_END()

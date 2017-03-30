@@ -1,15 +1,13 @@
 #pragma once
 
 
-#include "IAccepter.h"
-#include "LineSegment.h"
-#include "CSolidShape.h"
+#include "CShape.h"
 
 class CTriangle final:
-	public CSolidShape
+	public CShape
 {
 public:
-	CTriangle();
+	CTriangle() = default;
 	CTriangle(
 		const sf::Vector2f firstPoint
 		, const sf::Vector2f secondPoint
@@ -17,29 +15,21 @@ public:
 		, const sf::Color fillColor
 		, const sf::Color outlineColor
 	);
-	~CTriangle();
 
-	float				GetPerimeter() const override;
-	float				GetArea() const override;
+public:
+	void				SetFirstPoint(const sf::Vector2f position);
+	void				SetSecondPoint(const sf::Vector2f position);
+	void				SetThirdPoint(const sf::Vector2f position);
 
-	void				SetPositionFirstPoint(sf::Vector2f position);
-	void				SetPositionFirstPoint(float x, float y);
-
-	void				SetPositionSecondPoint(sf::Vector2f position);
-	void				SetPositionSecondPoint(float x, float y);
-
-	void				SetPositionThirdPoint(sf::Vector2f position);
-	void				SetPositionThirdPoint(float x, float y);
-
-	sf::Vector2f		GetFirstPoint() const;// for draw
+	sf::Vector2f		GetFirstPoint() const;
 	sf::Vector2f		GetSecondPoint() const;
 	sf::Vector2f		GetThirdPoint() const;
 private:
 
 	void				Accept(IShapeVisitor & visitor) override;
 private:
-	CLineSegment		m_firstLine;
-	CLineSegment		m_secondLine;
-	CLineSegment		m_thirdLine;
+	sf::Vector2f		m_firstPoint;
+	sf::Vector2f		m_secondPoint;
+	sf::Vector2f		m_thirdPoint;
 };
 

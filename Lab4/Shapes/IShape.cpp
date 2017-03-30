@@ -1,19 +1,9 @@
 #include "stdafx.h"
 #include "IShape.h"
 
-struct SColor
+namespace
 {
-	SColor(uint8_t r, uint8_t g, uint8_t b);
-	SColor(const std::string &value);
-	uint8_t red = 0;
-	uint8_t green = 0;
-	uint8_t blue = 0;
-
-	bool operator==(const SColor & other) const;
-};
-
-IShape::~IShape()
-{
+	const std::string MESSAGE_INCORRECT_VALUE = "Incorrect value!!!";
 }
 
 std::ostream& operator<<(std::ostream& stream, const sf::Color color)
@@ -53,4 +43,24 @@ sf::Color ToColor(const std::string & value)
 	}
 
 	return result;
+}
+
+
+SSize::SSize(float width, float height)
+	: width(width)
+	, height(height)
+{
+}
+
+bool SSize::operator==(SSize const & size) const
+{
+	return (size.width == width) && (size.height == height);
+}
+
+SSize & SSize::operator=(const SSize & right)
+{
+	width = right.width;
+	height = right.height;
+
+	return *this;
 }

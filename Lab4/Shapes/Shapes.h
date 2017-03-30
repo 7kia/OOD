@@ -1,10 +1,7 @@
 #pragma once
 
-#include "IShape.h"
-#include "ISolidShape.h"
+
 #include "Circle.h"
-#include "LineSegment.h"
-#include "MyCPoint.h"
 #include "Rectangle.h"
 #include "Triangle.h"
 

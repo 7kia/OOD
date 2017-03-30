@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "../ShapeReader.h"
-#include "Painter\Painter.h"
+#include "..\Painter\Painter.h"
 
 struct ShapeReader_
 {
@@ -15,12 +15,10 @@ struct ShapeReader_
 	const sf::Vector2f ORIGIN_LINE = { THIKNESS_LINE / 2.f, 0.f };
 	const float RADIUS_POINT = 2.f;
 
-	const int amountShapes = 5;
-	const int indexPoint = 0;
-	const int indexRectangle = 1;
-	const int indexCircle = 2;
-	const int indexTriangle = 3;
-	const int indexLine = 4;
+	const int amountShapes = 3;
+	const int indexRectangle = 0;
+	const int indexCircle = 1;
+	const int indexTriangle = 2;
 
 	ShapeReader_()
 	{
@@ -42,53 +40,13 @@ BOOST_AUTO_TEST_CASE(size_shape_list_is_correct)
 	BOOST_CHECK_EQUAL(draft.size(), amountShapes);
 }
 
-BOOST_AUTO_TEST_CASE(indexes_shape_is_correct)
-{
-	BOOST_CHECK_EQUAL(draft[indexPoint]->GetType(), "Point");
-	BOOST_CHECK_EQUAL(draft[indexLine]->GetType(), "Line");
-	BOOST_CHECK_EQUAL(draft[indexRectangle]->GetType(), "Rectangle");
-	BOOST_CHECK_EQUAL(draft[indexCircle]->GetType(), "Circle");
-	BOOST_CHECK_EQUAL(draft[indexTriangle]->GetType(), "Triangle");
-}
 
-BOOST_AUTO_TEST_SUITE(read_point)
-	struct check_point_ : ShapeReader_
-	{
-		const sf::Color fillColor;
-
-		const sf::Vector2f position;
-
-		check_point_()
-			: fillColor(16, 240, 48)
-			, position(100.f, 150.f)
-		{
-
-		}
-	};
-	BOOST_FIXTURE_TEST_SUITE(check_point, check_point_)
-		BOOST_AUTO_TEST_CASE(point_draft)
-		{
-			const CMyPoint* pPoint = dynamic_cast<CMyPoint*>(&*draft[indexPoint]);
-
-			VerifyVector2f(position, pPoint->GetPosition());
-			VerifyColor(fillColor, pPoint->GetFillColor());
-		}
-		BOOST_AUTO_TEST_CASE(point_sfmlShape)
-		{
-			const sf::CircleShape* pPoint = dynamic_cast<sf::CircleShape*>(&*sfmlShapes[indexPoint]);
-
-			VerifyVector2f(position, pPoint->getPosition());
-			VerifyColor(fillColor, pPoint->getFillColor());
-		}
-	BOOST_AUTO_TEST_SUITE_END()// check_point_
-BOOST_AUTO_TEST_SUITE_END()// read_point
 
 BOOST_AUTO_TEST_SUITE(read_rectangle)
 	struct check_rectangle_ : ShapeReader_
 	{
 		const sf::Vector2f leftToppoint;
-		const float width = 46.f;
-		const float height = 24.f;
+		const SSize size;
 		const sf::Color fillColor;
 		const sf::Color outlineColor;
 
@@ -96,6 +54,7 @@ BOOST_AUTO_TEST_SUITE(read_rectangle)
 			: fillColor(17, 241, 49)
 			, outlineColor(18, 242, 50)
 			, leftToppoint(45.f, 23.f)
+			, size(46.f, 24.f)
 		{
 
 		}
@@ -106,8 +65,8 @@ BOOST_AUTO_TEST_SUITE(read_rectangle)
 			const CRectangle* pRectangle = dynamic_cast<CRectangle*>(&*draft[indexRectangle]);
 
 			VerifyVector2f(leftToppoint, pRectangle->GetLeftTopPoint());
-			BOOST_CHECK(IsEqual(width, pRectangle->GetWidth()));
-			BOOST_CHECK(IsEqual(height, pRectangle->GetHeight()));
+			
+			VerifySize(pRectangle->GetSize(), size);
 			VerifyColor(fillColor, pRectangle->GetFillColor());
 			VerifyColor(outlineColor, pRectangle->GetOutlineColor());
 		}
@@ -116,8 +75,9 @@ BOOST_AUTO_TEST_SUITE(read_rectangle)
 			const sf::RectangleShape* pRectangle = dynamic_cast<sf::RectangleShape*>(&*sfmlShapes[indexRectangle]);
 
 			VerifyVector2f(leftToppoint, pRectangle->getPosition());
-			BOOST_CHECK(IsEqual(width, pRectangle->getSize().x));
-			BOOST_CHECK(IsEqual(height, pRectangle->getSize().y));
+
+			BOOST_CHECK(IsEqual(size.width, pRectangle->getSize().x));
+			BOOST_CHECK(IsEqual(size.height, pRectangle->getSize().y));
 			VerifyColor(fillColor, pRectangle->getFillColor());
 			VerifyColor(outlineColor, pRectangle->getOutlineColor());
 		}
@@ -203,56 +163,6 @@ BOOST_AUTO_TEST_SUITE(read_triangle)
 		}
 	BOOST_AUTO_TEST_SUITE_END()// check_triangle_
 BOOST_AUTO_TEST_SUITE_END()// read_triangle
-
-BOOST_AUTO_TEST_SUITE(read_line)
-	struct check_line_ : ShapeReader_
-	{
-		const sf::Vector2f firstPosition = { 11.f, 0.f };
-		const sf::Vector2f secondPosition = { -11.f, 11.f };
-		const sf::Color fillColor;
-
-		check_line_()
-			: fillColor(23, 247, 55)
-		{
-
-		}
-	};
-	BOOST_FIXTURE_TEST_SUITE(check_line, check_line_)
-		BOOST_AUTO_TEST_CASE(line_draft)
-		{
-			const CLineSegment* pLine = dynamic_cast<CLineSegment*>(&*draft[indexLine]);
-
-			VerifyVector2f(firstPosition, pLine->GetFirstPoint());
-			VerifyVector2f(secondPosition, pLine->GetSecondPoint());
-			VerifyColor(fillColor, pLine->GetFillColor());
-		}
-		BOOST_AUTO_TEST_CASE(line_sfmlShape)
-		{
-			const CLineSegment* pLineDraft = dynamic_cast<CLineSegment*>(&*draft[indexLine]);
-			const sf::RectangleShape* pLine = dynamic_cast<sf::RectangleShape*>(&*sfmlShapes[indexLine]);
-
-			VerifyColor(fillColor, pLine->getFillColor());
-			
-			VerifyVector2f(pLine->getSize(), sf::Vector2f(THIKNESS_LINE, pLineDraft->GetPerimeter()));
-			VerifyVector2f(pLine->getOrigin(), ORIGIN_LINE);
-			VerifyVector2f(pLine->getPosition(), pLineDraft->GetFirstPoint());
-
-			const sf::Vector2f coordinateSecondPointInZeroSystemCoordinates = pLineDraft->GetSecondPoint() - pLineDraft->GetFirstPoint();
-
-			float angle = (atan2(coordinateSecondPointInZeroSystemCoordinates.x,
-				coordinateSecondPointInZeroSystemCoordinates.y))
-				* 180.f
-				/ static_cast<float>(M_PI);
-			if (angle < 0)
-			{
-				angle += 180;
-			}
-
-			BOOST_CHECK(IsEqual(angle, pLine->getRotation()));
-
-		}
-	BOOST_AUTO_TEST_SUITE_END()// check_line_
-BOOST_AUTO_TEST_SUITE_END()// read_line
 
 
 BOOST_AUTO_TEST_SUITE_END()// ShapeReader_

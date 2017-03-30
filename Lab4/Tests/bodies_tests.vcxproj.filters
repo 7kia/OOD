@@ -36,9 +36,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,15 +45,6 @@
     <ClInclude Include="..\Shapes\IShape.h">
       <Filter>TestsShapes\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shapes\ISolidShape.h">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\LineSegment.h">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\MyCPoint.h">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shapes\Rectangle.h">
       <Filter>TestsShapes\Shapes</Filter>
     </ClInclude>
@@ -64,12 +52,6 @@
       <Filter>TestsShapes\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="..\Shapes\CShape.h">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\CSolidShape.h">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\IAccepter.h">
       <Filter>TestsShapes\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="..\Shapes\IVisitor.h">
@@ -86,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="..\PictureDraft.h">
       <Filter>TestApplication\TestClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,15 +89,6 @@
     <ClCompile Include="..\Shapes\IShape.cpp">
       <Filter>TestsShapes\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shapes\ISolidShape.cpp">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\LineSegment.cpp">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\MyCPoint.cpp">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Shapes\Rectangle.cpp">
       <Filter>TestsShapes\Shapes</Filter>
     </ClCompile>
@@ -122,16 +98,7 @@
     <ClCompile Include="..\Shapes\CShape.cpp">
       <Filter>TestsShapes\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shapes\CSolidShape.cpp">
-      <Filter>TestsShapes\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="ShapeTests\CircleTests.cpp">
-      <Filter>TestsShapes</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapeTests\LineSegmentTests.cpp">
-      <Filter>TestsShapes</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapeTests\MyCPointTests.cpp">
       <Filter>TestsShapes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeTests\RectangleTests.cpp">

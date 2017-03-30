@@ -108,7 +108,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <ExceptionHandling>Async</ExceptionHandling>
-      <AdditionalIncludeDirectories>../;C:\SDK\SFML\include;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDK\SFML\include;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,13 +172,8 @@
     <ClInclude Include="..\ShapeReader.h" />
     <ClInclude Include="..\Shapes\Circle.h" />
     <ClInclude Include="..\Shapes\CShape.h" />
-    <ClInclude Include="..\Shapes\CSolidShape.h" />
-    <ClInclude Include="..\Shapes\IAccepter.h" />
     <ClInclude Include="..\Shapes\IShape.h" />
-    <ClInclude Include="..\Shapes\ISolidShape.h" />
     <ClInclude Include="..\Shapes\IVisitor.h" />
-    <ClInclude Include="..\Shapes\LineSegment.h" />
-    <ClInclude Include="..\Shapes\MyCPoint.h" />
     <ClInclude Include="..\Shapes\Rectangle.h" />
     <ClInclude Include="..\Shapes\Triangle.h" />
     <ClInclude Include="stdafx.h" />
@@ -190,18 +185,12 @@
     <ClCompile Include="..\ShapeReader.cpp" />
     <ClCompile Include="..\Shapes\Circle.cpp" />
     <ClCompile Include="..\Shapes\CShape.cpp" />
-    <ClCompile Include="..\Shapes\CSolidShape.cpp" />
     <ClCompile Include="..\Shapes\IShape.cpp" />
-    <ClCompile Include="..\Shapes\ISolidShape.cpp" />
-    <ClCompile Include="..\Shapes\LineSegment.cpp" />
-    <ClCompile Include="..\Shapes\MyCPoint.cpp" />
     <ClCompile Include="..\Shapes\Rectangle.cpp" />
     <ClCompile Include="..\Shapes\Triangle.cpp" />
     <ClCompile Include="bodies_tests.cpp" />
     <ClCompile Include="ShapeReaderTests.cpp" />
     <ClCompile Include="ShapeTests\CircleTests.cpp" />
-    <ClCompile Include="ShapeTests\LineSegmentTests.cpp" />
-    <ClCompile Include="ShapeTests\MyCPointTests.cpp" />
     <ClCompile Include="ShapeTests\RectangleTests.cpp" />
     <ClCompile Include="ShapeTests\TriangleTests.cpp" />
     <ClCompile Include="Tests.cpp" />

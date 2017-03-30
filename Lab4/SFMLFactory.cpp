@@ -1,37 +1,17 @@
 #include "stdafx.h"
 #include "SFMLFactory.h"
 
+namespace
+{
+	const float					THIKNESS_LINE = 5;
+	const sf::Vector2f			ORIGIN_LINE = { THIKNESS_LINE / 2.f, 0.f };
+	const float					RADIUS_POINT = 2.f;
+}
 
 SFMLShapePtr CSFMLShapeFactory::CreateShape(const CShapePtr & shape)
 {
 	shape->Accept(*this);
 	return m_acceptShape;
-}
-
-void CSFMLShapeFactory::Visit(const CLineSegment & data)
-{
-	std::shared_ptr<sf::RectangleShape> line(new sf::RectangleShape);
-
-	line->setFillColor(data.GetFillColor());
-	line->setSize(sf::Vector2f(THIKNESS_LINE, data.GetPerimeter()));
-	line->setOrigin(ORIGIN_LINE);
-	line->setPosition(data.GetFirstPoint());
-
-	sf::Vector2f coordinateSecondPointInZeroSystemCoordinates = data.GetSecondPoint();
-	coordinateSecondPointInZeroSystemCoordinates -= data.GetFirstPoint();
-
-	float angle = (atan2(coordinateSecondPointInZeroSystemCoordinates.x,
-		coordinateSecondPointInZeroSystemCoordinates.y))
-		* 180.f
-		/ static_cast<float>(M_PI);
-	if (angle < 0)
-	{
-		angle += 180;
-	}
-
-	line->setRotation(angle);
-
-	m_acceptShape = std::move(line);
 }
 
 
@@ -44,26 +24,11 @@ void CSFMLShapeFactory::Visit(const CRectangle & data)
 	rectangle->setOutlineColor(data.GetOutlineColor());
 	rectangle->setOutlineThickness(THIKNESS_LINE);
 
-	rectangle->setSize(sf::Vector2f(data.GetWidth(), data.GetHeight()));
+	rectangle->setSize(sf::Vector2f(data.GetSize().width, data.GetSize().height));
 	rectangle->setOrigin(0.f, 0.f);// in SFML default anchor point in left top angle
 	rectangle->setPosition(data.GetLeftTopPoint());
 
 	m_acceptShape = std::move(rectangle);
-}
-
-
-void CSFMLShapeFactory::Visit(const CMyPoint & data)
-{
-	std::shared_ptr<sf::CircleShape> circle(new sf::CircleShape);
-
-	circle->setFillColor(data.GetFillColor());
-
-	circle->setOrigin(RADIUS_POINT / 2, RADIUS_POINT / 2);
-	circle->setPosition(data.GetPosition());
-
-	circle->setRadius(RADIUS_POINT);
-
-	m_acceptShape = std::move(circle);
 }
 
 

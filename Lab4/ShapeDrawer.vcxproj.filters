@@ -33,28 +33,10 @@
     <ClCompile Include="Shapes\IShape.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="Shapes\ISolidShape.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Shapes\LineSegment.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Shapes\MyCPoint.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Shapes\Rectangle.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="Shapes\Triangle.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shapes\CShape.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Shapes\CSolidShape.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeReader.cpp">
@@ -69,6 +51,12 @@
     <ClCompile Include="SFMLFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shapes\Rectangle.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -80,34 +68,16 @@
     <ClInclude Include="Shapes\IShape.h">
       <Filter>Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="Shapes\ISolidShape.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes\LineSegment.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes\MyCPoint.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="Shapes\Rectangle.h">
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\Triangle.h">
       <Filter>Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes\IAccepter.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="Shapes\IVisitor.h">
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\CShape.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes\CSolidShape.h">
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeReader.h">
@@ -119,14 +89,17 @@
     <ClInclude Include="Application.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PictureDraft.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Painter\Painter.h">
       <Filter>Source Files\Painter</Filter>
     </ClInclude>
     <ClInclude Include="SFMLFactory.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureDraft.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

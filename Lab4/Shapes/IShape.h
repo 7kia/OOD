@@ -7,30 +7,37 @@
 #include <sstream>
 #include <string>
 
-#include "IAccepter.h"
-
-
-static const float pi = boost::math::constants::pi<float>();
-static const std::string MESSAGE_INCORRECT_VALUE = "Incorrect value!!!";
-
+#include "IVisitor.h"
 
 static const sf::Color DEFAULT_COLOR(0, 0, 0, 0);
-static const int AMOUNT_NUMBERS_FOR_OUTPUT = 3;
 
 std::ostream& operator<<(std::ostream& stream, const sf::Vector2f & vector);
-
-
-// TODO : rewrite
 std::ostream& operator<<(std::ostream& stream, const sf::Color color);
 sf::Color ToColor(const std::string &value);
 
+struct SSize
+{
+	SSize() = default;
+	SSize(float width, float height);
+
+	bool operator==(SSize const& size) const;
+	SSize& operator=(const SSize& right);
+
+	float width = 0.f;
+	float height = 0.f;
+};
+
 class IShape
-	: public IAccepter
 {
 public:
-	virtual ~IShape();
+	virtual ~IShape() = default;;
 
-	virtual float				GetPerimeter() const = 0;
-	virtual float				GetArea() const = 0;
+	virtual void				SetFillColor(const sf::Color color) = 0;
+	virtual sf::Color			GetFillColor() const = 0;
+
+	virtual void				SetOutlineColor(const sf::Color color) = 0;
+	virtual sf::Color			GetOutlineColor() const = 0;
+
+	virtual void				Accept(IShapeVisitor & visitor) = 0;
 };
 

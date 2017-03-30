@@ -3,6 +3,28 @@
 
 using namespace std;
 
+namespace
+{
+	const std::vector<std::string> COMMANDS_NAME =
+	{
+		"Triangle" ,
+		"Rectangle" ,
+		"Circle"
+	};
+	const std::vector<int> AMOUNT_ARGUMENTS_FOR_COMMAND =
+	{
+		9 ,
+		7 ,
+		6
+	};
+	const std::string MESSAGE_INCORRECT_COMMAND = "Incorrect command.";
+
+	const std::string MESSAGE_FAILED_OPEN = "Failed to open ";
+	const std::string MESSAGE_FAILED_OPEN_FOR_READING = " for reading!";
+	const std::string MESSAGE_FAILED_OPEN_FOR_WRITING = " for writing!";
+	const std::string MESSAGE_INCORRECT_AMOUNT_ARGUMENTS = "Incorrect amount arguments! Must will be ";
+}
+
 CShapeReader::CShapeReader()
 {
 }
@@ -69,15 +91,7 @@ void CShapeReader::ReadShapes(std::istream & file)
 	while (getline(file, stringFromFile))
 	{
 		argumnents = SplitWords(stringFromFile);
-		if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Point)])
-		{
-			AddPoint(argumnents);
-		}
-		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::LineSegment)])
-		{
-			AddLineSegment(argumnents);
-		}
-		else if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Triangle)])
+		if (argumnents[0] == COMMANDS_NAME[size_t(IdCommand::Triangle)])
 		{
 			AddTriangle(argumnents);
 		}
@@ -107,37 +121,14 @@ void CShapeReader::CheckAmountArguments(const listArguments & arguments, IdComma
 	}
 }
 
-void CShapeReader::AddPoint(const listArguments & arguments)
-{
-	CheckAmountArguments(arguments, IdCommand::Point);
-
-	std::unique_ptr<CMyPoint> addPoint(new CMyPoint);
-	addPoint->SetPosition(stof(arguments[1]), stof(arguments[2]));
-	addPoint->SetFillColor(ToColor(arguments[3]));
-
-	m_draft.push_back(move(addPoint));
-}
-
-void CShapeReader::AddLineSegment(const listArguments & arguments)
-{
-	CheckAmountArguments(arguments, IdCommand::LineSegment);
-
-	std::unique_ptr<CLineSegment> addLine(new CLineSegment);
-	addLine->SetPositionFirstPoint(stof(arguments[1]), stof(arguments[2]));
-	addLine->SetPositionSecondPoint(stof(arguments[3]), stof(arguments[4]));
-	addLine->SetFillColor(ToColor(arguments[5]));
-
-	m_draft.push_back(move(addLine));
-}
-
 void CShapeReader::AddTriangle(const listArguments & arguments)
 {
 	CheckAmountArguments(arguments, IdCommand::Triangle);
 
 	std::unique_ptr<CTriangle> addTriangle(new CTriangle);
-	addTriangle->SetPositionFirstPoint(stof(arguments[1]), stof(arguments[2]));
-	addTriangle->SetPositionSecondPoint(stof(arguments[3]), stof(arguments[4]));
-	addTriangle->SetPositionThirdPoint(stof(arguments[5]), stof(arguments[6]));
+	addTriangle->SetFirstPoint(sf::Vector2f(stof(arguments[1]), stof(arguments[2])));
+	addTriangle->SetSecondPoint(sf::Vector2f(stof(arguments[3]), stof(arguments[4])));
+	addTriangle->SetThirdPoint(sf::Vector2f(stof(arguments[5]), stof(arguments[6])));
 	addTriangle->SetFillColor(ToColor(arguments[7]));
 	addTriangle->SetOutlineColor(ToColor(arguments[8]));
 
@@ -149,9 +140,8 @@ void CShapeReader::AddRectangle(const listArguments & arguments)
 	CheckAmountArguments(arguments, IdCommand::Rectangle);
 
 	std::unique_ptr<CRectangle> addRectangle(new CRectangle);
-	addRectangle->SetLeftTopPoint(stof(arguments[1]), stof(arguments[2]));
-	addRectangle->SetWidth(stof(arguments[3]));
-	addRectangle->SetHeight(stof(arguments[4]));
+	addRectangle->SetLeftTopPoint(sf::Vector2f(stof(arguments[1]), stof(arguments[2])));
+	addRectangle->SetSize(SSize(stof(arguments[3]), stof(arguments[4])));
 	addRectangle->SetFillColor(ToColor(arguments[5]));
 	addRectangle->SetOutlineColor(ToColor(arguments[6]));
 
@@ -163,7 +153,7 @@ void CShapeReader::AddCircle(const listArguments & arguments)
 	CheckAmountArguments(arguments, IdCommand::Circle);
 
 	std::unique_ptr<CCircle> addCircle(new CCircle);
-	addCircle->SetPositionCenter(stof(arguments[1]), stof(arguments[2]));
+	addCircle->SetPosition(sf::Vector2f(stof(arguments[1]), stof(arguments[2])));
 	addCircle->SetRadius(stof(arguments[3]));
 	addCircle->SetFillColor(ToColor(arguments[4]));
 	addCircle->SetOutlineColor(ToColor(arguments[5]));

@@ -32,3 +32,9 @@ void VerifyColor(const sf::Color & color, const sf::Color & myColor)
 	BOOST_CHECK_EQUAL(color.a, myColor.a);
 
 }
+
+void VerifySize(const SSize & size, const SSize & expectedSize)
+{
+	BOOST_CHECK(IsEqual(size.width, expectedSize.width));
+	BOOST_CHECK(IsEqual(size.height, expectedSize.height));
+}

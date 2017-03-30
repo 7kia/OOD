@@ -1,8 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "PictureDraft.h"
-#include "SFMLFactory.h"
+#include "..\PictureDraft.h"
+#include "..\SFMLFactory.h"
 
 class CPainter
 {
