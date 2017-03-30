@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "SFMLFactory.h"
+#include "SFMLShapeFactory.h"
 
 namespace
 {
@@ -14,7 +14,6 @@ SFMLShapePtr CSFMLShapeFactory::CreateShape(const CShapePtr & shape)
 	return m_acceptShape;
 }
 
-
 void CSFMLShapeFactory::Visit(const CRectangle & data)
 {
 	std::shared_ptr<sf::RectangleShape> rectangle = std::make_shared<sf::RectangleShape>();
@@ -25,7 +24,7 @@ void CSFMLShapeFactory::Visit(const CRectangle & data)
 	rectangle->setOutlineThickness(THIKNESS_LINE);
 
 	rectangle->setSize(sf::Vector2f(data.GetSize().width, data.GetSize().height));
-	rectangle->setOrigin(0.f, 0.f);// in SFML default anchor point in left top angle
+	rectangle->setOrigin(0.f, 0.f);
 	rectangle->setPosition(data.GetLeftTopPoint());
 
 	m_acceptShape = std::move(rectangle);

@@ -57,9 +57,6 @@
     <ClInclude Include="..\Painter\Painter.h">
       <Filter>TestApplication\TestClasses</Filter>
     </ClInclude>
-    <ClInclude Include="..\SFMLFactory.h">
-      <Filter>TestApplication\TestClasses</Filter>
-    </ClInclude>
     <ClInclude Include="..\ShapeReader.h">
       <Filter>TestApplication\TestClasses</Filter>
     </ClInclude>
@@ -77,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="..\Shapes\Shapes.h">
       <Filter>TestsShapes\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SFMLShapeFactory.h">
+      <Filter>TestApplication\TestClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +116,6 @@
     <ClCompile Include="..\Painter\Painter.cpp">
       <Filter>TestApplication\TestClasses</Filter>
     </ClCompile>
-    <ClCompile Include="..\SFMLFactory.cpp">
-      <Filter>TestApplication\TestClasses</Filter>
-    </ClCompile>
     <ClCompile Include="..\ShapeReader.cpp">
       <Filter>TestApplication\TestClasses</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="..\Shapes\ShapeFactory.cpp">
       <Filter>TestsShapes\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SFMLShapeFactory.cpp">
+      <Filter>TestApplication\TestClasses</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

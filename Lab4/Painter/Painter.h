@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "..\PictureDraft.h"
-#include "..\SFMLFactory.h"
+#include "..\SFMLShapeFactory.h"
 
 class CPainter
 {

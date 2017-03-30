@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "ShapeFactory.h"
 
 using namespace std;

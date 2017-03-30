@@ -168,7 +168,7 @@
   <ItemGroup>
     <ClInclude Include="..\Painter\Painter.h" />
     <ClInclude Include="..\PictureDraft.h" />
-    <ClInclude Include="..\SFMLFactory.h" />
+    <ClInclude Include="..\SFMLShapeFactory.h" />
     <ClInclude Include="..\ShapeReader.h" />
     <ClInclude Include="..\Shapes\Circle.h" />
     <ClInclude Include="..\Shapes\CShape.h" />
@@ -183,7 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Painter\Painter.cpp" />
-    <ClCompile Include="..\SFMLFactory.cpp" />
+    <ClCompile Include="..\SFMLShapeFactory.cpp" />
     <ClCompile Include="..\ShapeReader.cpp" />
     <ClCompile Include="..\Shapes\Circle.cpp" />
     <ClCompile Include="..\Shapes\CShape.cpp" />

@@ -48,9 +48,6 @@
     <ClCompile Include="Painter\Painter.cpp">
       <Filter>Source Files\Painter</Filter>
     </ClCompile>
-    <ClCompile Include="SFMLFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shapes\Rectangle.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Shapes\ShapeFactory.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLShapeFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,9 +92,6 @@
     <ClInclude Include="Painter\Painter.h">
       <Filter>Source Files\Painter</Filter>
     </ClInclude>
-    <ClInclude Include="SFMLFactory.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PictureDraft.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -106,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Shapes\IShapeVisitor.h">
       <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLShapeFactory.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
