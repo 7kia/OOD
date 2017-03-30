@@ -13,7 +13,7 @@ CRectangle::CRectangle(
 {
 }
 
-void CRectangle::SetLeftTopPoint(const sf::Vector2f leftTopPoint)
+void CRectangle::SetLeftTopPoint(const sf::Vector2f & leftTopPoint)
 {
 	m_leftTopPoint = leftTopPoint;
 }
@@ -23,7 +23,7 @@ sf::Vector2f CRectangle::GetLeftTopPoint() const
 	return m_leftTopPoint;
 }
 
-void CRectangle::SetSize(const SSize size)
+void CRectangle::SetSize(const SSize & size)
 {
 	m_size = size;
 }

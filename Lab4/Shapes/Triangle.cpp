@@ -16,17 +16,17 @@ CTriangle::CTriangle(
 }
 
 
-void CTriangle::SetFirstPoint(const sf::Vector2f position)
+void CTriangle::SetFirstPoint(const sf::Vector2f & position)
 {
 	m_firstPoint = position;
 }
 
-void CTriangle::SetSecondPoint(const sf::Vector2f position)
+void CTriangle::SetSecondPoint(const sf::Vector2f & position)
 {
 	m_secondPoint = position;
 }
 
-void CTriangle::SetThirdPoint(const sf::Vector2f position)
+void CTriangle::SetThirdPoint(const sf::Vector2f & position)
 {
 	m_thirdPoint = position;
 }

@@ -15,10 +15,10 @@ public:
 	);
 public:
 
-	void				SetLeftTopPoint(const sf::Vector2f leftTopPoint);
+	void				SetLeftTopPoint(const sf::Vector2f & leftTopPoint);
 	sf::Vector2f		GetLeftTopPoint() const;
 
-	void				SetSize(const SSize size);
+	void				SetSize(const SSize & size);
 	SSize				GetSize() const;
 private:
 

@@ -9,7 +9,7 @@ class CShape
 	: public IShape
 {
 public:
-	CShape(const sf::Color fillColor = DEFAULT_COLOR, const sf::Color outlineColor = DEFAULT_COLOR);
+	CShape(const sf::Color & fillColor = DEFAULT_COLOR, const sf::Color & outlineColor = DEFAULT_COLOR);
 public:
 
 	void						SetFillColor(const sf::Color & color);

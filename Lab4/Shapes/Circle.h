@@ -17,7 +17,7 @@ public:
 	void				SetRadius(float radius);
 	float				GetRadius() const;
 
-	void				SetPosition(sf::Vector2f position);
+	void				SetPosition(const sf::Vector2f & position);
 	sf::Vector2f		GetPosition() const;
 private:
 	void				Accept(IShapeVisitor & visitor) override;

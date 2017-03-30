@@ -17,9 +17,9 @@ public:
 	);
 
 public:
-	void				SetFirstPoint(const sf::Vector2f position);
-	void				SetSecondPoint(const sf::Vector2f position);
-	void				SetThirdPoint(const sf::Vector2f position);
+	void				SetFirstPoint(const sf::Vector2f & position);
+	void				SetSecondPoint(const sf::Vector2f & position);
+	void				SetThirdPoint(const sf::Vector2f & position);
 
 	sf::Vector2f		GetFirstPoint() const;
 	sf::Vector2f		GetSecondPoint() const;

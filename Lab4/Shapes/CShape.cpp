@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CShape.h"
 
-CShape::CShape(const sf::Color fillColor, const sf::Color outlineColor)
+CShape::CShape(const sf::Color & fillColor, const sf::Color & outlineColor)
 	: m_fillColor(fillColor)
 	, m_outlineColor(outlineColor)
 {
