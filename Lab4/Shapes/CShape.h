@@ -12,10 +12,10 @@ public:
 	CShape(const sf::Color fillColor = DEFAULT_COLOR, const sf::Color outlineColor = DEFAULT_COLOR);
 public:
 
-	void						SetFillColor(const sf::Color color);
+	void						SetFillColor(const sf::Color & color);
 	sf::Color					GetFillColor() const;
 
-	void						SetOutlineColor(const sf::Color color) override;
+	void						SetOutlineColor(const sf::Color & color) override;
 	sf::Color					GetOutlineColor() const override;
 protected:
 	sf::Color					m_fillColor;

@@ -7,7 +7,7 @@
 #include <sstream>
 #include <string>
 
-#include "IVisitor.h"
+#include "IShapeVisitor.h"
 
 static const sf::Color DEFAULT_COLOR(0, 0, 0, 0);
 
@@ -32,10 +32,10 @@ class IShape
 public:
 	virtual ~IShape() = default;;
 
-	virtual void				SetFillColor(const sf::Color color) = 0;
+	virtual void				SetFillColor(const sf::Color & color) = 0;
 	virtual sf::Color			GetFillColor() const = 0;
 
-	virtual void				SetOutlineColor(const sf::Color color) = 0;
+	virtual void				SetOutlineColor(const sf::Color & color) = 0;
 	virtual sf::Color			GetOutlineColor() const = 0;
 
 	virtual void				Accept(IShapeVisitor & visitor) = 0;

@@ -19,7 +19,7 @@ public:
 };
 
 class CSFMLShapeFactory 
-	: public IShapeVisitor
+	: private IShapeVisitor
 	, public ISFMLShapeFactory
 {
 public:
@@ -27,13 +27,16 @@ public:
 	// Methods
 public:
 	//--------------------------------------------
+	// ISFMLShapeFactory
+	SFMLShapePtr				CreateShape(const CShapePtr & shape) override;
+	//--------------------------------------------
+
+private:
+	//--------------------------------------------
 	// IShapeVisitor
 	void						Visit(const CTriangle & triangle) override;
 	void						Visit(const CRectangle & rectangle) override;
 	void						Visit(const CCircle & circle) override;
-	//--------------------------------------------
-	// ISFMLShapeFactory
-	SFMLShapePtr				CreateShape(const CShapePtr & shape) override;
 	//--------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////

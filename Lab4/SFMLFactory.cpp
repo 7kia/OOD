@@ -17,7 +17,7 @@ SFMLShapePtr CSFMLShapeFactory::CreateShape(const CShapePtr & shape)
 
 void CSFMLShapeFactory::Visit(const CRectangle & data)
 {
-	std::shared_ptr<sf::RectangleShape> rectangle(new sf::RectangleShape);
+	std::shared_ptr<sf::RectangleShape> rectangle = std::make_shared<sf::RectangleShape>();
 
 	rectangle->setFillColor(data.GetFillColor());
 
@@ -34,7 +34,7 @@ void CSFMLShapeFactory::Visit(const CRectangle & data)
 
 void CSFMLShapeFactory::Visit(const CCircle & data)
 {
-	std::shared_ptr<sf::CircleShape> circle(new sf::CircleShape);
+	std::shared_ptr<sf::CircleShape> circle = std::make_shared<sf::CircleShape>();
 
 	circle->setFillColor(data.GetFillColor());
 
@@ -51,7 +51,7 @@ void CSFMLShapeFactory::Visit(const CCircle & data)
 
 void CSFMLShapeFactory::Visit(const CTriangle & data)
 {
-	std::shared_ptr<sf::ConvexShape> triangle(new sf::ConvexShape);
+	std::shared_ptr<sf::ConvexShape> triangle = std::make_shared<sf::ConvexShape>();
 
 	triangle->setPointCount(3);
 

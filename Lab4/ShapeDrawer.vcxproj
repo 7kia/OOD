@@ -164,6 +164,7 @@
     <ClCompile Include="Shapes\Circle.cpp" />
     <ClCompile Include="Shapes\IShape.cpp" />
     <ClCompile Include="Shapes\Rectangle.cpp" />
+    <ClCompile Include="Shapes\ShapeFactory.cpp" />
     <ClCompile Include="Shapes\Triangle.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -175,10 +176,11 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="ShapeReader.h" />
     <ClInclude Include="Shapes\CShape.h" />
-    <ClInclude Include="Shapes\IVisitor.h" />
+    <ClInclude Include="Shapes\IShapeVisitor.h" />
     <ClInclude Include="Shapes\Circle.h" />
     <ClInclude Include="Shapes\IShape.h" />
     <ClInclude Include="Shapes\Rectangle.h" />
+    <ClInclude Include="Shapes\ShapeFactory.h" />
     <ClInclude Include="Shapes\Shapes.h" />
     <ClInclude Include="Shapes\Triangle.h" />
     <ClInclude Include="stdafx.h" />

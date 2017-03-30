@@ -2,11 +2,11 @@
 #include "Triangle.h"
 
 CTriangle::CTriangle(
-	const sf::Vector2f firstPoint
-	, const sf::Vector2f secondPoint
-	, const sf::Vector2f thirdPoint
-	, const sf::Color fillColor
-	, const sf::Color outlineColor
+	const sf::Vector2f & firstPoint
+	, const sf::Vector2f & secondPoint
+	, const sf::Vector2f & thirdPoint
+	, const sf::Color & fillColor
+	, const sf::Color & outlineColor
 )
 	: CShape(fillColor, outlineColor)
 	, m_firstPoint(firstPoint)

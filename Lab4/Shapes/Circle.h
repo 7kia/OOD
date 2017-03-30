@@ -8,10 +8,10 @@ class CCircle final :
 public:
 	CCircle() = default;
 	CCircle(
-		const sf::Vector2f center
-		, float radius
-		, const sf::Color fillColor
-		, const sf::Color outlineColor
+		const sf::Vector2f & center
+		, const float radius
+		, const sf::Color & fillColor
+		, const sf::Color & outlineColor
 	);
 public:
 	void				SetRadius(float radius);

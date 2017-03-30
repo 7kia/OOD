@@ -8,7 +8,7 @@ CShape::CShape(const sf::Color fillColor, const sf::Color outlineColor)
 }
 
 
-void CShape::SetFillColor(const sf::Color color)
+void CShape::SetFillColor(const sf::Color & color)
 {
 	m_fillColor = color;
 }
@@ -18,7 +18,7 @@ sf::Color CShape::GetFillColor() const
 	return m_fillColor;
 }
 
-void CShape::SetOutlineColor(const sf::Color color)
+void CShape::SetOutlineColor(const sf::Color & color)
 {
 	m_outlineColor = color;
 }

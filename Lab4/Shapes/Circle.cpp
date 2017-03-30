@@ -2,10 +2,10 @@
 #include "Circle.h"
 
 CCircle::CCircle(
-	const sf::Vector2f center
-	, float radius
-	, const sf::Color fillColor
-	, const sf::Color outlineColor
+	const sf::Vector2f & center
+	, const float radius
+	, const sf::Color & fillColor
+	, const sf::Color & outlineColor
 )
 	: CShape(fillColor, outlineColor)
 	, m_positionCenter(center)

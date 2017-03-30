@@ -2,10 +2,10 @@
 #include "Rectangle.h"
 
 CRectangle::CRectangle(
-	const sf::Vector2f leftTopPoint
-	, const SSize size
-	, const sf::Color fillColor
-	, const sf::Color outlineColor
+	const sf::Vector2f & leftTopPoint
+	, const SSize & size
+	, const sf::Color & fillColor
+	, const sf::Color & outlineColor
 )
 	: CShape(fillColor, outlineColor)
 	, m_leftTopPoint(leftTopPoint)

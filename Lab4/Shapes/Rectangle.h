@@ -8,10 +8,10 @@ class CRectangle final :// was exported from lab 3 Rectangle
 public:
 	CRectangle() = default;
 	CRectangle(
-		const sf::Vector2f leftTopPoint
-		, const SSize size
-		, const sf::Color fillColor
-		, const sf::Color outlineColor
+		const sf::Vector2f & leftTopPoint
+		, const SSize & size
+		, const sf::Color & fillColor
+		, const sf::Color & outlineColor
 	);
 public:
 

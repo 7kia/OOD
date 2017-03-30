@@ -40,8 +40,6 @@ BOOST_AUTO_TEST_CASE(size_shape_list_is_correct)
 	BOOST_CHECK_EQUAL(draft.size(), amountShapes);
 }
 
-
-
 BOOST_AUTO_TEST_SUITE(read_rectangle)
 	struct check_rectangle_ : ShapeReader_
 	{

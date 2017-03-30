@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Painter.h"
 
-CPainter::CPainter(const std::shared_ptr<ISFMLShapeFactory> pFactory)
+CPainter::CPainter(const std::shared_ptr<ISFMLShapeFactory> & pFactory)
 	: m_pFactory(pFactory)
 {
 }
 
-void CPainter::SetShapeFactory(const std::shared_ptr<ISFMLShapeFactory> pFactory)
+void CPainter::SetShapeFactory(const std::shared_ptr<ISFMLShapeFactory> & pFactory)
 {
 	m_pFactory = pFactory;
 }

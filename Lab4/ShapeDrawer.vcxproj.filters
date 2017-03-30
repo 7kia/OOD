@@ -57,6 +57,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shapes\ShapeFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -72,9 +75,6 @@
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\Triangle.h">
-      <Filter>Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Shapes\IVisitor.h">
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shapes\CShape.h">
@@ -100,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\ShapeFactory.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\IShapeVisitor.h">
+      <Filter>Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
