@@ -1,0 +1,39 @@
+#pragma once
+
+
+class IState
+{
+public:
+	virtual void InsertQuarter() = 0;
+	virtual void EjectQuarter() = 0;
+	virtual void TurnCrank() = 0;
+	virtual void Dispense() = 0;
+	virtual std::string ToString()const = 0;
+	virtual ~IState() = default;
+};
+
+class IGumballMachine
+{
+public:
+	virtual ~IGumballMachine() = default;
+
+	virtual void ReleaseBall() = 0;
+	virtual unsigned GetBallCount()const = 0;
+
+	virtual void EjectQuarter() = 0;
+	virtual void InsertQuarter() = 0;
+	virtual void TurnCrank() = 0;
+	virtual std::string ToString() const = 0;
+
+
+};
+
+class IGumballMachineWithState : public IGumballMachine
+{
+public:
+
+	virtual void SetSoldOutState() = 0;
+	virtual void SetNoQuarterState() = 0;
+	virtual void SetSoldState() = 0;
+	virtual void SetHasQuarterState() = 0;
+};
