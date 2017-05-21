@@ -27,17 +27,11 @@
     <ClInclude Include="targetver.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="..\gumball_machine\GumBallMachineWithDynamicallyCreatedState.h">
-      <Filter>Заголовочные файлы\TestClasess</Filter>
-    </ClInclude>
     <ClInclude Include="..\gumball_machine\NaiveGumBallMachine.h">
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClInclude>
     <ClInclude Include="gumball_machine_tests.h">
       <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="..\gumball_machine\GumBallMachineWithState.h">
-      <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClInclude>
     <ClInclude Include="..\gumball_machine\IGumballMachine.h">
       <Filter>Заголовочные файлы\TestClasess</Filter>

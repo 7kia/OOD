@@ -26,7 +26,7 @@ public:
 	bool EjectQuarters() override;
 	bool TurnCrank() override;
 
-	void Refill(unsigned numBalls) override;
+	bool Refill(unsigned numBalls) override;
 
 	std::string ToString() const override;
 

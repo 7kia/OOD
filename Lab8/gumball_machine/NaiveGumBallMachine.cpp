@@ -1,10 +1,11 @@
+#include "stdafx.h"
 #include "NaiveGumBallMachine.h"
 
 using namespace std;
 
 naive::CGumballMachine::CGumballMachine(unsigned ballCount, unsigned maxQuarter)
 	: m_state(ballCount > 0 ? State::NoQuarter : State::SoldOut)
-	, m_ballCount(ballCount)
+	, m_ballsCount(ballCount)
 	, m_maxCoinsCount(maxQuarter)
 {
 }
@@ -21,7 +22,6 @@ unsigned naive::CGumballMachine::GetCoinsCount() const
 
 bool naive::CGumballMachine::InsertQuarter()
 {
-	using namespace std;
 	switch (m_state)
 	{
 	case State::SoldOut:
@@ -73,7 +73,6 @@ bool naive::CGumballMachine::EjectQuarters()
 
 bool naive::CGumballMachine::TurnCrank()
 {
-	using namespace std;
 	switch (m_state)
 	{
 	case State::SoldOut:
@@ -96,10 +95,15 @@ bool naive::CGumballMachine::TurnCrank()
 	return false;
 }
 
-void naive::CGumballMachine::Refill(unsigned numBalls)
+bool naive::CGumballMachine::Refill(unsigned numBalls)
 {
-	m_ballsCount = numBalls;
-	m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+	if (m_state != State::Sold)
+	{
+		m_ballsCount = numBalls;
+		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+		return true;
+	}
+	return false;
 }
 
 string naive::CGumballMachine::ToString()const
@@ -120,12 +124,10 @@ Machine is %3%
 
 void naive::CGumballMachine::Dispense()
 {
-	using namespace std;
 	switch (m_state)
 	{
 	case State::Sold:
-		cout << "A gumball comes rolling out the slot\n";
-		--m_ballsCount;
+		ReleaseBall();
 		if (m_ballsCount == 0)
 		{
 			cout << "Oops, out of gumballs\n";
@@ -170,8 +172,7 @@ void naive::CGumballMachine::AddCoin()
 	}
 	else
 	{	
-		auto fmt = boost::format("You can't add more than %1 coins"");
-
+		auto fmt = boost::format("You can't add more than %1 coins");
 		cout << fmt % m_maxCoinsCount << endl;
 	}
 }

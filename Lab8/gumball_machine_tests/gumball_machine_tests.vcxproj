@@ -149,8 +149,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gumball_machine\GumBallMachineWithDynamicallyCreatedState.h" />
-    <ClInclude Include="..\gumball_machine\GumBallMachineWithState.h" />
     <ClInclude Include="..\gumball_machine\IGumballMachine.h" />
     <ClInclude Include="..\gumball_machine\NaiveGumBallMachine.h" />
     <ClInclude Include="gumball_machine_tests.h" />

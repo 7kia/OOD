@@ -25,9 +25,9 @@ public:
 	virtual void UseCoin() = 0;
 	virtual void ReturnAllCoins() = 0;
 
-	virtual void Refill(unsigned numBalls) = 0;
+	virtual bool Refill(unsigned numBalls) = 0;
 
-	virtual bool EjectQuarter() = 0;
+	virtual bool EjectQuarters() = 0;
 	virtual bool InsertQuarter() = 0;
 	virtual bool TurnCrank() = 0;
 	virtual std::string ToString() const = 0;
