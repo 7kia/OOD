@@ -32,7 +32,7 @@ float CCircle::GetRadius() const
 }
 
 
-void CCircle::SetPosition(sf::Vector2f position)
+void CCircle::SetPosition(const sf::Vector2f & position)
 {
 	m_positionCenter = position;
 }
