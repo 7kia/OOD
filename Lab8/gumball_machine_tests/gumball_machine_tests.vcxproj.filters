@@ -36,6 +36,9 @@
     <ClInclude Include="..\gumball_machine\IGumballMachine.h">
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClInclude>
+    <ClInclude Include="..\gumball_machine\GumBallMachineWithState.h">
+      <Filter>Заголовочные файлы\TestClasess</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -45,6 +48,9 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="..\gumball_machine\NaiveGumBallMachine.cpp">
+      <Filter>Заголовочные файлы\TestClasess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gumball_machine\GumBallMachineWithState.cpp">
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClCompile>
   </ItemGroup>

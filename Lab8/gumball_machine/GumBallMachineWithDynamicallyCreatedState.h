@@ -144,10 +144,10 @@ class CGumballMachine : public IGumballMachineWithState
 {
 public:
 	CGumballMachine(unsigned numBalls)
-		: m_count(numBalls)
+		: m_ballsCount(numBalls)
 	{
 
-		if (m_count > 0)
+		if (m_ballsCount > 0)
 		{
 			SetNoQuarterState();
 		}
@@ -177,19 +177,19 @@ C++-enabled Standing Gumball Model #2016 (with state)
 Inventory: %1% gumball%2%
 Machine is %3%
 )");
-		return (fmt % m_count % (m_count != 1 ? "s" : "") % m_currentState->ToString()).str();
+		return (fmt % m_ballsCount % (m_ballsCount != 1 ? "s" : "") % m_currentState->ToString()).str();
 	}
 private:
 	unsigned GetBallCount() const override
 	{
-		return m_count;
+		return m_ballsCount;
 	}
 	virtual void ReleaseBall() override
 	{
-		if (m_count != 0)
+		if (m_ballsCount != 0)
 		{
 			std::cout << "A gumball comes rolling out the slot...\n";
-			--m_count;
+			--m_ballsCount;
 		}
 	}
 	void SetSoldOutState() override
@@ -209,7 +209,7 @@ private:
 		m_currentState.reset(new CHasQuarterState(*this));
 	}
 private:
-	unsigned m_count = 0;
+	unsigned m_ballsCount = 0;
 	std::unique_ptr<IState> m_currentState;
 
 };

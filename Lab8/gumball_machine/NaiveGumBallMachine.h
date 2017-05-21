@@ -39,8 +39,8 @@ private:
 	void Dispense();
 private:
 	unsigned m_ballsCount;	// Количество шариков
-	unsigned m_coinsCount = 0;
-	const unsigned m_maxCoinsCount = 1;
+	unsigned m_quarterCount = 0;
+	const unsigned m_maxQuarterCount = 1;
 	State m_state = State::SoldOut;
 };
 }

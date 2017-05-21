@@ -4,10 +4,11 @@
 class IState
 {
 public:
-	virtual void InsertQuarter() = 0;
-	virtual void EjectQuarter() = 0;
-	virtual void TurnCrank() = 0;
-	virtual void Dispense() = 0;
+	virtual bool InsertQuarter() = 0;
+	virtual bool EjectQuarter() = 0;
+	virtual bool TurnCrank() = 0;
+	virtual bool Dispense() = 0;
+	virtual bool CanRefill() = 0;
 	virtual std::string ToString()const = 0;
 	virtual ~IState() = default;
 };

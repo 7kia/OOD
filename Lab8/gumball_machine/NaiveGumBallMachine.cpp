@@ -2,25 +2,26 @@
 #include "NaiveGumBallMachine.h"
 
 using namespace std;
+using namespace naive;
 
-naive::CGumballMachine::CGumballMachine(unsigned ballCount, unsigned maxQuarter)
+CGumballMachine::CGumballMachine(unsigned ballCount, unsigned maxQuarter)
 	: m_state(ballCount > 0 ? State::NoQuarter : State::SoldOut)
 	, m_ballsCount(ballCount)
-	, m_maxCoinsCount(maxQuarter)
+	, m_maxQuarterCount(maxQuarter)
 {
 }
 
-unsigned naive::CGumballMachine::GetBallCount() const
+unsigned CGumballMachine::GetBallCount() const
 {
 	return m_ballsCount;
 }
 
-unsigned naive::CGumballMachine::GetCoinsCount() const
+unsigned CGumballMachine::GetCoinsCount() const
 {
-	return m_coinsCount;
+	return m_quarterCount;
 }
 
-bool naive::CGumballMachine::InsertQuarter()
+bool CGumballMachine::InsertQuarter()
 {
 	switch (m_state)
 	{
@@ -42,7 +43,7 @@ bool naive::CGumballMachine::InsertQuarter()
 	return false;
 }
 
-bool naive::CGumballMachine::EjectQuarters()
+bool CGumballMachine::EjectQuarters()
 {
 	switch (m_state)
 	{
@@ -55,7 +56,7 @@ bool naive::CGumballMachine::EjectQuarters()
 		break;
 	case State::Sold:
 	case State::SoldOut:
-		if (m_coinsCount == 0)
+		if (m_quarterCount == 0)
 		{
 			cout << "You can't eject, you haven't inserted a quarter yet\n";
 		}
@@ -71,7 +72,7 @@ bool naive::CGumballMachine::EjectQuarters()
 	return false;
 }
 
-bool naive::CGumballMachine::TurnCrank()
+bool CGumballMachine::TurnCrank()
 {
 	switch (m_state)
 	{
@@ -95,18 +96,25 @@ bool naive::CGumballMachine::TurnCrank()
 	return false;
 }
 
-bool naive::CGumballMachine::Refill(unsigned numBalls)
+bool CGumballMachine::Refill(unsigned numBalls)
 {
 	if (m_state != State::Sold)
 	{
 		m_ballsCount = numBalls;
-		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+		if (m_quarterCount == 0)
+		{
+			m_state = State::NoQuarter;
+		}
+		else
+		{
+			m_state = State::HasQuarter;
+		}
 		return true;
 	}
 	return false;
 }
 
-string naive::CGumballMachine::ToString()const
+string CGumballMachine::ToString()const
 {
 	string state =
 		(m_state == State::SoldOut) ? "sold out" :
@@ -122,7 +130,7 @@ Machine is %3%
 	return (fmt % m_ballsCount % (m_ballsCount != 1 ? "s" : "") % state).str();
 }
 
-void naive::CGumballMachine::Dispense()
+void CGumballMachine::Dispense()
 {
 	switch (m_state)
 	{
@@ -148,7 +156,7 @@ void naive::CGumballMachine::Dispense()
 			cout << "Oops, out of gumballs\n";
 			m_state = State::SoldOut;
 		}
-		else if (m_coinsCount == 0)
+		else if (m_quarterCount == 0)
 		{
 			m_state = State::NoQuarter;
 		}
@@ -163,36 +171,36 @@ void naive::CGumballMachine::Dispense()
 	}
 }
 
-void naive::CGumballMachine::AddCoin()
+void CGumballMachine::AddCoin()
 {
-	if (m_coinsCount < m_maxCoinsCount)
+	if (m_quarterCount < m_maxQuarterCount)
 	{
-		++m_coinsCount;
+		++m_quarterCount;
 		cout << "You inserted a quarter\n";
 	}
 	else
 	{	
 		auto fmt = boost::format("You can't add more than %1 coins");
-		cout << fmt % m_maxCoinsCount << endl;
+		cout << fmt % m_maxQuarterCount << endl;
 	}
 }
 
-void naive::CGumballMachine::UseCoin()
+void CGumballMachine::UseCoin()
 {
-	if (m_coinsCount != 0)
+	if (m_quarterCount != 0)
 	{
-		--m_coinsCount;
+		--m_quarterCount;
 	}
 }
 
-void naive::CGumballMachine::ReturnAllCoins()
+void CGumballMachine::ReturnAllCoins()
 {
 	auto fmt = boost::format("%1% quater%2% returned");
-	cout << fmt % m_coinsCount % (m_coinsCount == 0 ? "" : "s") << endl;
-	m_coinsCount = 0;
+	cout << fmt % m_quarterCount % (m_quarterCount == 0 ? "" : "s") << endl;
+	m_quarterCount = 0;
 }
 
-void naive::CGumballMachine::ReleaseBall()
+void CGumballMachine::ReleaseBall()
 {
 	if (m_ballsCount != 0)
 	{

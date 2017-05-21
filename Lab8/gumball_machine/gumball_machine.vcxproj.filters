@@ -19,21 +19,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NaiveGumBallMachine.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GumBallMachineWithState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NaiveGumBallMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GumBallMachineWithState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GumBallMachineWithDynamicallyCreatedState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IGumballMachine.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NaiveGumBallMachine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GumBallMachineWithState.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
