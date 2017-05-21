@@ -17,12 +17,19 @@ class IGumballMachine
 public:
 	virtual ~IGumballMachine() = default;
 
-	virtual void ReleaseBall() = 0;
 	virtual unsigned GetBallCount()const = 0;
+	virtual unsigned GetCoinsCount() const = 0;
 
-	virtual void EjectQuarter() = 0;
-	virtual void InsertQuarter() = 0;
-	virtual void TurnCrank() = 0;
+	virtual void ReleaseBall() = 0;
+	virtual void AddCoin() = 0;
+	virtual void UseCoin() = 0;
+	virtual void ReturnAllCoins() = 0;
+
+	virtual void Refill(unsigned numBalls) = 0;
+
+	virtual bool EjectQuarter() = 0;
+	virtual bool InsertQuarter() = 0;
+	virtual bool TurnCrank() = 0;
 	virtual std::string ToString() const = 0;
 
 
