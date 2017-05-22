@@ -1,21 +1,22 @@
 #include "stdafx.h"
-#include "GumBallMachineWithState.h"
+#include "GumBallMachineWithDynamicallyCreatedState.h"
 
 using namespace std;
-using namespace with_state;
+using namespace with_dynamic_state;
+
 
 CSoldState::CSoldState(IGumballMachineWithState & gumballMachine)
 	: m_gumballMachine(gumballMachine)
 {
 }
 
-bool CSoldState::InsertQuarter() 
+bool CSoldState::InsertQuarter()
 {
 	std::cout << "Please wait, we're already giving you a gumball\n";
 	return false;
 }
 
-bool CSoldState::EjectQuarter() 
+bool CSoldState::EjectQuarter()
 {
 	if (m_gumballMachine.GetCoinsCount() == 0)
 	{
@@ -30,13 +31,13 @@ bool CSoldState::EjectQuarter()
 	return false;
 }
 
-bool CSoldState::TurnCrank() 
+bool CSoldState::TurnCrank()
 {
 	std::cout << "Turning twice doesn't get you another gumball\n";
 	return false;
 }
 
-bool CSoldState::Dispense() 
+bool CSoldState::Dispense()
 {
 	m_gumballMachine.ReleaseBall();
 	if (m_gumballMachine.GetBallCount() == 0)
@@ -57,7 +58,7 @@ bool CSoldState::CanRefill()
 	return false;
 }
 
-std::string CSoldState::ToString() const 
+std::string CSoldState::ToString() const
 {
 	return "delivering a gumball";
 }
@@ -69,13 +70,13 @@ CSoldOutState::CSoldOutState(IGumballMachineWithState & gumballMachine)
 {
 }
 
-bool CSoldOutState::InsertQuarter() 
+bool CSoldOutState::InsertQuarter()
 {
 	std::cout << "You can't insert a quarter, the machine is sold out\n";
 	return false;
 }
 
-bool CSoldOutState::EjectQuarter() 
+bool CSoldOutState::EjectQuarter()
 {
 	if (m_gumballMachine.GetCoinsCount() != 0)
 	{
@@ -87,13 +88,13 @@ bool CSoldOutState::EjectQuarter()
 	return false;
 }
 
-bool CSoldOutState::TurnCrank() 
+bool CSoldOutState::TurnCrank()
 {
 	std::cout << "You turned but there's no gumballs\n";
 	return false;
 }
 
-bool CSoldOutState::Dispense() 
+bool CSoldOutState::Dispense()
 {
 	m_gumballMachine.ReleaseBall();
 	if (m_gumballMachine.GetBallCount() == 0)
@@ -118,7 +119,7 @@ bool CSoldOutState::CanRefill()
 }
 
 
-std::string CSoldOutState::ToString() const 
+std::string CSoldOutState::ToString() const
 {
 	return "sold out";
 }
@@ -130,12 +131,12 @@ CHasQuarterState::CHasQuarterState(IGumballMachineWithState & gumballMachine)
 {
 }
 
-bool CHasQuarterState::InsertQuarter() 
+bool CHasQuarterState::InsertQuarter()
 {
 	return m_gumballMachine.AddCoin();
 }
 
-bool CHasQuarterState::EjectQuarter() 
+bool CHasQuarterState::EjectQuarter()
 {
 	std::cout << "Quarter returned\n";
 	m_gumballMachine.ReturnAllCoins();
@@ -143,7 +144,7 @@ bool CHasQuarterState::EjectQuarter()
 	return true;
 }
 
-bool CHasQuarterState::TurnCrank() 
+bool CHasQuarterState::TurnCrank()
 {
 	cout << "You turned...\n";
 	m_gumballMachine.UseCoin();
@@ -151,7 +152,7 @@ bool CHasQuarterState::TurnCrank()
 	return true;
 }
 
-bool CHasQuarterState::Dispense() 
+bool CHasQuarterState::Dispense()
 {
 	std::cout << "No gumball dispensed\n";
 	return false;
@@ -162,7 +163,7 @@ bool CHasQuarterState::CanRefill()
 	return true;
 }
 
-std::string CHasQuarterState::ToString() const 
+std::string CHasQuarterState::ToString() const
 {
 	return "waiting for turn of crank";
 }
@@ -174,7 +175,7 @@ CNoQuarterState::CNoQuarterState(IGumballMachineWithState & gumballMachine)
 {
 }
 
-bool CNoQuarterState::InsertQuarter() 
+bool CNoQuarterState::InsertQuarter()
 {
 	std::cout << "You inserted a quarter\n";
 	m_gumballMachine.AddCoin();
@@ -182,19 +183,19 @@ bool CNoQuarterState::InsertQuarter()
 	return true;
 }
 
-bool CNoQuarterState::EjectQuarter() 
+bool CNoQuarterState::EjectQuarter()
 {
 	std::cout << "You haven't inserted a quarter\n";
 	return false;
 }
 
-bool CNoQuarterState::TurnCrank() 
+bool CNoQuarterState::TurnCrank()
 {
 	std::cout << "You turned but there's no quarter\n";
 	return false;
 }
 
-bool CNoQuarterState::Dispense() 
+bool CNoQuarterState::Dispense()
 {
 	std::cout << "You need to pay first\n";
 	return false;
@@ -205,31 +206,31 @@ bool CNoQuarterState::CanRefill()
 	return true;
 }
 
-std::string CNoQuarterState::ToString() const 
+std::string CNoQuarterState::ToString() const
 {
 	return "waiting for quarter";
 }
 
 
 CGumballMachine::CGumballMachine(unsigned ballCount, unsigned maxQuarter)
-	: m_soldState(*this)
-	, m_soldOutState(*this)
-	, m_noQuarterState(*this)
-	, m_hasQuarterState(*this)
-	, m_state(&m_soldOutState)
-	, m_ballsCount(ballCount)
+	: m_ballsCount(ballCount)
 	, m_maxQuarterCount(maxQuarter)
 {
 	if (m_ballsCount > 0)
 	{
-		m_state = &m_noQuarterState;
+		SetNoQuarterState();
 	}
+	else
+	{
+		SetSoldOutState();
+	}
+
 }
 
 
 bool CGumballMachine::Refill(unsigned numBalls)
 {
-	if (m_state->CanRefill())
+	if (m_currentState->CanRefill())
 	{
 		m_ballsCount = numBalls;
 		if (m_quarterCount == 0)
@@ -245,26 +246,26 @@ bool CGumballMachine::Refill(unsigned numBalls)
 	return false;
 }
 
-bool CGumballMachine::EjectQuarters() 
+bool CGumballMachine::EjectQuarters()
 {
-	return m_state->EjectQuarter();
+	return m_currentState->EjectQuarter();
 }
 
-bool CGumballMachine::InsertQuarter() 
+bool CGumballMachine::InsertQuarter()
 {
-	return m_state->InsertQuarter();
+	return m_currentState->InsertQuarter();
 }
 
-bool CGumballMachine::TurnCrank() 
+bool CGumballMachine::TurnCrank()
 {
-	if (m_state->TurnCrank())
+	if (m_currentState->TurnCrank())
 	{
-		return m_state->Dispense();
+		return m_currentState->Dispense();
 	}
 	return false;
 }
 
-std::string CGumballMachine::ToString()const 
+std::string CGumballMachine::ToString()const
 {
 	auto fmt = boost::format(R"(
 Mighty Gumball, Inc.
@@ -273,7 +274,7 @@ Inventory: %1% gumball%2%
 Machine is %3%
 )");
 
-	return (fmt % m_ballsCount % (m_ballsCount != 1 ? "s" : "") % m_state->ToString()).str();
+	return (fmt % m_ballsCount % (m_ballsCount != 1 ? "s" : "") % m_currentState->ToString()).str();
 }
 
 unsigned CGumballMachine::GetBallCount() const
@@ -288,22 +289,22 @@ unsigned CGumballMachine::GetCoinsCount() const
 
 void CGumballMachine::SetSoldOutState()
 {
-	m_state = &m_soldOutState;
+	m_currentState.reset(new CSoldOutState(*this));
 }
 
 void CGumballMachine::SetNoQuarterState()
 {
-	m_state = &m_noQuarterState;
+	m_currentState.reset(new CNoQuarterState(*this));
 }
 
 void CGumballMachine::SetSoldState()
 {
-	m_state = &m_soldState;
+	m_currentState.reset(new CSoldState(*this));
 }
 
 void CGumballMachine::SetHasQuarterState()
 {
-	m_state = &m_hasQuarterState;
+	m_currentState.reset(new CHasQuarterState(*this));
 }
 
 

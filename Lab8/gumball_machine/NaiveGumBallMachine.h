@@ -31,10 +31,10 @@ public:
 	std::string ToString() const override;
 
 private:
-	void AddCoin()  override;
-	void UseCoin() override;
-	void ReturnAllCoins() override;
-	void ReleaseBall() override;
+	bool AddCoin()  override;
+	bool UseCoin() override;
+	bool ReturnAllCoins() override;
+	bool ReleaseBall() override;
 
 	void Dispense();
 private:

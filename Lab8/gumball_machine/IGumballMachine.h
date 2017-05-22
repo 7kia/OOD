@@ -21,10 +21,10 @@ public:
 	virtual unsigned GetBallCount()const = 0;
 	virtual unsigned GetCoinsCount() const = 0;
 
-	virtual void ReleaseBall() = 0;
-	virtual void AddCoin() = 0;
-	virtual void UseCoin() = 0;
-	virtual void ReturnAllCoins() = 0;
+	virtual bool ReleaseBall() = 0;
+	virtual bool AddCoin() = 0;
+	virtual bool UseCoin() = 0;
+	virtual bool ReturnAllCoins() = 0;
 
 	virtual bool Refill(unsigned numBalls) = 0;
 

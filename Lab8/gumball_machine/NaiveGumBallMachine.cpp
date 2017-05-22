@@ -171,40 +171,45 @@ void CGumballMachine::Dispense()
 	}
 }
 
-void CGumballMachine::AddCoin()
+bool CGumballMachine::AddCoin()
 {
 	if (m_quarterCount < m_maxQuarterCount)
 	{
 		++m_quarterCount;
 		cout << "You inserted a quarter\n";
+		return true;
 	}
-	else
-	{	
-		auto fmt = boost::format("You can't add more than %1 coins");
-		cout << fmt % m_maxQuarterCount << endl;
-	}
+	auto fmt = boost::format("You can't add more than %1 coins");
+	cout << fmt % m_maxQuarterCount << endl;
+	return false;
 }
 
-void CGumballMachine::UseCoin()
+bool CGumballMachine::UseCoin()
 {
 	if (m_quarterCount != 0)
 	{
 		--m_quarterCount;
+		return true;
 	}
+	return false;
 }
 
-void CGumballMachine::ReturnAllCoins()
+bool CGumballMachine::ReturnAllCoins()
 {
 	auto fmt = boost::format("%1% quater%2% returned");
+	const bool isQuarters = m_quarterCount == 0;
 	cout << fmt % m_quarterCount % (m_quarterCount == 0 ? "" : "s") << endl;
 	m_quarterCount = 0;
+	return isQuarters;
 }
 
-void CGumballMachine::ReleaseBall()
+bool CGumballMachine::ReleaseBall()
 {
 	if (m_ballsCount != 0)
 	{
 		cout << "A gumball comes rolling out the slot...\n";
 		--m_ballsCount;
+		return true;
 	}
+	return false;
 }

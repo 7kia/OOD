@@ -24,11 +24,11 @@
     <ClCompile Include="GumBallMachineWithState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GumBallMachineWithDynamicallyCreatedState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GumBallMachineWithDynamicallyCreatedState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IGumballMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GumBallMachineWithState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GumBallMachineWithDynamicallyCreatedState.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

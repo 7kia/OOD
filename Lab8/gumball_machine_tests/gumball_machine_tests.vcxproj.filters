@@ -39,6 +39,9 @@
     <ClInclude Include="..\gumball_machine\GumBallMachineWithState.h">
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClInclude>
+    <ClInclude Include="..\gumball_machine\GumBallMachineWithDynamicallyCreatedState.h">
+      <Filter>Заголовочные файлы\TestClasess</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +54,9 @@
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClCompile>
     <ClCompile Include="..\gumball_machine\GumBallMachineWithState.cpp">
+      <Filter>Заголовочные файлы\TestClasess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gumball_machine\GumBallMachineWithDynamicallyCreatedState.cpp">
       <Filter>Заголовочные файлы\TestClasess</Filter>
     </ClCompile>
   </ItemGroup>
