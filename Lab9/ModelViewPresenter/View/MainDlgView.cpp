@@ -129,11 +129,14 @@ BOOL CMainDlgView::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	if (m_harmonicsList.GetSelCount() == -1)
+	if (m_harmonicsList.GetCurSel() == -1)
 	{
 		DisableEditElements();
 	}
-
+	else
+	{
+		EnableEditElememts();
+	}
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
@@ -254,10 +257,6 @@ void CMainDlgView::OnBnClickedButtonDelete()
 		m_deleteHarmonicSignal(index);
 	}
 
-	if (m_harmonicsList.GetSelCount() == -1)
-	{
-		DisableEditElements();
-	}
 
 }
 

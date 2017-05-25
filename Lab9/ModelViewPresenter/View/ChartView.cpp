@@ -81,11 +81,21 @@ void CChartView::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 
 	auto oldPen = dc->SelectObject(&pen);
 
-	dc->MoveTo(TransformX(m_points.front().x), TransformY(m_points.front().y));
+	double scaleXForPoints = w / graphWidth * 10.f;
+	double scaleYForPoints = h / graphHeight * 10.f;
+
+	auto TransformXForPoints = [&](double x) {
+		return int((x - m_leftTop.x) * scaleX);
+	};
+	auto TransformYForPoints = [&](double y) {
+		return int((y - m_leftTop.y) * scaleY);
+	};
+
+	dc->MoveTo(TransformXForPoints(m_points.front().x), TransformYForPoints(m_points.front().y));
 	for (size_t i = 1; i < m_points.size(); ++i)
 	{
 		auto & pt = m_points[i];
-		dc->LineTo(TransformX(pt.x), TransformY(pt.y));
+		dc->LineTo(TransformXForPoints(pt.x), TransformYForPoints(pt.y));
 	}
 
 	dc->SelectObject(oldPen);
