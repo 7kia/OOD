@@ -55,6 +55,7 @@ void CAddHarmonicDlg::UpdatePreview()
 }
 
 
+
 BEGIN_MESSAGE_MAP(CAddHarmonicDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_COS_RADIO, &CAddHarmonicDlg::OnBtnClickedCosRadio)
 	ON_BN_CLICKED(IDC_SIN_RADIO, &CAddHarmonicDlg::OnBtnClickedSinRadio)
@@ -76,7 +77,7 @@ BOOL CAddHarmonicDlg::OnInitDialog()
 	m_editFrequency.SetWindowTextW(L"1");
 
 	m_useSin = true;
-	CheckRadioButton(IDC_COS_RADIO, IDC_SIN_RADIO, IDC_SIN_RADIO);
+	CheckRadioButton(IDC_SIN_RADIO, IDC_COS_RADIO, IDC_SIN_RADIO);
 
 	UpdatePreview();
 	return TRUE;

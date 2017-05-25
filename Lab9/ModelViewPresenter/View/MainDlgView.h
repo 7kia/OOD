@@ -51,6 +51,8 @@ private:
 	void OnKillFocusPhase();
 	void OnKillFocusFrequency();
 
+	void DisableEditElements();
+	void EnableEditElememts();
 	void UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & signal);
 
 	InitSignal m_initSignal;

@@ -40,6 +40,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	void UpdatePreview();
+private:
 
 	AddHarmonicSignal m_addHarmonicSignal;
 	CEdit m_editAmplitude;

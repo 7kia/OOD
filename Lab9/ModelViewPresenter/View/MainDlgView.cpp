@@ -35,9 +35,6 @@ void CMainDlgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_AMPLITUDE, m_amplitudeEdit);
 	DDX_Control(pDX, IDC_EDIT_FREQUENCY, m_frequencyEdit);
 	DDX_Control(pDX, IDC_EDIT_PHASE, m_phaseEdit);
-	
-	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(FALSE);
-	GetDlgItem(IDC_RADIO_COS)->EnableWindow(FALSE);
 }
 
 void CMainDlgView::SetListItems(std::vector<std::wstring> const& list)
@@ -132,10 +129,10 @@ BOOL CMainDlgView::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	m_amplitudeEdit.EnableWindow(FALSE);
-	m_frequencyEdit.EnableWindow(FALSE);
-	m_phaseEdit.EnableWindow(FALSE);
-
+	if (m_harmonicsList.GetSelCount() == -1)
+	{
+		DisableEditElements();
+	}
 
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -205,6 +202,26 @@ void CMainDlgView::OnKillFocusFrequency()
 	UpdateDataAndSaveSelect(m_frequencyEdit, m_changeFrequencySignal);
 }
 
+void CMainDlgView::DisableEditElements()
+{
+	m_amplitudeEdit.EnableWindow(FALSE);
+	m_frequencyEdit.EnableWindow(FALSE);
+	m_phaseEdit.EnableWindow(FALSE);
+
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(FALSE);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(FALSE);
+}
+
+void CMainDlgView::EnableEditElememts()
+{
+	m_amplitudeEdit.EnableWindow(TRUE);
+	m_frequencyEdit.EnableWindow(TRUE);
+	m_phaseEdit.EnableWindow(TRUE);
+
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(TRUE);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(TRUE);
+}
+
 void CMainDlgView::UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & useSignal)
 {
 	if (UpdateData())
@@ -222,13 +239,10 @@ void CMainDlgView::OnBnClickedButtonAdd()
 {
 	if (m_addHarmonicSignal())
 	{
-		m_amplitudeEdit.EnableWindow(TRUE);
-		m_frequencyEdit.EnableWindow(TRUE);
-		m_phaseEdit.EnableWindow(TRUE);
-
-		GetDlgItem(IDC_RADIO_SIN)->EnableWindow(TRUE);
-		GetDlgItem(IDC_RADIO_COS)->EnableWindow(TRUE);
+		EnableEditElememts();
 	}
+	
+	
 }
 
 
@@ -239,6 +253,12 @@ void CMainDlgView::OnBnClickedButtonDelete()
 	{
 		m_deleteHarmonicSignal(index);
 	}
+
+	if (m_harmonicsList.GetSelCount() == -1)
+	{
+		DisableEditElements();
+	}
+
 }
 
 

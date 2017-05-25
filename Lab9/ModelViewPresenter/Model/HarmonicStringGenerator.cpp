@@ -3,7 +3,12 @@
 #include <sstream>
 #include <boost\format.hpp>
 
-std::wstring CHarmonicStringGenerator::CreateHarmonicString(float amplitude, FunctionType const& function, float frequency, float phase)
+std::wstring CHarmonicStringGenerator::CreateHarmonicString(
+	float amplitude,
+	FunctionType const& function,
+	float frequency,
+	float phase
+)
 {
 	auto ToSignedString = [](double value) {
 		std::wostringstream strm;
@@ -13,8 +18,8 @@ std::wstring CHarmonicStringGenerator::CreateHarmonicString(float amplitude, Fun
 	};
 
 	std::map<FunctionType, std::wstring> functions = {
-		{FunctionType::Sin, L"sin"},
-		{FunctionType::Cos, L"cos"},
+		{ FunctionType::Sin, L"sin" },
+		{ FunctionType::Cos, L"cos" },
 	};
 
 	std::wostringstream strm;

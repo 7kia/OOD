@@ -2,6 +2,17 @@
 #include "HarmonicCollection.h"
 #include "Harmonic.h"
 
+namespace
+{
+	void CheckIndex(size_t index, size_t max)
+	{
+		if (index >= max)
+		{
+			throw std::out_of_range("Index out range");
+		}
+	};
+}
+
 float CHarmonicCollection::CalculateAt(float x) const
 {
 	float result = 0;
@@ -14,10 +25,7 @@ float CHarmonicCollection::CalculateAt(float x) const
 
 IHarmonicPtr CHarmonicCollection::GetHarmonic(size_t index) const
 {
-	if (index >= m_harmonics.size())
-	{
-		throw std::out_of_range("Out of range");
-	}
+	CheckIndex(index, m_harmonics.size());
 	return m_harmonics[index];
 }
 
@@ -34,10 +42,7 @@ void CHarmonicCollection::AddHarmonic(const std::shared_ptr<IHarmonic> & pHarmon
 
 void CHarmonicCollection::DeleteHarmonic(size_t index)
 {
-	if (index >= m_harmonics.size())
-	{
-		throw std::out_of_range("Out of range");
-	}
+	CheckIndex(index, m_harmonics.size());
 	m_harmonics.erase(m_harmonics.begin() + index);
 	m_harmonicsChangeSignal();
 }
