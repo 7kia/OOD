@@ -1,0 +1,17 @@
+#pragma once
+
+#include "HarmonicCollection.h"
+
+class CApplicationModel
+{
+public:
+	//////////////////////////////////////////////////////////////////////
+	// Methods
+public:
+	IHarmonicCollection & GetHarmonicCollection();
+
+	//////////////////////////////////////////////////////////////////////
+	// Data
+private:
+	CHarmonicCollection m_harmonicCollection;
+};
