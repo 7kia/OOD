@@ -35,6 +35,9 @@ void CMainDlgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_AMPLITUDE, m_amplitudeEdit);
 	DDX_Control(pDX, IDC_EDIT_FREQUENCY, m_frequencyEdit);
 	DDX_Control(pDX, IDC_EDIT_PHASE, m_phaseEdit);
+	
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(FALSE);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(FALSE);
 }
 
 void CMainDlgView::SetListItems(std::vector<std::wstring> const& list)
@@ -57,11 +60,11 @@ void CMainDlgView::UpdateSelectedHarmonic(
 	m_frequencyEdit.SetWindowTextW(boost::lexical_cast<std::wstring>(frequency).c_str());
 
 	std::map<FunctionType, DWORD> functions = {
-		{FunctionType::Cos, IDC_RADIOCOS},
-		{ FunctionType::Sin, IDC_RADIOSIN },
+		{ FunctionType::Cos, IDC_RADIO_COS},
+		{ FunctionType::Sin, IDC_RADIO_SIN },
 	};
 	
-	CheckRadioButton(IDC_RADIOSIN, IDC_RADIOCOS, functions.at(type));
+	CheckRadioButton(IDC_RADIO_SIN, IDC_RADIO_COS, functions.at(type));
 }
 
 IChartView & CMainDlgView::GetChartView()
@@ -118,8 +121,8 @@ BEGIN_MESSAGE_MAP(CMainDlgView, CDialogEx)
 	ON_EN_KILLFOCUS(IDC_EDIT_AMPLITUDE, &CMainDlgView::OnKillFocusAmplitude)
 	ON_EN_KILLFOCUS(IDC_EDIT_FREQUENCY, &CMainDlgView::OnKillFocusFrequency)
 	ON_EN_KILLFOCUS(IDC_EDIT_PHASE, &CMainDlgView::OnKillFocusPhase)
-	ON_BN_CLICKED(IDC_RADIOSIN, &CMainDlgView::OnBtnClickedRadiosin)
-	ON_BN_CLICKED(IDC_RADIOCOS, &CMainDlgView::OnBtnClickedRadiocos)
+	ON_BN_CLICKED(IDC_RADIO_SIN, &CMainDlgView::OnBtnClickedRadiosin)
+	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlgView::OnBtnClickedRadiocos)
 END_MESSAGE_MAP()
 
 
@@ -128,6 +131,11 @@ END_MESSAGE_MAP()
 BOOL CMainDlgView::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
+
+	m_amplitudeEdit.EnableWindow(FALSE);
+	m_frequencyEdit.EnableWindow(FALSE);
+	m_phaseEdit.EnableWindow(FALSE);
+
 
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -212,7 +220,15 @@ void CMainDlgView::UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & 
 
 void CMainDlgView::OnBnClickedButtonAdd()
 {
-	m_addHarmonicSignal();
+	if (m_addHarmonicSignal())
+	{
+		m_amplitudeEdit.EnableWindow(TRUE);
+		m_frequencyEdit.EnableWindow(TRUE);
+		m_phaseEdit.EnableWindow(TRUE);
+
+		GetDlgItem(IDC_RADIO_SIN)->EnableWindow(TRUE);
+		GetDlgItem(IDC_RADIO_COS)->EnableWindow(TRUE);
+	}
 }
 
 

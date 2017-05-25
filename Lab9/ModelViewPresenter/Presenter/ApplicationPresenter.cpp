@@ -80,9 +80,9 @@ void CApplicationPresenter::ChangeSelection(int index)
 	);
 }
 
-void CApplicationPresenter::OpenAddDialog()
+bool CApplicationPresenter::OpenAddDialog()
 {
-	 m_addHarmonic.DoModal();
+	return (m_addHarmonic.DoModal() == IDOK);
 }
 
 void CApplicationPresenter::AddHarmonic(

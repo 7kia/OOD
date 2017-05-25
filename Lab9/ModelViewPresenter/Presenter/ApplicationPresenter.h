@@ -36,7 +36,7 @@ private:
 		float frequency,
 		float phase
 	);
-	void OpenAddDialog();
+	bool OpenAddDialog();
 	void DeleteHarmonic(int index);
 	
 	void Update();

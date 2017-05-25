@@ -138,3 +138,8 @@ void CAddHarmonicDlg::OnOK()
 	m_addHarmonicSignal(amplitude, function, frequency, phase);
 	CDialogEx::OnOK();
 }
+
+void CAddHarmonicDlg::OnCancel()
+{
+	CDialogEx::OnCancel();
+}

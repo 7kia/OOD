@@ -32,6 +32,8 @@ public:
 	afx_msg void OnKillFocusPhase();
 
 	virtual void OnOK();
+	virtual void OnCancel();
+
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 

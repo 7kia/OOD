@@ -10,7 +10,7 @@ class IMainDlgView
 public:
 	typedef signals::Signal<void(int, float)> ChangeHarmonicSignal;
 	typedef signals::Signal<void(int, FunctionType)> ChangeFunctionTypeSignal;
-	typedef signals::Signal<void()> AddHarmonicSignal;
+	typedef signals::Signal<bool()> AddHarmonicSignal;
 	typedef signals::Signal<void(int)> DeleteHarmonicSignal;
 	typedef signals::Signal<void(int)> ChangeSelectionSignal;
 	typedef signals::Signal<void()> InitSignal;

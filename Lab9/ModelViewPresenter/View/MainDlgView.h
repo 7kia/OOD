@@ -64,11 +64,13 @@ private:
 	
 	CChartView m_chart;
 
-public:
 	CListBox m_harmonicsList;
 	CEdit m_amplitudeEdit;
 	CEdit m_frequencyEdit;
 	CEdit m_phaseEdit;
+	int m_sinRatio;
+	int m_cosRatio;
+public:
 
 	afx_msg void OnBnClickedButtonAdd();
 	afx_msg void OnBnClickedButtonDelete();
