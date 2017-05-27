@@ -1,0 +1,21 @@
+#pragma once
+#include "IStyle.h"
+
+class CStyle :	public IStyle
+{
+public:
+	CStyle(bool enable, RGBAColor color);
+public:
+
+	bool IsEnabled()const override final;
+	void Enable(bool enable) override final;
+
+	RGBAColor GetColor()const override final;
+	void SetColor(RGBAColor color) override final;
+
+protected:
+	bool m_isEnabled = false;
+	RGBAColor m_color;
+};
+
+bool operator==(IStylePtr const& first, IStylePtr const& second);
