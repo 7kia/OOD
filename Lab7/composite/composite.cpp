@@ -11,7 +11,6 @@ using namespace std;
 
 void InitSlide(CSlide & slide)
 {
-
 	// Sourse propotion
 	// trianlge		50., 50., 400., 300.
 	// rectangle	100., 350.0, 300., 350.
@@ -20,29 +19,27 @@ void InitSlide(CSlide & slide)
 	CTriangle triangle(
 		triangleFrame,
 		std::make_shared<CStyle>(true, 0xA00000FF),
-		std::make_shared<CLineStyle>(false, 0xFFFFFFFF, 5.f)
+		std::make_shared<CLineStyle>(true, 0x000000FF, 5.f)
 	);
 
 	RectD rectangleFrame = { 50., 175.0, 150., 175. };
 	CRectangle rectangle(
 		rectangleFrame,
-		std::make_shared<CStyle>(true, 0xAA4400FF),
-		std::make_shared<CLineStyle>(true, 0xaaAAFFFF, 3.f)
+		std::make_shared<CStyle>(false, 0xAA4400FF),
+		std::make_shared<CLineStyle>(true, 0x00FF00FF, 3.f)
 	);
 
 	RectD ellipseFrame = { 100., 100., 25, 25 };	
 	CEllipse ellipse(
 		ellipseFrame,
-		std::make_shared<CStyle>(true, 0xF0A000FF),
-		std::make_shared<CLineStyle>(true, 0xD0D000FF, 3.f)
+		std::make_shared<CStyle>(true, 0x001DFFFF),
+		std::make_shared<CLineStyle>(false, 0x000000FF, 3.f)
 	);
-
-
 
 	auto group = std::make_shared<CGroup>();
 	group->InsertShape(make_shared<CRectangle>(rectangle), 0);
-	group->InsertShape(make_shared<CTriangle>(triangle), 0);
-	group->InsertShape(make_shared<CEllipse>(ellipse), 0);
+	group->InsertShape(make_shared<CTriangle>(triangle), 1);
+	group->InsertShape(make_shared<CEllipse>(ellipse), 2);
 
 	RectD groupFrame = { 300., 150., 500., 300. };
 	group->SetFrame(groupFrame);
@@ -54,7 +51,7 @@ void InitSlide(CSlide & slide)
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Canvas");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Lab 7 \"Composite\"");
 	CCanvas canvas(window);
 	CSlide slide;
 	InitSlide(slide);
@@ -67,7 +64,9 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
 		}
 		canvas.draw(window, sf::RenderStates::Default);
 		window.display();
