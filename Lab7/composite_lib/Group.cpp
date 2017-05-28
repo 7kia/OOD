@@ -8,14 +8,19 @@
 
 RectD CGroup::GetFrame()
 {
+	if (GetShapesCount() == 0)
+	{
+		return RectD(0, 0, 0, 0);
+	}
+
 	RectD frame = {
 		std::numeric_limits<double>::infinity(), 
 		std::numeric_limits<double>::infinity(),
 		-std::numeric_limits<double>::infinity(),
 		-std::numeric_limits<double>::infinity()
 	};
-	double maxRight = 0;
-	double maxBottom = 0;
+	double maxRight = 0.;
+	double maxBottom = 0.;
 	for (auto & shape : m_shapes)
 	{
 		auto shapeFrame = shape->GetFrame();
@@ -32,23 +37,26 @@ RectD CGroup::GetFrame()
 
 void CGroup::SetFrame(const RectD & rect)
 {
-	auto oldFrame = GetFrame();
-
-	double ratioX = rect.width / oldFrame.width;
-	double ratioY = rect.height / oldFrame.height;
-
-	for (auto & shape : m_shapes)
+	if (GetShapesCount() != 0)
 	{
-		auto shapeFrame = shape->GetFrame();
-		double paddingX = shapeFrame.left - oldFrame.left;
-		double paddingY = shapeFrame.top - oldFrame.top;
+		auto oldFrame = GetFrame();
 
-		shapeFrame.left = rect.left + paddingX * ratioX;
-		shapeFrame.top = rect.top + paddingY * ratioY;
-		shapeFrame.width *= ratioX;
-		shapeFrame.height *= ratioY;
+		double ratioX = rect.width / oldFrame.width;
+		double ratioY = rect.height / oldFrame.height;
 
-		shape->SetFrame(shapeFrame);
+		for (auto & shape : m_shapes)
+		{
+			auto shapeFrame = shape->GetFrame();
+			double paddingX = shapeFrame.left - oldFrame.left;
+			double paddingY = shapeFrame.top - oldFrame.top;
+
+			shapeFrame.left = rect.left + paddingX * ratioX;
+			shapeFrame.top = rect.top + paddingY * ratioY;
+			shapeFrame.width *= ratioX;
+			shapeFrame.height *= ratioY;
+
+			shape->SetFrame(shapeFrame);
+		}
 	}
 }
 
@@ -97,10 +105,14 @@ boost::optional<float> CGroup::GetLineThickness() const
 	boost::optional<float> thickness;
 	if (!m_shapes.empty())
 	{
-		bool thicknessesEqual = std::all_of(m_shapes.begin(), m_shapes.end(), [&](std::shared_ptr<IShape> const& shape) {
-			return shape->GetLineThickness() && m_shapes.front()->GetLineThickness() 
+		bool thicknessesEqual = std::all_of(m_shapes.begin(), m_shapes.end(),
+			[&](std::shared_ptr<IShape> const& shape) 
+			{
+			return shape->GetLineThickness() 
+				&& m_shapes.front()->GetLineThickness() 
 				&& (shape->GetLineThickness().get() == m_shapes.front()->GetLineThickness().get());
-		});
+			}
+		);
 		thickness = thicknessesEqual ? m_shapes.front()->GetLineThickness() : boost::none;
 	}
 	return thickness;
@@ -138,7 +150,7 @@ std::shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index)
 
 void CGroup::InsertShape(std::shared_ptr<IShape> const& pShape, size_t index)
 {
-	// TODO : check correctness insert and remove for this and group
+	// TODO : check correctness insert and remove for this(+) and group
 	CheckIndex(index, m_shapes.size());
 	if (pShape.get() != this)
 	{

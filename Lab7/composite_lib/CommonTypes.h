@@ -8,7 +8,28 @@ struct Rect
 	T top;
 	T width;
 	T height;
+
+	Rect(
+		T left,
+		T top,
+		T width,
+		T height
+	);
 };
+
+template <typename T>
+Rect<T>::Rect(
+	T left,
+	T top,
+	T width,
+	T height
+)
+	: left(left)
+	, top(top)
+	, width(width)
+	, height(height)
+{
+}
 
 typedef Rect<double> RectD;
 typedef uint32_t RGBAColor;

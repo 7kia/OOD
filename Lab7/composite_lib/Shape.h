@@ -34,6 +34,5 @@ private:
 	IStylePtr m_pFillStyle;
 	ILineStylePtr m_pLineStyle;
 	RectD m_frame;
-
 };
 
