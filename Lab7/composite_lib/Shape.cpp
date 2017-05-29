@@ -3,7 +3,7 @@
 
 
 CShape::CShape(
-	RectD const& frame,
+	RectF const& frame,
 	IStylePtr const& fillStyle,
 	ILineStylePtr const& lineStyle
 )
@@ -14,12 +14,12 @@ CShape::CShape(
 
 }
 
-RectD CShape::GetFrame()
+RectF CShape::GetFrame()
 {
 	return m_frame;
 }
 
-void CShape::SetFrame(const RectD & rect)
+void CShape::SetFrame(const RectF & rect)
 {
 	m_frame = rect;
 }

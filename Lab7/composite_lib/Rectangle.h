@@ -6,7 +6,7 @@ class CRectangle : public CShape
 {
 public:
 	CRectangle(
-		RectD const& frame,
+		RectF const& frame,
 		IStylePtr const& fillStyle, 
 		ILineStylePtr const& lineStyle
 	);

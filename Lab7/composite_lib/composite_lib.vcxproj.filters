@@ -69,18 +69,12 @@
     <ClInclude Include="GlobalFunctions.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="composite_lib.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Style.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
@@ -108,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IStyle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FillStyle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

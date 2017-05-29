@@ -12,10 +12,10 @@ class CGroup
 public:
 	//--------------------------------------------
 	// IShape
-	ILineStylePtr GetLineStyle()const override;
+	ILineStylePtr GetLineStyle() const override;
 	void SetLineStyle(ILineStylePtr const& style) override;
 
-	IStylePtr GetFillStyle()const override;
+	IStylePtr GetFillStyle() const override;
 	void SetFillStyle(IStylePtr const& style) override;
 
 	boost::optional<float> GetLineThickness() const override;
@@ -25,8 +25,8 @@ public:
 
 	std::shared_ptr<IGroup> GetGroup() override;
 
-	RectD GetFrame() override;
-	void SetFrame(const RectD & rect) override;
+	RectF GetFrame() override;
+	void SetFrame(const RectF & rect) override;
 	//--------------------------------------------
 	// IGroup
 	size_t GetShapesCount() const override;

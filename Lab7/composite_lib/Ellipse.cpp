@@ -2,7 +2,7 @@
 #include "Ellipse.h"
 
 CEllipse::CEllipse(
-	RectD const& frame,
+	RectF const& frame,
 	IStylePtr const& fillStyle,
 	ILineStylePtr const& lineStyle
 )

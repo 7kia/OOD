@@ -6,21 +6,21 @@
 #include <algorithm>
 #include <boost\limits.hpp>
 
-RectD CGroup::GetFrame()
+RectF CGroup::GetFrame()
 {
 	if (GetShapesCount() == 0)
 	{
-		return RectD(0, 0, 0, 0);
+		return RectF(0, 0, 0, 0);
 	}
 
-	RectD frame = {
-		std::numeric_limits<double>::infinity(), 
-		std::numeric_limits<double>::infinity(),
-		-std::numeric_limits<double>::infinity(),
-		-std::numeric_limits<double>::infinity()
+	RectF frame = {
+		std::numeric_limits<float>::infinity(), 
+		std::numeric_limits<float>::infinity(),
+		-std::numeric_limits<float>::infinity(),
+		-std::numeric_limits<float>::infinity()
 	};
-	double maxRight = 0.;
-	double maxBottom = 0.;
+	float maxRight = 0;
+	float maxBottom = 0;
 	for (auto & shape : m_shapes)
 	{
 		auto shapeFrame = shape->GetFrame();
@@ -35,20 +35,20 @@ RectD CGroup::GetFrame()
 	return frame;
 }
 
-void CGroup::SetFrame(const RectD & rect)
+void CGroup::SetFrame(const RectF & rect)
 {
 	if (GetShapesCount() != 0)
 	{
 		auto oldFrame = GetFrame();
 
-		double ratioX = rect.width / oldFrame.width;
-		double ratioY = rect.height / oldFrame.height;
+		float ratioX = rect.width / oldFrame.width;
+		float ratioY = rect.height / oldFrame.height;
 
 		for (auto & shape : m_shapes)
 		{
 			auto shapeFrame = shape->GetFrame();
-			double paddingX = shapeFrame.left - oldFrame.left;
-			double paddingY = shapeFrame.top - oldFrame.top;
+			float paddingX = shapeFrame.left - oldFrame.left;
+			float paddingY = shapeFrame.top - oldFrame.top;
 
 			shapeFrame.left = rect.left + paddingX * ratioX;
 			shapeFrame.top = rect.top + paddingY * ratioY;
@@ -151,6 +151,10 @@ std::shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index)
 void CGroup::InsertShape(std::shared_ptr<IShape> const& pShape, size_t index)
 {
 	// TODO : check correctness insert and remove for this(+) and group
+	/*В InsertShape надо корректно обрабатывать ситуацию со вставкой самого себя или родителя.
+	Возможно, при попытке вставить фигуру в другую группу, ее следует из старой группы 
+	удалять.Чтобы иерархия имела вид дерева, а не произвольного графа*/
+
 	CheckIndex(index, m_shapes.size());
 	if (pShape.get() != this)
 	{

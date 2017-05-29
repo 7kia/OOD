@@ -5,7 +5,7 @@ class CEllipse : public CShape
 {
 public:
 	CEllipse(
-		RectD const& frame,
+		RectF const& frame,
 		IStylePtr const& fillStyle,
 		ILineStylePtr const& lineStyle
 	);

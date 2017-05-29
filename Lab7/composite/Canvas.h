@@ -1,24 +1,35 @@
 #pragma once
-#include "..\composite_lib\ICanvas.h"
+#include <ICanvas.h>
 #include <memory>
 
 
-class CCanvas : public ICanvas, public sf::Drawable
+class CCanvas 
+	: public ICanvas
+	, public sf::Drawable
 {
-public: 
-	CCanvas(sf::RenderTarget & renderTarget);
-
-	void SetLineColor(RGBAColor color) override;
-	void SetLineThickness(float thickness) override;
-	void BeginFill(RGBAColor color) override;
+public:
+	//--------------------------------------------
+	// ICanvas
+	void SetLineColor(RGBAColor color) override final;
+	void SetLineThickness(float thickness) override final;
+	void BeginFill(RGBAColor color) override final;
 	void EndFill() override;
-	void MoveTo(double x, double y) override;
-	void LineTo(double x, double y) override;
-	void DrawEllipse(double left, double top, double width, double height) override;
-
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void MoveTo(float x, float y) override final;
+	void LineTo(float x, float y) override final;
+	void DrawEllipse(
+		float left,
+		float top,
+		float width,
+		float height
+	) override final;
+	//--------------------------------------------
+	// sf::Drawable
+	void draw(
+		sf::RenderTarget& target,
+		sf::RenderStates states = sf::RenderStates::Default
+	) const override final;
+	//--------------------------------------------
 private:
-	sf::RenderTarget & m_renderTarget;
 	std::vector<std::shared_ptr<sf::Drawable>> m_drawables;
 	std::vector<sf::Vector2f> m_fillPoints;
 	float m_lineThickness;

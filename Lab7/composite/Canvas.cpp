@@ -2,14 +2,6 @@
 #include "Canvas.h"
 
 
-
-CCanvas::CCanvas(sf::RenderTarget & renderTarget)
-	: m_renderTarget(renderTarget)
-{
-
-}
-
-
 void CCanvas::SetLineColor(RGBAColor color)
 {
 	m_lineColor = sf::Color(color);
@@ -52,39 +44,42 @@ void CCanvas::EndFill()
 	m_drawables.push_back(shape);
 }
 
-void CCanvas::MoveTo(double x, double y)
+void CCanvas::MoveTo(float x, float y)
 {
-	m_lastPoint = sf::Vector2f((float)x, (float)y);
+	m_lastPoint = sf::Vector2f(x, y);
 	if (m_isFilling)
 	{
 		m_fillPoints.push_back(m_lastPoint);
 	}
 }
 
-void CCanvas::LineTo(double x, double y)
+void CCanvas::LineTo(float x, float y)
 {
-	float dx = (float)x - m_lastPoint.x;
-	float dy = (float)y - m_lastPoint.y;
-	float rotation = atan2f((float)dy, (float)dx) * 180.f / (float)M_PI;
+	float dx = x - m_lastPoint.x;
+	float dy = y - m_lastPoint.y;
+	float rotation = atan2f(dy, dx) * 180.f / float(M_PI);
 
-	auto rect = std::make_shared<sf::RectangleShape>();
-	rect->setSize(sf::Vector2f(sqrtf((dx * dx) + (dy * dy)) + m_lineThickness * 2.f, m_lineThickness));
-	rect->setOrigin(m_lineThickness, m_lineThickness);
-	rect->setPosition(m_lastPoint.x, m_lastPoint.y);
-	rect->setRotation(rotation);
-	rect->setFillColor(m_lineColor);
+	auto line = std::make_shared<sf::RectangleShape>();
+	line->setSize(sf::Vector2f(sqrtf((dx * dx) + (dy * dy)) + m_lineThickness * 2.f, m_lineThickness));
+	line->setOrigin(m_lineThickness, m_lineThickness);
+	line->setPosition(m_lastPoint.x, m_lastPoint.y);
+	line->setRotation(rotation);
+	line->setFillColor(m_lineColor);
 
-	m_renderTarget.draw(*rect);
-	m_drawables.push_back(rect);
+	m_drawables.push_back(line);
 	MoveTo(x, y);
-
 }
 
-void CCanvas::DrawEllipse(double left, double top, double width, double height)
+void CCanvas::DrawEllipse(
+	float left,
+	float top,
+	float width,
+	float height
+)
 {
-	auto ellipse = std::make_shared<sf::CircleShape>((float) height);
-	ellipse->scale((float)(width / height), 1);
-	ellipse->setPosition((float)left, (float)top);
+	auto ellipse = std::make_shared<sf::CircleShape>(height);
+	ellipse->scale(width / height, 1);
+	ellipse->setPosition(left, top);
 	ellipse->setOutlineColor(m_lineColor);
 	ellipse->setOutlineThickness(m_lineThickness);
 
@@ -96,7 +91,6 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height)
 	{
 		ellipse->setFillColor(sf::Color::Transparent);
 	}
-	m_renderTarget.draw(*ellipse);
 	m_drawables.push_back(ellipse);
 }
 

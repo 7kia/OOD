@@ -2,7 +2,7 @@
 #include "Triangle.h"
 
 CTriangle::CTriangle(
-	RectD const& frame,
+	RectF const& frame,
 	IStylePtr const& fillStyle,
 	ILineStylePtr const& lineStyle
 )

@@ -1,16 +1,16 @@
 #pragma once
 #include "IStyle.h"
 
-class CStyle :	public IStyle
+class CFillStyle :	public IStyle
 {
 public:
-	CStyle(bool enable, RGBAColor color);
+	CFillStyle(bool enable, RGBAColor color);
 public:
 
-	bool IsEnabled()const override final;
+	bool IsEnabled() const override final;
 	void Enable(bool enable) override final;
 
-	RGBAColor GetColor()const override final;
+	RGBAColor GetColor() const override final;
 	void SetColor(RGBAColor color) override final;
 
 protected:

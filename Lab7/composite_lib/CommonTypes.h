@@ -31,5 +31,5 @@ Rect<T>::Rect(
 {
 }
 
-typedef Rect<double> RectD;
+typedef Rect<float> RectF;
 typedef uint32_t RGBAColor;

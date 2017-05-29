@@ -1,6 +1,6 @@
 #pragma once
 #include "IShape.h"
-#include "Style.h"
+#include "FillStyle.h"
 #include "LineStyle.h"
 #include "CommonTypes.h"
 
@@ -8,18 +8,18 @@ class CShape : public IShape
 {
 public:
 	CShape(
-		RectD const& frame,
+		RectF const& frame,
 		IStylePtr const& fillStyle, 
 		ILineStylePtr const& lineStyle
 	);
 public:
-	RectD GetFrame() override;
-	void SetFrame(const RectD & rect) override;
+	RectF GetFrame() override;
+	void SetFrame(const RectF & rect) override;
 
-	ILineStylePtr GetLineStyle()const override;
+	ILineStylePtr GetLineStyle() const override;
 	void SetLineStyle(ILineStylePtr const& style) override;
 
-	IStylePtr GetFillStyle()const override;
+	IStylePtr GetFillStyle() const override;
 	void SetFillStyle(IStylePtr const& style) override;
 
 	boost::optional<float> GetLineThickness() const override;
@@ -33,6 +33,6 @@ protected:
 private:
 	IStylePtr m_pFillStyle;
 	ILineStylePtr m_pLineStyle;
-	RectD m_frame;
+	RectF m_frame;
 };
 
