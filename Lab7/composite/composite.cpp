@@ -46,6 +46,7 @@ void InitSlide(CSlide & slide)
 
 	RectF groupFrame = { 300., 150., 500., 300. };
 	group->SetFrame(groupFrame);
+
 	slide.AddShape(make_shared<CRectangle>(rectangle));
 	slide.AddShape(make_shared<CTriangle>(triangle));
 	slide.AddShape(make_shared<CEllipse>(ellipse));

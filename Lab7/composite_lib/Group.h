@@ -33,6 +33,7 @@ public:
 	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) override;
 	void InsertShape(std::shared_ptr<IShape> const& pShape, size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
+	size_t GetShapesIndex(std::shared_ptr<IShape> const& pShape) override;
 	//--------------------------------------------
 private:
 	std::vector<std::shared_ptr<IShape>> m_shapes;

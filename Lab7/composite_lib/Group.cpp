@@ -150,20 +150,30 @@ std::shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index)
 
 void CGroup::InsertShape(std::shared_ptr<IShape> const& pShape, size_t index)
 {
-	// TODO : check correctness insert and remove for this(+) and group
-	/*В InsertShape надо корректно обрабатывать ситуацию со вставкой самого себя или родителя.
-	Возможно, при попытке вставить фигуру в другую группу, ее следует из старой группы 
-	удалять.Чтобы иерархия имела вид дерева, а не произвольного графа*/
-
 	CheckIndex(index, m_shapes.size());
-	if (pShape.get() != this)
+	const bool getThis = (pShape.get() == this);
+	auto parent = pShape->GetGroup();
+	if (!getThis)
 	{
 		m_shapes.insert(m_shapes.begin() + index, pShape);
 	}
+	if (parent)
+	{
+		size_t indexToParent = parent->GetShapesIndex(pShape);
+		if (indexToParent >= parent->GetShapesCount())
+		{
+			parent->RemoveShapeAtIndex(indexToParent);
+		}
+	}	
 }
 
 void CGroup::RemoveShapeAtIndex(size_t index)
 {
 	CheckIndex(index, m_shapes.size() + 1);
 	m_shapes.erase(m_shapes.begin() + index);
+}
+
+size_t CGroup::GetShapesIndex(std::shared_ptr<IShape> const & pShape)
+{
+	return std::find(m_shapes.begin(), m_shapes.end(), pShape) - m_shapes.begin();
 }
