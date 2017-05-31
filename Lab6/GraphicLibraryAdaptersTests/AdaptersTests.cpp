@@ -13,16 +13,17 @@ struct SCommonData
 	const uint32_t rectangleColor = 0xFF0000;
 	const uint32_t triangleColor = 0xFFFFFF;
 
+	std::string expectedStreamForRectangle;
+	std::string expectedStreamForLine;
+	std::string expectedStreamForTriangle;
+
+	std::stringstream stream;
+
 };
 
 struct CanvasClassAdapterFixture : public SCommonData
 {
-	std::stringstream stream;
 	CCanvasClassAdapter adapter;
-
-	std::string expectedStreamForRectangle;
-	std::string expectedStreamForLine;
-	std::string expectedStreamForTriangle;
 
 	shape_drawing_lib::CCanvasPainter painter;
 	shape_drawing_lib::CRectangle rectangle;
@@ -75,13 +76,8 @@ struct CanvasClassAdapterFixture : public SCommonData
 
 struct CanvasObjectAdapterFixture : public SCommonData
 {
-	std::stringstream stream;
 	modern_graphics_lib::CModernGraphicsRenderer renderer;
 	CCanvasObjectAdapter adapter;
-
-	std::string expectedStreamForRectangle;
-	std::string expectedStreamForLine;
-	std::string expectedStreamForTriangle;
 
 	shape_drawing_lib::CCanvasPainter painter;
 	shape_drawing_lib::CRectangle rectangle;
@@ -135,12 +131,7 @@ struct CanvasObjectAdapterFixture : public SCommonData
 
 struct CanvasColoredAdapterFixture : public SCommonData
 {
-	std::stringstream stream;
 	CCanvasColoredAdapter adapter;
-
-	std::string expectedStreamForRectangle;
-	std::string expectedStreamForLine;
-	std::string expectedStreamForTriangle;
 
 	shape_drawing_lib_pro::CCanvasPainter painter;
 	shape_drawing_lib_pro::CRectangle rectangle;
