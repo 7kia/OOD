@@ -8,55 +8,55 @@ using namespace std;
 namespace modern_graphics_lib_pro
 {
 
-CModernGraphicsRenderer::CModernGraphicsRenderer(std::ostream & strm)
-	: m_out(strm)
-{
-
-}
-
-CModernGraphicsRenderer::~CModernGraphicsRenderer()
-{
-	if (m_drawing) 
+	CModernGraphicsRenderer::CModernGraphicsRenderer(std::ostream & strm)
+		: m_out(strm)
 	{
-		EndDraw();
-	}
-}
 
-void CModernGraphicsRenderer::BeginDraw()
-{
-	if (m_drawing)
-	{
-		throw logic_error("Drawing has already begun");
 	}
-	m_out << "<draw>" << endl;
-	m_drawing = true;
-}
 
-void CModernGraphicsRenderer::DrawLine(
-	const CPoint & start,
-	const CPoint & end,
-	const CRGBAColor& color
-)
-{
-	if (!m_drawing)
+	CModernGraphicsRenderer::~CModernGraphicsRenderer()
 	{
-		throw logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
+		if (m_drawing) 
+		{
+			EndDraw();
+		}
 	}
-	auto lineFormat = boost::format(R"(  <line fromX="%1%" fromY="%2%" toX="%3%" toY="%4%">)");
-	auto colorFormat = boost::format(R"(    <color r="%1$.2f" g="%2$.2f" b="%3$.2f" a="%4$.2f" />)");
-	m_out << lineFormat % start.x % start.y % end.x % end.y << endl
-		<< colorFormat % color.r % color.g % color.b % color.a << endl
-		<< R"(  </line>)" << endl;
-}
 
-void CModernGraphicsRenderer::EndDraw()
-{
-	if (!m_drawing)
+	void CModernGraphicsRenderer::BeginDraw()
 	{
-		throw logic_error("Drawing has not been started");
+		if (m_drawing)
+		{
+			throw logic_error("Drawing has already begun");
+		}
+		m_out << "<draw>" << endl;
+		m_drawing = true;
 	}
-	m_out << "</draw>" << endl;
-	m_drawing = false;
-}
+
+	void CModernGraphicsRenderer::DrawLine(
+		const CPoint & start,
+		const CPoint & end,
+		const CRGBAColor& color
+	)
+	{
+		if (!m_drawing)
+		{
+			throw logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
+		}
+		auto lineFormat = boost::format(R"(  <line fromX="%1%" fromY="%2%" toX="%3%" toY="%4%">)");
+		auto colorFormat = boost::format(R"(    <color r="%1$.2f" g="%2$.2f" b="%3$.2f" a="%4$.2f" />)");
+		m_out << lineFormat % start.x % start.y % end.x % end.y << endl
+			<< colorFormat % color.r % color.g % color.b % color.a << endl
+			<< R"(  </line>)" << endl;
+	}
+
+	void CModernGraphicsRenderer::EndDraw()
+	{
+		if (!m_drawing)
+		{
+			throw logic_error("Drawing has not been started");
+		}
+		m_out << "</draw>" << endl;
+		m_drawing = false;
+	}
 
 }

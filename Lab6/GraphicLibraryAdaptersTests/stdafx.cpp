@@ -12,29 +12,3 @@
 #define BOOST_TEST_NO_MAIN 
 // подключаем реализацию boost test
 #include <boost/test/included/unit_test.hpp>
-
-bool IsEqual(float a, float b)
-{
-	return fabs(a - b) < 0.001f;
-}
-
-void VerifyVector2f(const sf::Vector2f & vector, const sf::Vector2f & expectedVector)
-{
-	BOOST_CHECK(IsEqual(vector.x, expectedVector.x));
-	BOOST_CHECK(IsEqual(vector.y, expectedVector.y));
-}
-
-void VerifyColor(const sf::Color & color, const sf::Color & myColor)
-{
-	BOOST_CHECK_EQUAL(color.r, myColor.r);
-	BOOST_CHECK_EQUAL(color.g, myColor.g);
-	BOOST_CHECK_EQUAL(color.b, myColor.b);
-	BOOST_CHECK_EQUAL(color.a, myColor.a);
-
-}
-
-void VerifySize(const SSize & size, const SSize & expectedSize)
-{
-	BOOST_CHECK(IsEqual(size.width, expectedSize.width));
-	BOOST_CHECK(IsEqual(size.height, expectedSize.height));
-}

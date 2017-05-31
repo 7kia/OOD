@@ -5,22 +5,18 @@
 
 namespace modern_graphics_lib
 {
+	class CModernGraphicsRenderer
+	{
+	public:
+		CModernGraphicsRenderer(std::ostream & strm);
+		~CModernGraphicsRenderer();
 
+		void BeginDraw();
+		void DrawLine(const CPoint & start, const CPoint & end);
+		void EndDraw();
 
-class CModernGraphicsRenderer
-{
-public:
-	CModernGraphicsRenderer(std::ostream & strm);
-	~CModernGraphicsRenderer();
-
-	void BeginDraw();
-	void DrawLine(const CPoint & start, const CPoint & end);
-	void EndDraw();
-
-private:
-	std::ostream & m_out;
-	bool m_drawing = false;
-};
-
-
+	private:
+		std::ostream & m_out;
+		bool m_drawing = false;
+	};
 }

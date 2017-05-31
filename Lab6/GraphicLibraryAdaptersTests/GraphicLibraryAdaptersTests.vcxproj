@@ -22,7 +22,7 @@
     <ProjectGuid>{93656AD3-9342-41E7-A77F-9660AA6F84A8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>bodies_tests</RootNamespace>
-    <ProjectName>ShapesTests</ProjectName>
+    <ProjectName>GraphicLibraryAdaptersTests</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -108,13 +108,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <ExceptionHandling>Async</ExceptionHandling>
-      <AdditionalIncludeDirectories>C:\SDK\SFML\include;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDK\SFML\lib;%(AdditionalLibraryDirectories);C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>graphics_lib.lib;graphics_lib_pro.lib;modern_graphics_lib.lib;modern_graphics_lib_pro.lib;shape_drawing_lib.lib;shape_drawing_lib_pro.lib;GraphicLibraryAdapters.lib;%(AdditionalIncludeDirectories)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>$(TargetPath)  --log_level=test_suite</Command>
@@ -166,36 +166,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Painter\Painter.h" />
-    <ClInclude Include="..\PictureDraft.h" />
-    <ClInclude Include="..\SFMLShapeFactory.h" />
-    <ClInclude Include="..\ShapeReader.h" />
-    <ClInclude Include="..\Shapes\Circle.h" />
-    <ClInclude Include="..\Shapes\CShape.h" />
-    <ClInclude Include="..\Shapes\IShape.h" />
-    <ClInclude Include="..\Shapes\IShapeVisitor.h" />
-    <ClInclude Include="..\Shapes\Rectangle.h" />
-    <ClInclude Include="..\Shapes\ShapeFactory.h" />
-    <ClInclude Include="..\Shapes\Shapes.h" />
-    <ClInclude Include="..\Shapes\Triangle.h" />
+    <ClInclude Include="AdaptersTests.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Painter\Painter.cpp" />
-    <ClCompile Include="..\SFMLShapeFactory.cpp" />
-    <ClCompile Include="..\ShapeReader.cpp" />
-    <ClCompile Include="..\Shapes\Circle.cpp" />
-    <ClCompile Include="..\Shapes\CShape.cpp" />
-    <ClCompile Include="..\Shapes\IShape.cpp" />
-    <ClCompile Include="..\Shapes\Rectangle.cpp" />
-    <ClCompile Include="..\Shapes\ShapeFactory.cpp" />
-    <ClCompile Include="..\Shapes\Triangle.cpp" />
-    <ClCompile Include="bodies_tests.cpp" />
-    <ClCompile Include="ShapeReaderTests.cpp" />
-    <ClCompile Include="ShapeTests\CircleTests.cpp" />
-    <ClCompile Include="ShapeTests\RectangleTests.cpp" />
-    <ClCompile Include="ShapeTests\TriangleTests.cpp" />
+    <ClCompile Include="AdaptersTests.cpp" />
+    <ClCompile Include="GraphicLibraryAdaptersTests.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -2,26 +2,24 @@
 
 namespace modern_graphics_lib_pro
 {
+	class CRGBAColor
+	{
+	public:
+		CRGBAColor(
+			float r,
+			float g,
+			float b,
+			float a
+		) 
+			:r(r)
+			, g(g)
+			, b(b)
+			, a(a) 
+		{}
 
-class CRGBAColor
-{
-public:
-	CRGBAColor(
-		float r,
-		float g,
-		float b,
-		float a
-	) 
-		:r(r)
-		, g(g)
-		, b(b)
-		, a(a) 
-	{}
-
-	float r;
-	float g;
-	float b;
-	float a;
-};
-
+		float r;
+		float g;
+		float b;
+		float a;
+	};
 }
