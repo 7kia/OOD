@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D963F88C-2AE3-4D9C-936A-5940CE2DB8FA}</ProjectGuid>
+    <ProjectGuid>{491491FD-62B4-4F48-845E-B59922278C28}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>shape_drawing_lib_pro</RootNamespace>
+    <RootNamespace>GraphicLibraryAdapters</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -130,24 +130,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CanvasPainter.h" />
-    <ClInclude Include="ICanvasDrawable.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="CanvasClassAdapter.h" />
+    <ClInclude Include="CanvasColoredAdapter.h" />
+    <ClInclude Include="CanvasObjectAdapter.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CanvasPainter.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="CanvasClassAdapter.cpp" />
+    <ClCompile Include="CanvasColoredAdapter.cpp" />
+    <ClCompile Include="CanvasObjectAdapter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

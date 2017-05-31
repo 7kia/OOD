@@ -24,19 +24,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="CanvasPainter.h">
+    <ClInclude Include="CanvasClassAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="ICanvasDrawable.h">
+    <ClInclude Include="CanvasColoredAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>Файлы исходного кода</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
+    <ClInclude Include="CanvasObjectAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,13 +38,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="CanvasPainter.cpp">
+    <ClCompile Include="CanvasClassAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
+    <ClCompile Include="CanvasColoredAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
+    <ClCompile Include="CanvasObjectAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
