@@ -13,8 +13,9 @@
 #include "../shape_drawing_lib_pro/Triangle.h"
 
 #include "../GraphicLibraryAdapters/CanvasClassAdapter.h"
-#include "../GraphicLibraryAdapters/CanvasColoredAdapter.h"
 #include "../GraphicLibraryAdapters/CanvasObjectAdapter.h"
+#include "../GraphicLibraryAdapters/CanvasColoredClassAdapter.h"
+#include "../GraphicLibraryAdapters/CanvasColoredObjectAdapter.h"
 
 #include <boost/mpl/list.hpp>
 #include <boost/mpl/vector.hpp>

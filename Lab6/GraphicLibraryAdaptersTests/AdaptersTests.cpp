@@ -129,15 +129,15 @@ struct CanvasObjectAdapterFixture : public SCommonData
 	}
 };
 
-struct CanvasColoredAdapterFixture : public SCommonData
+struct CanvasColoredClassAdapterFixture : public SCommonData
 {
-	CCanvasColoredAdapter adapter;
+	CCanvasColoredClassAdapter adapter;
 
 	shape_drawing_lib_pro::CCanvasPainter painter;
 	shape_drawing_lib_pro::CRectangle rectangle;
 	shape_drawing_lib_pro::CTriangle triangle;
 
-	CanvasColoredAdapterFixture()
+	CanvasColoredClassAdapterFixture()
 		: adapter(stream)
 		, painter(adapter)
 		, rectangle(
@@ -151,7 +151,8 @@ struct CanvasColoredAdapterFixture : public SCommonData
 			shape_drawing_lib_pro::Point(secondTrianlgePoint[0], secondTrianlgePoint[1]),
 			shape_drawing_lib_pro::Point(thirdTrianlgePoint[0], thirdTrianlgePoint[1]),
 			triangleColor
-		) {
+		) 
+	{
 		adapter.SetColor(0xFFFFFF);
 
 		expectedStreamForRectangle = R"(<draw>
@@ -201,16 +202,92 @@ struct CanvasColoredAdapterFixture : public SCommonData
 	}
 };
 
-typedef boost::mpl::vector<CanvasClassAdapterFixture,
+
+struct CanvasColoredObjectAdapterFixture : public SCommonData
+{
+	modern_graphics_lib_pro::CModernGraphicsRenderer renderer;
+	CCanvasColoredObjectAdapter adapter;
+
+	shape_drawing_lib_pro::CCanvasPainter painter;
+	shape_drawing_lib_pro::CRectangle rectangle;
+	shape_drawing_lib_pro::CTriangle triangle;
+
+	CanvasColoredObjectAdapterFixture()
+		: renderer(stream)
+		, adapter(renderer)
+		, painter(adapter)
+		, rectangle(
+			shape_drawing_lib_pro::Point(leftTopRectangle[0], leftTopRectangle[1]),
+			rectangleWidth,
+			rectangleHeight,
+			rectangleColor
+		)
+		, triangle(
+			shape_drawing_lib_pro::Point(firstTrianlgePoint[0], firstTrianlgePoint[1]),
+			shape_drawing_lib_pro::Point(secondTrianlgePoint[0], secondTrianlgePoint[1]),
+			shape_drawing_lib_pro::Point(thirdTrianlgePoint[0], thirdTrianlgePoint[1]),
+			triangleColor
+		) {
+		adapter.SetColor(0xFFFFFF);
+
+		expectedStreamForRectangle = R"(<draw>
+  <line fromX="0" fromY="1" toX="100" toY="1">
+    <color r="1.00" g="0.00" b="0.00" a="1.00" />
+  </line>
+</draw>
+<draw>
+  <line fromX="100" fromY="1" toX="100" toY="76">
+    <color r="1.00" g="0.00" b="0.00" a="1.00" />
+  </line>
+</draw>
+<draw>
+  <line fromX="100" fromY="76" toX="0" toY="76">
+    <color r="1.00" g="0.00" b="0.00" a="1.00" />
+  </line>
+</draw>
+<draw>
+  <line fromX="0" fromY="76" toX="0" toY="1">
+    <color r="1.00" g="0.00" b="0.00" a="1.00" />
+  </line>
+</draw>
+)";
+		expectedStreamForLine = R"(<draw>
+  <line fromX="0" fromY="0" toX="1" toY="2">
+    <color r="1.00" g="1.00" b="1.00" a="1.00" />
+  </line>
+</draw>
+)";
+		expectedStreamForTriangle = R"(<draw>
+  <line fromX="0" fromY="0" toX="100" toY="100">
+    <color r="1.00" g="1.00" b="1.00" a="1.00" />
+  </line>
+</draw>
+<draw>
+  <line fromX="100" fromY="100" toX="75" toY="100">
+    <color r="1.00" g="1.00" b="1.00" a="1.00" />
+  </line>
+</draw>
+<draw>
+  <line fromX="75" fromY="100" toX="0" toY="0">
+    <color r="1.00" g="1.00" b="1.00" a="1.00" />
+  </line>
+</draw>
+)";
+
+	}
+};
+
+typedef boost::mpl::vector<
+	CanvasClassAdapterFixture,
 	CanvasObjectAdapterFixture,
-	CanvasColoredAdapterFixture
+	CanvasColoredClassAdapterFixture,
+	CanvasColoredObjectAdapterFixture
 > AdapterFixtures;
 
-BOOST_AUTO_TEST_SUITE(when_used_as_canvas)
+BOOST_AUTO_TEST_SUITE(when_used_canvas)
 	BOOST_FIXTURE_TEST_CASE_TEMPLATE(can_draw_rectangle, T, AdapterFixtures, T)
 	{
 		painter.Draw(rectangle);
-
 		BOOST_CHECK_EQUAL(stream.str(), expectedStreamForRectangle);
 	}
 

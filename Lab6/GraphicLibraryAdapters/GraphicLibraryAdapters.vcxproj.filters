@@ -27,10 +27,13 @@
     <ClInclude Include="CanvasClassAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="CanvasColoredAdapter.h">
+    <ClInclude Include="CanvasObjectAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
-    <ClInclude Include="CanvasObjectAdapter.h">
+    <ClInclude Include="CanvasColoredClassAdapter.h">
+      <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasColoredObjectAdapter.h">
       <Filter>Файлы исходного кода</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,10 +44,13 @@
     <ClCompile Include="CanvasClassAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="CanvasColoredAdapter.cpp">
+    <ClCompile Include="CanvasObjectAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="CanvasObjectAdapter.cpp">
+    <ClCompile Include="CanvasColoredClassAdapter.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasColoredObjectAdapter.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
