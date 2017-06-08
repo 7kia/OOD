@@ -34,8 +34,8 @@ void CHtmlConverter::Save(const fs::path & path, const IDocument & document) con
 
 	outputFile << "<!DOCTYPE html>" << endl
 		<< "<html>" << endl;
-	outputFile << CreateTitle(outputFile, document);
-	outputFile << "\t<body>\n" << CreateBody(path, document) << "\t</body>\n"
+	outputFile << CreateTitle(document);
+	outputFile << CreateBody(path, document)
 		<< "</html>";
 
 	if (!outputFile.flush())
@@ -45,7 +45,7 @@ void CHtmlConverter::Save(const fs::path & path, const IDocument & document) con
 	outputFile.close();
 }
 
-std::string CHtmlConverter::CreateTitle(std::ofstream & file, const IDocument & document) const
+std::string CHtmlConverter::CreateTitle(const IDocument & document) const
 {
 	const auto title = "\t\t<title>" + ReplaceEncodeSymbols(document.GetTitle())+ "</title>\n";
 	return "\t<head>\n"
@@ -71,11 +71,15 @@ string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & docum
 		}
 		else if (item.GetImage())
 		{
-			bodyString += CreateImage(path, item.GetImage());
+			bodyString += CreateImage(item.GetImage());
+		}
+		else
+		{
+			throw std::runtime_error("Unknown item");
 		}
 	}
 
-	bodyString += "\t</body>\n";
+	bodyString += "\n\t</body>\n";
 	return bodyString;
 }
 
@@ -84,7 +88,7 @@ string CHtmlConverter::CreateParagraph(const IParagraphConstPtr & pParagraph) co
 	return "\t\t<p>" + ReplaceEncodeSymbols(pParagraph->GetText()) + "</p>\n";
 }
 
-string CHtmlConverter::CreateImage(const fs::path & imagePath, const IImageConstPtr & pImage) const
+string CHtmlConverter::CreateImage(const IImageConstPtr & pImage) const
 {
 	boost::format imageFormat(R"(		<img src="%1%" width="%2%" height="%3%"/>)");
 	stringstream stream;
