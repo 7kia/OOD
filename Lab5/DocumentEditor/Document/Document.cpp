@@ -44,6 +44,7 @@ CDocument::CDocument()
 
 CDocument::~CDocument()
 {
+	boost::filesystem::remove_all(boost::filesystem::path(m_tempPath) / IMAGES_DIRECTORY);
 	boost::filesystem::remove_all(m_tempPath);
 }
 
