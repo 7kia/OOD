@@ -7,19 +7,19 @@ class CResizeImageCommand :	public CAbstractCommand
 {
 public:
 	CResizeImageCommand(
-		std::shared_ptr<IImage> const & pImage,
-		int newWidth,
-		int newHeight
+		unsigned & width,
+		unsigned & height,
+		unsigned newWidth,
+		unsigned newHeight
 	);
 
 protected:
 	void DoExecute() override;
 	void DoUnexecute() override;
 private:
-	std::shared_ptr<IImage> m_pImage;
-	int m_newWidth;
-	int m_newHeight;
-	int m_oldWidth;
-	int m_oldHeight;
+	unsigned & m_width;
+	unsigned & m_height;
+	unsigned m_newWidth;
+	unsigned m_newHeight;
 };
 

@@ -12,7 +12,11 @@ CDeleteItemCommand::CDeleteItemCommand(vector<DocumentItemPtr> & items, size_t i
 
 void CDeleteItemCommand::DoExecute()
 {
-	CheckIndex(m_index, m_items.size() + 1);
+	if (m_items.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+	CheckIndex(m_index, m_items.size());
 
 	m_item = m_items[m_index];
 	m_items.erase(m_items.begin() + m_index);

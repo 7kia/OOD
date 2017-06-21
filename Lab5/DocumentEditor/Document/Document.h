@@ -41,6 +41,8 @@ public:
 
 	void Save(const std::string& path) const override;
 
+
+	boost::filesystem::path GetTempPath() const;
 private:
 	void CopyImagesForFile(const std::string path) const;
 private:

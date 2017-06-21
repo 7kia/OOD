@@ -19,13 +19,17 @@ CImage::CImage(
 	, m_width(width)
 	, m_history(history)
 {
+	if (!exists(boost::filesystem::path(path)))
+	{
+		throw std::invalid_argument("Invalid file path or not accessible file");
+	}
 
 }
 
 
 CImage::~CImage()
 {
-	try
+	/*try
 	{
 		if (filesystem::exists(m_path))
 		{
@@ -35,7 +39,7 @@ CImage::~CImage()
 	catch (std::exception & e)
 	{
 		std::cout << e.what() << std::endl;
-	}
+	}*/
 	
 }
 
@@ -68,6 +72,5 @@ void CImage::SetHeight(unsigned height)
 
 void CImage::Resize(unsigned width, unsigned height)
 {
-	auto pImage = shared_from_this();
-	m_history.AddAndExecuteCommand(std::make_unique<CResizeImageCommand>(pImage, width, height));
+	m_history.AddAndExecuteCommand(std::make_unique<CResizeImageCommand>(m_width, m_height, width, height));
 }

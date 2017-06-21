@@ -27,6 +27,13 @@ void CInsertItemCommand::DoExecute()
 	{
 		m_items.push_back(m_item);
 	}
+
+	/*if (m_item->GetImage())
+	{
+		auto pPictureModel = dynamic_cast<CPictureModel*>(m_shapeModel.get());
+
+		m_textureStorage.SetDelete(m_textureStorage.GetTexturePath(pPictureModel->GetTexture()), false);
+	}*/
 }
 
 void CInsertItemCommand::DoUnexecute()
@@ -41,4 +48,30 @@ void CInsertItemCommand::DoUnexecute()
 	{
 		m_items.pop_back();
 	}
+
+	/*if (m_item->GetType())
+	{
+		auto pPictureModel = dynamic_cast<CPictureModel*>(m_shapeModel.get());
+		const auto shapeHavePicture = m_shapeCollection.GetShape(pPictureModel->GetTexture());
+		if (!shapeHavePicture)
+		{
+			m_textureStorage.SetDelete(m_textureStorage.GetTexturePath(pPictureModel->GetTexture()), true);
+		}
+	}*/
 }
+//
+//void CInsertItemCommand::Destroy()
+//{
+//	if (m_item->GetType())
+//	{
+//		auto listShapesAfterDestroy = m_shapeCollection.GetShapes();
+//		listShapesAfterDestroy.pop_back();// TODO: check correctness
+//
+//		auto pPictureModel = dynamic_cast<CPictureModel*>(m_shapeModel.get());
+//
+//		m_textureStorage.SetDelete(
+//			m_textureStorage.GetTexturePath(pPictureModel->GetTexture()),
+//			!HavePictureWithTexture(pPictureModel->GetTexture(), listShapesAfterDestroy)
+//		);
+//	}
+//}

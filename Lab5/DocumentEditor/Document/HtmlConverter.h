@@ -17,7 +17,7 @@ private:
 	std::string CreateBody(const boost::filesystem::path & path, const IDocument & document) const;
 
 	std::string CreateParagraph(const IParagraphConstPtr & pParagraph) const;
-	std::string CreateImage(const IImageConstPtr & pImage) const;
+	std::string CreateImage(const IImageConstPtr & pImage, const std::string & path) const;
 	std::string ReplaceEncodeSymbols(std::string const & text) const;
 };
 

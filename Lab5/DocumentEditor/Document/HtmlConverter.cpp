@@ -57,7 +57,7 @@ string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & docum
 {
 	string bodyString = "\t<body>\n";
 
-	auto pathToImages = boost::filesystem::path(path).parent_path() / IMAGES_DIRECTORY;
+	auto pathToImages = boost::filesystem::path(path).stem() / IMAGES_DIRECTORY;
 	if (!boost::filesystem::exists(fs::path(pathToImages)))
 	{
 		boost::filesystem::create_directory(pathToImages);
@@ -71,7 +71,7 @@ string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & docum
 		}
 		else if (item.GetImage())
 		{
-			bodyString += CreateImage(item.GetImage());
+			bodyString += CreateImage(item.GetImage(), pathToImages.generic_string());
 		}
 		else
 		{
@@ -88,12 +88,17 @@ string CHtmlConverter::CreateParagraph(const IParagraphConstPtr & pParagraph) co
 	return "\t\t<p>" + ReplaceEncodeSymbols(pParagraph->GetText()) + "</p>\n";
 }
 
-string CHtmlConverter::CreateImage(const IImageConstPtr & pImage) const
+string CHtmlConverter::CreateImage(const IImageConstPtr & pImage, const string & path) const
 {
-	boost::format imageFormat(R"(		<img src="%1%" width="%2%" height="%3%"/>)");
+	boost::format imageFormat(R"(		<img src="%1%" width="%2%" height="%3%">
+)");
 	stringstream stream;
+
+	auto pathToTemp = boost::filesystem::path(pImage->GetPath());
+	string imageName = pathToTemp.filename().generic_string();
+
 	stream << imageFormat
-		% ReplaceEncodeSymbols(pImage->GetPath())
+		% (path + "/" + ReplaceEncodeSymbols(imageName))
 		% pImage->GetWidth()
 		% pImage->GetHeight();
 

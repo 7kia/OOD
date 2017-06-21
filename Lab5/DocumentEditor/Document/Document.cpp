@@ -80,6 +80,7 @@ std::shared_ptr<IImage> CDocument::InsertImage(
 	boost::optional<size_t> const& position
 )
 {
+
 	size_t pos = position ? *position : m_documentItems.size();
 	CheckIndex(pos, m_documentItems.size());
 
@@ -115,18 +116,31 @@ size_t CDocument::GetItemsCount() const
 
 CConstDocumentItem CDocument::GetItem(size_t index) const
 {
+	if (m_documentItems.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+	CheckIndex(index, m_documentItems.size());
 	return *m_documentItems[index].get();
 }
 
 CDocumentItem CDocument::GetItem(size_t index)
 {
-	CheckIndex(index, m_documentItems.size() + 1);
+	if (m_documentItems.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+	CheckIndex(index, m_documentItems.size());
 	return *m_documentItems[index].get();
 }
 
 void CDocument::DeleteItem(size_t index)
 {
-	CheckIndex(index, m_documentItems.size() + 1);
+	if (m_documentItems.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+	CheckIndex(index, m_documentItems.size());
 
 	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_documentItems, index));
 }
@@ -157,6 +171,11 @@ void CDocument::Save(const std::string & path) const
 
 	CHtmlConverter htmlConverter;
 	htmlConverter.Save(fs::path(path), *this);
+}
+
+boost::filesystem::path CDocument::GetTempPath() const
+{
+	return m_tempPath;
 }
 
 void CDocument::CopyImagesForFile(const std::string path) const

@@ -1,30 +1,31 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
+using namespace std;
 
 CResizeImageCommand::CResizeImageCommand(
-	std::shared_ptr<IImage> const & pImage,
-	int newWidth,
-	int newHeight
-)// TODO : see need interface for IImage get height and width
-	: m_pImage(pImage)
-	, m_oldHeight(pImage->GetHeight())
-	, m_oldWidth(pImage->GetWidth())
-	, m_newHeight(newHeight)
+	unsigned & width,
+	unsigned & height,
+	unsigned newWidth,
+	unsigned newHeight
+)
+	: m_width(width)
+	, m_height(height)
 	, m_newWidth(newWidth)
+	, m_newHeight(newHeight)
 {
-
 }
-
 
 void CResizeImageCommand::DoExecute()
 {
-	m_pImage->SetWidth(m_newWidth);
-	m_pImage->SetHeight(m_newHeight);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }
 
 void CResizeImageCommand::DoUnexecute()
 {
-	m_pImage->SetWidth(m_oldWidth);
-	m_pImage->SetHeight(m_oldHeight);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }
+
+
