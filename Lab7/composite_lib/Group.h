@@ -21,11 +21,11 @@ public:
 	boost::optional<float> GetLineThickness() const override;
 	void SetLineThickness(float thickness) override;
 
-	void Draw(ICanvas & canvas) override;
+	void Draw(ICanvas & canvas) const override final;
 
 	std::shared_ptr<IGroup> GetGroup() override;
 
-	RectF GetFrame() override;
+	RectF GetFrame() const override;
 	void SetFrame(const RectF & rect) override;
 	//--------------------------------------------
 	// IGroup

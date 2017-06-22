@@ -14,7 +14,7 @@ CShape::CShape(
 
 }
 
-RectF CShape::GetFrame()
+RectF CShape::GetFrame() const
 {
 	return m_frame;
 }
@@ -59,7 +59,7 @@ std::shared_ptr<IGroup> CShape::GetGroup()
 	return nullptr;
 }
 
-void CShape::Draw(ICanvas & canvas)
+void CShape::Draw(ICanvas & canvas) const
 {
 	bool isFillStyleEnabled = m_pFillStyle && m_pFillStyle->IsEnabled();
 

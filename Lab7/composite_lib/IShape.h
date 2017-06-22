@@ -22,10 +22,10 @@ public:
 	virtual boost::optional<float> GetLineThickness() const = 0;
 	virtual void SetLineThickness(float thickness) = 0;
 
-	virtual RectF GetFrame() = 0;
+	virtual RectF GetFrame() const = 0;
 	virtual void SetFrame(const RectF & rect) = 0;
 
-	virtual void Draw(ICanvas & canvas) = 0;
+	virtual void Draw(ICanvas & canvas) const = 0;
 
 	virtual std::shared_ptr<IGroup> GetGroup() = 0;
 };

@@ -14,7 +14,7 @@ void CSlide::RemoveShape(size_t index)
 	m_shapes.erase(m_shapes.begin() + index);
 }
 
-void CSlide::Draw(ICanvas & canvas)
+void CSlide::Draw(ICanvas & canvas) const
 {
 	for (const auto & shape : m_shapes)
 	{

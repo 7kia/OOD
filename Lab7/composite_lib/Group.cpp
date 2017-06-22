@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <boost\limits.hpp>
 
-RectF CGroup::GetFrame()
+RectF CGroup::GetFrame() const
 {
 	if (GetShapesCount() == 0)
 	{
@@ -125,7 +125,7 @@ void CGroup::SetLineThickness(float thickness)
 	}
 }
 
-void CGroup::Draw(ICanvas & canvas)
+void CGroup::Draw(ICanvas & canvas) const
 {
 	for(auto & shape : m_shapes) {
 		shape->Draw(canvas);

@@ -11,6 +11,6 @@ public:
 	);
 
 private:
-	void DrawBehavior(ICanvas & canvas) override;
+	void DrawBehavior(ICanvas & canvas) const override;
 };
 

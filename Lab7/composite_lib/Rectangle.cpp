@@ -12,7 +12,7 @@ CRectangle::CRectangle(
 
 }
 
-void CRectangle::DrawBehavior(ICanvas & canvas)
+void CRectangle::DrawBehavior(ICanvas & canvas) const
 {
 	auto frame = GetFrame();
 	canvas.MoveTo(frame.left, frame.top);

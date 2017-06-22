@@ -13,7 +13,7 @@ public:
 		ILineStylePtr const& lineStyle
 	);
 public:
-	RectF GetFrame() override;
+	RectF GetFrame() const override;
 	void SetFrame(const RectF & rect) override;
 
 	ILineStylePtr GetLineStyle() const override;
@@ -27,9 +27,9 @@ public:
 
 	std::shared_ptr<IGroup> GetGroup() override;
 
-	void Draw(ICanvas & canvas) override;
+	void Draw(ICanvas & canvas) const override final;
 protected:
-	virtual void DrawBehavior(ICanvas & canvas) = 0;
+	virtual void DrawBehavior(ICanvas & canvas) const = 0;
 private:
 	IStylePtr m_pFillStyle;
 	ILineStylePtr m_pLineStyle;

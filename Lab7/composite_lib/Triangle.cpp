@@ -11,7 +11,7 @@ CTriangle::CTriangle(
 
 }
 
-void CTriangle::DrawBehavior(ICanvas & canvas)
+void CTriangle::DrawBehavior(ICanvas & canvas) const
 {
 	auto frame = GetFrame();
 	canvas.MoveTo(frame.left, frame.top + frame.height);
