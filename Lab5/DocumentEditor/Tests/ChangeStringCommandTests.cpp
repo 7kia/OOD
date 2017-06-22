@@ -3,9 +3,9 @@
 
 using namespace std;
 
-struct changeStringFixture
+struct ChangeStringFixture
 {
-	changeStringFixture()
+	ChangeStringFixture()
 		: sourceString("source")
 		, newString("new")
 		, command(sourceString, newString)
@@ -15,7 +15,7 @@ struct changeStringFixture
 	CChangeStringCommand command;
 };
 
-BOOST_FIXTURE_TEST_SUITE(CChangeStringCommand_, changeStringFixture)
+BOOST_FIXTURE_TEST_SUITE(CChangeStringCommand_tests, ChangeStringFixture)
 	BOOST_AUTO_TEST_CASE(can_execute_and_unexecute)
 	{
 		command.Execute();

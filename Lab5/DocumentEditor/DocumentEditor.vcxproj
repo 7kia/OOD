@@ -161,7 +161,6 @@
     <ClCompile Include="Document\DocumentItems\Menu.cpp" />
     <ClCompile Include="Document\DocumentItems\Paragraph.cpp" />
     <ClCompile Include="Document\HtmlConverter.cpp" />
-    <ClCompile Include="Document\TextureStorage.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="GlobalFunctions.cpp" />
     <ClCompile Include="main.cpp" />
@@ -187,7 +186,6 @@
     <ClInclude Include="Document\DocumentItems\Paragraph.h" />
     <ClInclude Include="Document\HtmlConverter.h" />
     <ClInclude Include="Document\IDocument.h" />
-    <ClInclude Include="Document\TextureStorage.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="GlobalFunctions.h" />
     <ClInclude Include="stdafx.h" />

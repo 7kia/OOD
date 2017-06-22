@@ -78,9 +78,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Document\TextureStorage.cpp">
-      <Filter>Document</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command\AbstractCommand.h">
@@ -148,9 +145,6 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Document\TextureStorage.h">
-      <Filter>Document</Filter>
     </ClInclude>
     <ClInclude Include="Command\IHistory.h">
       <Filter>Command</Filter>

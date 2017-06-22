@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="ChangeStringCommandTests.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="HistoryTests.cpp" />
     <ClCompile Include="ParagraphTests.cpp" />
@@ -56,6 +55,18 @@
     </ClCompile>
     <ClCompile Include="..\Command\History.cpp">
       <Filter>TestClasses\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageCommandTests.cpp">
+      <Filter>CommandTests</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeStringCommandTests.cpp">
+      <Filter>CommandTests</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertItemCommandTests.cpp">
+      <Filter>CommandTests</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteItemCommandTests.cpp">
+      <Filter>CommandTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +158,9 @@
     </Filter>
     <Filter Include="TestClasses\Command">
       <UniqueIdentifier>{3aa84c5b-e021-4c0d-a555-1b4d5efaa503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommandTests">
+      <UniqueIdentifier>{3a8b62b2-1c33-4a0c-8eec-68b6c745ca6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -209,12 +209,15 @@
     <ClCompile Include="..\Document\TextureStorage.cpp" />
     <ClCompile Include="..\Editor.cpp" />
     <ClCompile Include="..\GlobalFunctions.cpp" />
+    <ClCompile Include="DeleteItemCommandTests.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="ChangeStringCommandTests.cpp" />
     <ClCompile Include="HistoryTests.cpp" />
     <ClCompile Include="ImageTests.cpp" />
+    <ClCompile Include="InsertItemCommandTests.cpp" />
     <ClCompile Include="ParagraphTests.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResizeImageCommandTests.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
