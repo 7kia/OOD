@@ -9,7 +9,7 @@ typedef std::vector<bool> ChangeArray;
 class CommandMock : public CAbstractCommand
 {
 public:
-	CommandMock(ChangeArray& commands, size_t id) 
+	CommandMock(ChangeArray& commands, int id) 
 		: m_commands(commands)
 		, m_id(id)
 	{
@@ -24,7 +24,7 @@ protected:
 		m_commands.at(m_id) = !m_commands.at(m_id);
 	}
 private:
-	size_t m_id;
+	int m_id;
 	ChangeArray& m_commands;
 };
 
@@ -54,7 +54,7 @@ BOOST_FIXTURE_TEST_SUITE(CHistory_tests, historyFixture)
 	{
 		history.AddAndExecuteCommand(make_unique<CommandMock>(commands, 0));
 		history.AddAndExecuteCommand(make_unique<CommandMock>(commands, 1));
-		BOOST_CHECK_EQUAL(commands.size(), 2);
+		BOOST_CHECK_EQUAL(commands.size(), size_t(2));
 
 		BOOST_CHECK_EQUAL(commands[0], true);
 		BOOST_CHECK_EQUAL(commands[1], true);
@@ -81,8 +81,8 @@ BOOST_FIXTURE_TEST_SUITE(CHistory_tests, historyFixture)
 		history.Undo();
 
 		history.AddAndExecuteCommand(make_unique<CommandMock>(commands, 1));
-		BOOST_CHECK_EQUAL(history.GetSize(), 2);
-		BOOST_CHECK(commands[1]); 
+		BOOST_CHECK_EQUAL(history.GetSize(), size_t(2));
+		BOOST_CHECK(commands[1]);
 		BOOST_CHECK(commands[0]);
 	}
 	BOOST_AUTO_TEST_CASE(should_erase_commands_if_capacity_is_filled)
@@ -93,7 +93,7 @@ BOOST_FIXTURE_TEST_SUITE(CHistory_tests, historyFixture)
 		{
 			commands.push_back(false);
 		}
-		for (size_t i = 0; i < maxAmountCommands; ++i)
+		for (int i = 0; i < maxAmountCommands; ++i)
 		{
 			history.AddAndExecuteCommand(make_unique<CommandMock>(commands, i));
 		}

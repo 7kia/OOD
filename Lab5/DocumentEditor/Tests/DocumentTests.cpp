@@ -31,7 +31,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		}
 		BOOST_AUTO_TEST_CASE(is_empty)
 		{
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 		}
 		BOOST_AUTO_TEST_CASE(do_not_change_history)
 		{
@@ -121,8 +121,8 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		{
 			auto p1 = document.InsertParagraph(textFirstParagraph);
 			auto p2 = document.InsertParagraph(textSecondParagraph);
-			auto p3 = document.InsertParagraph(textThirdParagraph, 1);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 3);
+			auto p3 = document.InsertParagraph(textThirdParagraph, size_t(1));
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(3));
 			BOOST_CHECK_EQUAL(
 				document.GetItem(0).GetParagraph()->GetText(),
 				textFirstParagraph
@@ -154,14 +154,14 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				auto p1 = document.InsertParagraph(textFirstParagraph);
 				auto p2 = document.InsertParagraph(textSecondParagraph, 0);
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 				BOOST_CHECK_EQUAL(
 					p1->GetText(),
 					textFirstParagraph
 				);
 
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 
 				document.Redo();
 				BOOST_CHECK_EQUAL(
@@ -174,7 +174,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				);
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				BOOST_CHECK_EQUAL(
 					p2->GetText(),
 					textSecondParagraph
@@ -195,7 +195,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 			, path2("images/" + name2)
 		{
 			p1 = document.InsertImage(path1, width1, height1);
-			p2 = document.InsertImage(path2, width2, height2, 0);
+			p2 = document.InsertImage(path2, width2, height2, size_t(0));
 		}
 
 		void CheckFirtstImg()
@@ -248,7 +248,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 	BOOST_FIXTURE_TEST_SUITE(InsertImage_tests, InsertImage_Fixture)
 		BOOST_AUTO_TEST_CASE(can_insert_images_in_any_positions)
 		{
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 			BOOST_CHECK_EQUAL(p1->GetWidth(), width1);
 			BOOST_CHECK_EQUAL(p1->GetHeight(), height1);
 			BOOST_CHECK_EQUAL(
@@ -285,14 +285,14 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				CheckFirtstImg();
 
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 				CheckFirtstImg();
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				CheckSecondImg();
 			}
 	BOOST_AUTO_TEST_SUITE_END()
@@ -311,11 +311,11 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		BOOST_AUTO_TEST_CASE(can_delete)
 		{
 			document.DeleteItem(1);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 			BOOST_CHECK_EQUAL(document.GetItem(0).GetImage(), img);
 
 			document.DeleteItem(0);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 		}
 		BOOST_AUTO_TEST_CASE(can_undo_and_redo)
 			{
@@ -323,10 +323,10 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				document.DeleteItem(0);
 				document.Undo();
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				document.Redo();
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 

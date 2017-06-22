@@ -26,10 +26,10 @@ BOOST_FIXTURE_TEST_SUITE(CInsertItemCommand_tests, InsertItemFixture)
 BOOST_AUTO_TEST_CASE(can_execute_and_unexecute)
 {
 	command->Execute();
-	BOOST_CHECK_EQUAL(items.size(), 1);
+	BOOST_CHECK_EQUAL(items.size(), size_t(1));
 	BOOST_CHECK_EQUAL(items[0], item);
 
 	command->Unexecute();
-	BOOST_CHECK_EQUAL(items.size(), 0);
+	BOOST_CHECK_EQUAL(items.size(), size_t(0));
 }
 BOOST_AUTO_TEST_SUITE_END()
