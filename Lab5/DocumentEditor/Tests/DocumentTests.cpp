@@ -7,9 +7,9 @@
 
 using namespace std;
 
-struct documentFixture
+struct DocumentFixture
 {
-	documentFixture()
+	DocumentFixture()
 		: outOfRangeMessage("Index out range")
 		, tempPath(document.GetTempPath().generic_string())
 	{}
@@ -23,7 +23,7 @@ struct documentFixture
 	const string tempPath;
 };
 
-BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
+BOOST_FIXTURE_TEST_SUITE(CDocument_tests, DocumentFixture)
 	BOOST_AUTO_TEST_SUITE(constructor_tests)
 		BOOST_AUTO_TEST_CASE(has_empty_title)
 		{
@@ -68,7 +68,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		);
 	}
 
-	struct SetTitle_Fixture : public documentFixture
+	struct SetTitle_Fixture : public DocumentFixture
 	{
 		SetTitle_Fixture()
 			: title1("new")
@@ -102,7 +102,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 	
-	struct InsertParagraph_Fixture : public documentFixture
+	struct InsertParagraph_Fixture : public DocumentFixture
 	{
 		InsertParagraph_Fixture()
 			: textFirstParagraph("text 1")
@@ -186,7 +186,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 
-	struct InsertImage_Fixture : public documentFixture
+	struct InsertImage_Fixture : public DocumentFixture
 	{
 		InsertImage_Fixture()
 			: name1("image1.txt")
@@ -297,7 +297,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 
-	struct DeleteItem_Fixture : public documentFixture
+	struct DeleteItem_Fixture : public DocumentFixture
 	{
 		DeleteItem_Fixture()
 		{

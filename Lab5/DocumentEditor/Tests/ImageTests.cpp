@@ -10,9 +10,9 @@
 using namespace std;
 using namespace boost;
 
-struct imageFixture
+struct ImageFixture
 {
-	imageFixture()
+	ImageFixture()
 		: fileName("testImage.txt")
 		, width(100)
 		, height(100)
@@ -29,7 +29,7 @@ struct imageFixture
 	CImage image;
 };
 
-BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
+BOOST_FIXTURE_TEST_SUITE(CImage_, ImageFixture)
 	BOOST_AUTO_TEST_CASE(throw_exception_if_source_image_is_not_accessible)
 	{
 		VerifyException<invalid_argument>(

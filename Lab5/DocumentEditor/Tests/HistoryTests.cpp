@@ -28,9 +28,9 @@ private:
 	ChangeArray& m_commands;
 };
 
-struct historyFixture
+struct HistoryFixture
 {
-	historyFixture()
+	HistoryFixture()
 	{
 		for (size_t i = 0; i < 2; ++i)
 		{
@@ -42,7 +42,7 @@ struct historyFixture
 	ChangeArray commands;
 }; 
 
-BOOST_FIXTURE_TEST_SUITE(CHistory_tests, historyFixture)
+BOOST_FIXTURE_TEST_SUITE(CHistory_tests, HistoryFixture)
 	BOOST_AUTO_TEST_SUITE(constructor_tests)
 		BOOST_AUTO_TEST_CASE(is_empty)
 		{
