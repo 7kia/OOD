@@ -9,7 +9,7 @@ typedef std::vector<bool> ChangeArray;
 class CommandMock : public CAbstractCommand
 {
 public:
-	CommandMock(ChangeArray& commands, int id) 
+	CommandMock(ChangeArray& commands, size_t id) 
 		: m_commands(commands)
 		, m_id(id)
 	{

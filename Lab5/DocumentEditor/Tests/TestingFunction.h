@@ -15,7 +15,7 @@ namespace
 	template <typename Ex, typename Fn>
 	void VerifyException(Fn && fn, const std::string & expectedDescription)
 	{
-		BOOST_REQUIRE_THROW(
+		BOOST_CHECK_EXCEPTION(
 			fn(), 
 			Ex, 
 			[&](const Ex& e) {

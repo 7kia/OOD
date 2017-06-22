@@ -213,10 +213,12 @@ boost::optional<size_t> CEditor::ReadPosition(istream & in) const
 		}
 		catch (invalid_argument & exception)
 		{
+			(void)exception;
 			throw invalid_argument("Value should be a unsigned number or \"end\"");
 		}
 		catch (out_of_range & exception)
 		{
+			(void)exception;
 			throw out_of_range("Number value out of range type value");
 		}
 	}

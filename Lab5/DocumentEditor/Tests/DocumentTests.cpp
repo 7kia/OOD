@@ -240,10 +240,10 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		const string name2;
 		const std::string path1;
 		const std::string path2;
-		const int width1 = 100;
-		const int width2 = 250;
-		const int height1 = 100;
-		const int height2 = 250;
+		const unsigned width1 = 100;
+		const unsigned width2 = 250;
+		const unsigned height1 = 100;
+		const unsigned height2 = 250;
 	};
 	BOOST_FIXTURE_TEST_SUITE(InsertImage_tests, InsertImage_Fixture)
 		BOOST_AUTO_TEST_CASE(can_insert_images_in_any_positions)
