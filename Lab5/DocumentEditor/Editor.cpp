@@ -16,7 +16,7 @@ CEditor::CEditor()
 	AddMenuItem("insertParagraph", "Add paragraph at position. Args: <position>|end <text>", &CEditor::AddParagraph);
 	AddMenuItem("insertImage", "Add image at positions. Args: <position>|end <width> <height> <path>", &CEditor::AddImage);
 	AddMenuItem("deleteItem", "Delete item at position. Args: <position>", &CEditor::DeleteItem);
-	AddMenuItem("replaceText", "Replace text at position. Args: <position>", &CEditor::ReplaceText);
+	AddMenuItem("replaceText", "Replace text at position. Args: <position> <text>", &CEditor::ReplaceText);
 	AddMenuItem("resizeImage", "Resize image at position. Args: <position> <width> <height>", &CEditor::ResizeImage);
 	AddMenuItem("save", "Save html document to path. Args: <path>", &CEditor::Save);
 	AddMenuItem("list", "Show document", &CEditor::List);
@@ -43,8 +43,10 @@ void CEditor::AddParagraph(istream & in)
 {
 	try
 	{
-		size_t position = size_t(ReadUnsigned(in));
+		boost::optional<size_t> position = ReadPosition(in);
+		
 		string text = ReadLine(in);
+
 		m_document->InsertParagraph(text, position);
 	}
 	catch (exception & e)
@@ -57,7 +59,7 @@ void CEditor::AddImage(istream & in)
 {
 	try
 	{
-		size_t position = size_t(ReadUnsigned(in));
+		boost::optional<size_t> position = ReadPosition(in);
 		unsigned width = ReadUnsigned(in);
 		unsigned height = ReadUnsigned(in);
 		string path = ReadLine(in);
@@ -181,7 +183,7 @@ void CEditor::Redo(istream &)
 	}
 }
 
-unsigned CEditor::ReadUnsigned(istream & in)
+unsigned CEditor::ReadUnsigned(istream & in) const
 {
 	int index;
 	if (!(in >> index) || (index < 0))
@@ -191,10 +193,34 @@ unsigned CEditor::ReadUnsigned(istream & in)
 	return index;
 }
 
-string CEditor::ReadLine(istream & in)
+string CEditor::ReadLine(istream & in) const
 {
 	string text;
 	getline(in >> ws, text);
 	return text;
+}
+
+boost::optional<size_t> CEditor::ReadPosition(istream & in) const
+{
+	boost::optional<size_t> result;
+	string pos;
+	in >> pos;
+	if (pos != "end")
+	{
+		try
+		{
+			result = stoull(pos);
+		}
+		catch (invalid_argument & exception)
+		{
+			throw invalid_argument("Value should be a unsigned number or \"end\"");
+		}
+		catch (out_of_range & exception)
+		{
+			throw out_of_range("Number value out of range type value");
+		}
+	}
+
+	return result;
 }
 

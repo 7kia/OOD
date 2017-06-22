@@ -24,7 +24,7 @@ namespace
 
 }
 
-void CHtmlConverter::Save(const fs::path & path, const IDocument & document) const
+void CHtmlConverter::Save(const fs::path & path, const IDocument & document)
 {
 	std::ofstream outputFile(path.generic_string());
 	if (!outputFile.is_open())
@@ -45,7 +45,7 @@ void CHtmlConverter::Save(const fs::path & path, const IDocument & document) con
 	outputFile.close();
 }
 
-std::string CHtmlConverter::CreateTitle(const IDocument & document) const
+std::string CHtmlConverter::CreateTitle(const IDocument & document)
 {
 	const auto title = "\t\t<title>" + ReplaceEncodeSymbols(document.GetTitle())+ "</title>\n";
 	return "\t<head>\n"
@@ -53,7 +53,7 @@ std::string CHtmlConverter::CreateTitle(const IDocument & document) const
 		"\t</head>\n";
 }
 
-string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & document) const
+string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & document)
 {
 	string bodyString = "\t<body>\n";
 
@@ -83,12 +83,12 @@ string CHtmlConverter::CreateBody(const fs::path & path, const IDocument & docum
 	return bodyString;
 }
 
-string CHtmlConverter::CreateParagraph(const IParagraphConstPtr & pParagraph) const
+string CHtmlConverter::CreateParagraph(const IParagraphConstPtr & pParagraph)
 {
 	return "\t\t<p>" + ReplaceEncodeSymbols(pParagraph->GetText()) + "</p>\n";
 }
 
-string CHtmlConverter::CreateImage(const IImageConstPtr & pImage, const string & path) const
+string CHtmlConverter::CreateImage(const IImageConstPtr & pImage, const string & path)
 {
 	boost::format imageFormat(R"(		<img src="%1%" width="%2%" height="%3%">
 )");
@@ -106,7 +106,7 @@ string CHtmlConverter::CreateImage(const IImageConstPtr & pImage, const string &
 }
 
 
-std::string CHtmlConverter::ReplaceEncodeSymbols(std::string const& text) const
+std::string CHtmlConverter::ReplaceEncodeSymbols(std::string const& text)
 {
 	string newString = text;
 	replace_all(newString, "&", "&amp;");

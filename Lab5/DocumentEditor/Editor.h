@@ -27,9 +27,9 @@ private:
 	void Undo(std::istream &);
 	void Redo(std::istream &);
 
-	unsigned ReadUnsigned(std::istream & in);
-	std::string ReadLine(std::istream & in);
-
+	unsigned ReadUnsigned(std::istream & in) const;
+	std::string ReadLine(std::istream & in) const;
+	boost::optional<size_t> ReadPosition(std::istream & in) const;
 private:
 	CMenu m_menu;
 	std::unique_ptr<IDocument> m_document;

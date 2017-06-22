@@ -120,7 +120,7 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 	{
 		throw std::out_of_range("Index out range");
 	}
-	CheckIndex(index, m_documentItems.size());
+	CheckIndex(index, m_documentItems.size() - 1);
 	return *m_documentItems[index].get();
 }
 
@@ -130,7 +130,7 @@ CDocumentItem CDocument::GetItem(size_t index)
 	{
 		throw std::out_of_range("Index out range");
 	}
-	CheckIndex(index, m_documentItems.size());
+	CheckIndex(index, m_documentItems.size() - 1);
 	return *m_documentItems[index].get();
 }
 
@@ -140,7 +140,7 @@ void CDocument::DeleteItem(size_t index)
 	{
 		throw std::out_of_range("Index out range");
 	}
-	CheckIndex(index, m_documentItems.size());
+	CheckIndex(index, m_documentItems.size() - 1);
 
 	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_documentItems, index));
 }

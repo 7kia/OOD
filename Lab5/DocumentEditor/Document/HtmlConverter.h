@@ -11,13 +11,13 @@ class IDocument;
 class CHtmlConverter
 {
 public:
-	void Save(const boost::filesystem::path & path, const IDocument & document) const;
+	static void Save(const boost::filesystem::path & path, const IDocument & document);
 private:
-	std::string CreateTitle(const IDocument & document) const;
-	std::string CreateBody(const boost::filesystem::path & path, const IDocument & document) const;
+	static std::string CreateTitle(const IDocument & document);
+	static std::string CreateBody(const boost::filesystem::path & path, const IDocument & document);
 
-	std::string CreateParagraph(const IParagraphConstPtr & pParagraph) const;
-	std::string CreateImage(const IImageConstPtr & pImage, const std::string & path) const;
-	std::string ReplaceEncodeSymbols(std::string const & text) const;
+	static std::string CreateParagraph(const IParagraphConstPtr & pParagraph);
+	static std::string CreateImage(const IImageConstPtr & pImage, const std::string & path);
+	static std::string ReplaceEncodeSymbols(std::string const & text);
 };
 
