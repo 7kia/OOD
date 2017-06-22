@@ -98,25 +98,17 @@ std::shared_ptr<IImage> CDocument::InsertImage(
 		throw std::invalid_argument("invalid image height");
 	}
 
-	auto iterEqual = std::find_if(m_documentItems.begin(), m_documentItems.end(),
-		[&](const DocumentItemPtr & pItem)
-	{
-		if (const auto image = pItem->GetImage())
+	auto iterEqual = std::find_if(m_copyImages.begin(), m_copyImages.end(),
+		[&](const auto & copy)
 		{
-			auto imagePath = fs::path(image->GetPath());
-			auto parentFolder = imagePath.parent_path();
-			auto imageName = imagePath.filename();
-			if ((parentFolder == fs::path(path).parent_path())
-				&& (imageName == fs::path(path).filename())
-				)
+			if (copy.first == path)
 			{
 				return true;
 			}
+			return false;
 		}
-		return false;
-	}
 	);
-	if (iterEqual == m_documentItems.end())
+	if (iterEqual == m_copyImages.end())
 	{
 		CopyImage(path);
 	}
@@ -124,7 +116,7 @@ std::shared_ptr<IImage> CDocument::InsertImage(
 
 
 
-	auto pImage = make_shared<CImage>(path, width, height, m_history);
+	auto pImage = make_shared<CImage>(m_copyImages[path], width, height, m_history);
 	auto pItem = make_shared<CDocumentItem>(pImage);
 
 	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_documentItems, pItem, pos));
@@ -191,8 +183,7 @@ void CDocument::Save(const std::string & path) const
 {
 	CopyImagesForFile(path);
 
-	CHtmlConverter htmlConverter;
-	htmlConverter.Save(fs::path(path), *this);
+	CHtmlConverter::Save(fs::path(path), *this);
 }
 
 boost::filesystem::path CDocument::GetTempPath() const
@@ -224,17 +215,15 @@ void CDocument::CopyImagesForFile(const std::string path) const
 	}
 }
 
-void CDocument::CopyImage(const std::string & path) const
+void CDocument::CopyImage(const std::string & path)
 {
 	auto pathToLoadImage = boost::filesystem::path(path);
 
 	boost::filesystem::path pathToNewImage;
-	auto iter = std::find_if(m_documentItems.begin(), m_documentItems.end(),
-		[&](const DocumentItemPtr & pItem)
-	{
-		if (const auto image = pItem->GetImage())
+	auto iter = std::find_if(m_copyImages.begin(), m_copyImages.end(), 
+		[&](auto & copy)
 		{
-			auto imagePath = fs::path(image->GetPath());
+			auto imagePath = fs::path(copy.second);
 			auto parentFolder = imagePath.parent_path();
 			auto imageName = imagePath.filename();
 			if ((parentFolder != fs::path(path).parent_path())
@@ -243,11 +232,11 @@ void CDocument::CopyImage(const std::string & path) const
 			{
 				return true;
 			}
+			return false;
+
 		}
-		return false;
-	}
 	);
-	if (iter == m_documentItems.end())
+	if (iter == m_copyImages.end())
 	{
 		string newName = pathToLoadImage.filename().generic_string();
 		pathToNewImage = m_tempPath / IMAGES_DIRECTORY / newName;
@@ -262,4 +251,5 @@ void CDocument::CopyImage(const std::string & path) const
 		pathToNewImage = m_tempPath / IMAGES_DIRECTORY / newName;
 	}
 	boost::filesystem::copy_file(path, pathToNewImage, boost::filesystem::copy_option::overwrite_if_exists);
+	m_copyImages.emplace(std::pair<std::string, std::string>(path, pathToNewImage.generic_string()));
 }

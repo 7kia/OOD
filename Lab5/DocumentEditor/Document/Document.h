@@ -4,7 +4,7 @@
 #include "DocumentItems/ConstDocumentItem.h"
 
 #include <boost/filesystem.hpp>
-
+#include <map>
 
 class CDocument : public IDocument
 {
@@ -45,10 +45,14 @@ public:
 	boost::filesystem::path GetTempPath() const;
 private:
 	void CopyImagesForFile(const std::string path) const;
-	void CopyImage(const std::string& path) const;
+	void CopyImage(const std::string& path);
 private:
 	std::string m_title;
 	CHistory m_history;
 	std::vector<DocumentItemPtr> m_documentItems;
 	boost::filesystem::path m_tempPath;
+
+	// first - where was
+	// second - where downloaded
+	std::map<std::string, std::string> m_copyImages;
 };

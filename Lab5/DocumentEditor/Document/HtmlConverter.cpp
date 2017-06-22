@@ -93,7 +93,7 @@ string CHtmlConverter::CreateImage(const IImageConstPtr & pImage, const string &
 	boost::format imageFormat(R"(		<img src="%1%" width="%2%" height="%3%">
 )");
 	stringstream stream;
-
+	
 	auto pathToTemp = boost::filesystem::path(pImage->GetPath());
 	string imageName = pathToTemp.filename().generic_string();
 
