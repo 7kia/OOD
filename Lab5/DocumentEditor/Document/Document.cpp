@@ -7,6 +7,7 @@
 #include <boost/uuid/uuid_io.hpp> 
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/filesystem/path.hpp>
 
 #include "Document.h"
 #include "DocumentCommands/ChangeStringCommand.h"
@@ -96,13 +97,34 @@ std::shared_ptr<IImage> CDocument::InsertImage(
 	{
 		throw std::invalid_argument("invalid image height");
 	}
-	auto pathToLoadImage = boost::filesystem::path(path);
-	string newName = pathToLoadImage.filename().generic_string();
-	auto pathToNewImage = m_tempPath / IMAGES_DIRECTORY / newName;
 
-	boost::filesystem::copy_file(path, pathToNewImage, boost::filesystem::copy_option::overwrite_if_exists);
+	auto iterEqual = std::find_if(m_documentItems.begin(), m_documentItems.end(),
+		[&](const DocumentItemPtr & pItem)
+	{
+		if (const auto image = pItem->GetImage())
+		{
+			auto imagePath = fs::path(image->GetPath());
+			auto parentFolder = imagePath.parent_path();
+			auto imageName = imagePath.filename();
+			if ((parentFolder == fs::path(path).parent_path())
+				&& (imageName == fs::path(path).filename())
+				)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	);
+	if (iterEqual == m_documentItems.end())
+	{
+		CopyImage(path);
+	}
 
-	auto pImage = make_shared<CImage>(pathToNewImage.generic_string(), width, height, m_history);
+
+
+
+	auto pImage = make_shared<CImage>(path, width, height, m_history);
 	auto pItem = make_shared<CDocumentItem>(pImage);
 
 	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_documentItems, pItem, pos));
@@ -200,4 +222,44 @@ void CDocument::CopyImagesForFile(const std::string path) const
 
 		}
 	}
+}
+
+void CDocument::CopyImage(const std::string & path) const
+{
+	auto pathToLoadImage = boost::filesystem::path(path);
+
+	boost::filesystem::path pathToNewImage;
+	auto iter = std::find_if(m_documentItems.begin(), m_documentItems.end(),
+		[&](const DocumentItemPtr & pItem)
+	{
+		if (const auto image = pItem->GetImage())
+		{
+			auto imagePath = fs::path(image->GetPath());
+			auto parentFolder = imagePath.parent_path();
+			auto imageName = imagePath.filename();
+			if ((parentFolder != fs::path(path).parent_path())
+				&& (imageName == fs::path(path).filename())
+				)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	);
+	if (iter == m_documentItems.end())
+	{
+		string newName = pathToLoadImage.filename().generic_string();
+		pathToNewImage = m_tempPath / IMAGES_DIRECTORY / newName;
+	}
+	else
+	{
+		boost::filesystem::path newName = boost::filesystem::unique_path(
+			pathToLoadImage.stem().generic_string()
+			+ "%%%%"
+			+ pathToLoadImage.extension().generic_string()
+		);
+		pathToNewImage = m_tempPath / IMAGES_DIRECTORY / newName;
+	}
+	boost::filesystem::copy_file(path, pathToNewImage, boost::filesystem::copy_option::overwrite_if_exists);
 }

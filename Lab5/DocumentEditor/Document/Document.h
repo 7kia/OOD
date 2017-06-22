@@ -45,6 +45,7 @@ public:
 	boost::filesystem::path GetTempPath() const;
 private:
 	void CopyImagesForFile(const std::string path) const;
+	void CopyImage(const std::string& path) const;
 private:
 	std::string m_title;
 	CHistory m_history;
