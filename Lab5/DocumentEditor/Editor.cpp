@@ -4,6 +4,8 @@
 #include "Document/DocumentItems/DocumentItem.h"
 #include "Document/DocumentItems/ConstDocumentItem.h"
 
+#include <sstream>
+
 using namespace std;
 using namespace std::placeholders;
 
@@ -202,25 +204,31 @@ string CEditor::ReadLine(istream & in) const
 
 boost::optional<size_t> CEditor::ReadPosition(istream & in) const
 {
-	boost::optional<size_t> result;
 	string pos;
 	in >> pos;
 	if (pos != "end")
 	{
 		try
 		{
-			result = stoull(pos);
+			size_t result;
+			std::stringstream strm;
+			strm.str(pos.c_str());
+			strm >> result;
+
+			return result;
 		}
 		catch (invalid_argument & exception)
 		{
+			(void)exception;
 			throw invalid_argument("Value should be a unsigned number or \"end\"");
 		}
 		catch (out_of_range & exception)
 		{
+			(void)exception;
 			throw out_of_range("Number value out of range type value");
 		}
 	}
 
-	return result;
+	return boost::optional<size_t>();
 }
 

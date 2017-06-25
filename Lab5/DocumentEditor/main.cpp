@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Editor.h"
 #include <locale.h>
 int main()

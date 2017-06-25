@@ -4,9 +4,9 @@
 
 using namespace std;
 
-struct paragraphFixture
+struct ParagraphFixture
 {
-	paragraphFixture()
+	ParagraphFixture()
 		: oldText("text")
 		, paragraph("text", history)
 		, newText("new text")
@@ -19,7 +19,7 @@ struct paragraphFixture
 	CParagraph paragraph;
 };
 
-BOOST_FIXTURE_TEST_SUITE(CParagraph_, paragraphFixture)
+BOOST_FIXTURE_TEST_SUITE(CParagraph_, ParagraphFixture)
 	BOOST_AUTO_TEST_SUITE(after_construction)
 		BOOST_AUTO_TEST_CASE(have_preset_text)
 		{

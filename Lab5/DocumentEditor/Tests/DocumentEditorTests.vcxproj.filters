@@ -20,9 +20,6 @@
     <ClCompile Include="..\Document\HtmlConverter.cpp">
       <Filter>TestClasses\Document</Filter>
     </ClCompile>
-    <ClCompile Include="..\Document\TextureStorage.cpp">
-      <Filter>TestClasses\Document</Filter>
-    </ClCompile>
     <ClCompile Include="..\Document\DocumentItems\ConstDocumentItem.cpp">
       <Filter>TestClasses\Document\DocumentItems</Filter>
     </ClCompile>
@@ -86,9 +83,6 @@
       <Filter>TestClasses\Document</Filter>
     </ClInclude>
     <ClInclude Include="..\Document\IDocument.h">
-      <Filter>TestClasses\Document</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Document\TextureStorage.h">
       <Filter>TestClasses\Document</Filter>
     </ClInclude>
     <ClInclude Include="..\Document\DocumentItems\ConstDocumentItem.h">

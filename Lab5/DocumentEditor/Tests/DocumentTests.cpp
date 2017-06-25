@@ -7,9 +7,9 @@
 
 using namespace std;
 
-struct documentFixture
+struct DocumentFixture
 {
-	documentFixture()
+	DocumentFixture()
 		: outOfRangeMessage("Index out range")
 		, tempPath(document.GetTempPath().generic_string())
 	{}
@@ -23,7 +23,7 @@ struct documentFixture
 	const string tempPath;
 };
 
-BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
+BOOST_FIXTURE_TEST_SUITE(CDocument_tests, DocumentFixture)
 	BOOST_AUTO_TEST_SUITE(constructor_tests)
 		BOOST_AUTO_TEST_CASE(has_empty_title)
 		{
@@ -31,7 +31,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		}
 		BOOST_AUTO_TEST_CASE(is_empty)
 		{
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 		}
 		BOOST_AUTO_TEST_CASE(do_not_change_history)
 		{
@@ -68,7 +68,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		);
 	}
 
-	struct SetTitle_Fixture : public documentFixture
+	struct SetTitle_Fixture : public DocumentFixture
 	{
 		SetTitle_Fixture()
 			: title1("new")
@@ -102,7 +102,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 	
-	struct InsertParagraph_Fixture : public documentFixture
+	struct InsertParagraph_Fixture : public DocumentFixture
 	{
 		InsertParagraph_Fixture()
 			: textFirstParagraph("text 1")
@@ -121,8 +121,8 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		{
 			auto p1 = document.InsertParagraph(textFirstParagraph);
 			auto p2 = document.InsertParagraph(textSecondParagraph);
-			auto p3 = document.InsertParagraph(textThirdParagraph, 1);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 3);
+			auto p3 = document.InsertParagraph(textThirdParagraph, size_t(1));
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(3));
 			BOOST_CHECK_EQUAL(
 				document.GetItem(0).GetParagraph()->GetText(),
 				textFirstParagraph
@@ -154,14 +154,14 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				auto p1 = document.InsertParagraph(textFirstParagraph);
 				auto p2 = document.InsertParagraph(textSecondParagraph, 0);
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 				BOOST_CHECK_EQUAL(
 					p1->GetText(),
 					textFirstParagraph
 				);
 
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 
 				document.Redo();
 				BOOST_CHECK_EQUAL(
@@ -174,7 +174,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				);
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				BOOST_CHECK_EQUAL(
 					p2->GetText(),
 					textSecondParagraph
@@ -186,7 +186,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 
-	struct InsertImage_Fixture : public documentFixture
+	struct InsertImage_Fixture : public DocumentFixture
 	{
 		InsertImage_Fixture()
 			: name1("image1.txt")
@@ -195,7 +195,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 			, path2("images/" + name2)
 		{
 			p1 = document.InsertImage(path1, width1, height1);
-			p2 = document.InsertImage(path2, width2, height2, 0);
+			p2 = document.InsertImage(path2, width2, height2, size_t(0));
 		}
 
 		void CheckFirtstImg()
@@ -240,15 +240,15 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		const string name2;
 		const std::string path1;
 		const std::string path2;
-		const int width1 = 100;
-		const int width2 = 250;
-		const int height1 = 100;
-		const int height2 = 250;
+		const unsigned width1 = 100;
+		const unsigned width2 = 250;
+		const unsigned height1 = 100;
+		const unsigned height2 = 250;
 	};
 	BOOST_FIXTURE_TEST_SUITE(InsertImage_tests, InsertImage_Fixture)
 		BOOST_AUTO_TEST_CASE(can_insert_images_in_any_positions)
 		{
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 			BOOST_CHECK_EQUAL(p1->GetWidth(), width1);
 			BOOST_CHECK_EQUAL(p1->GetHeight(), height1);
 			BOOST_CHECK_EQUAL(
@@ -285,19 +285,19 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				CheckFirtstImg();
 
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 				CheckFirtstImg();
 
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				CheckSecondImg();
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 
-	struct DeleteItem_Fixture : public documentFixture
+	struct DeleteItem_Fixture : public DocumentFixture
 	{
 		DeleteItem_Fixture()
 		{
@@ -311,11 +311,11 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 		BOOST_AUTO_TEST_CASE(can_delete)
 		{
 			document.DeleteItem(1);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(1));
 			BOOST_CHECK_EQUAL(document.GetItem(0).GetImage(), img);
 
 			document.DeleteItem(0);
-			BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+			BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 		}
 		BOOST_AUTO_TEST_CASE(can_undo_and_redo)
 			{
@@ -323,10 +323,10 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_tests, documentFixture)
 				document.DeleteItem(0);
 				document.Undo();
 				document.Undo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(2));
 				document.Redo();
 				document.Redo();
-				BOOST_CHECK_EQUAL(document.GetItemsCount(), 0);
+				BOOST_CHECK_EQUAL(document.GetItemsCount(), size_t(0));
 			}
 	BOOST_AUTO_TEST_SUITE_END()
 
