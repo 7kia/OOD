@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonTypes.h"
+#include <memory>
 
 class IStyle
 {

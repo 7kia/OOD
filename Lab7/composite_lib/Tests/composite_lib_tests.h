@@ -9,4 +9,8 @@
 #include "LineStyle.h"
 #include "fillstyle.h"
 
+#include "Triangle.h"
+#include "Ellipse.h"
+#include "Rectangle.h"
+
 #include "TestingFunction.h"

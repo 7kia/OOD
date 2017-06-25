@@ -5,9 +5,9 @@ class CTriangle : public CShape
 {
 public:
 	CTriangle(
-		RectF const& frame,
-		IStylePtr const& fillStyle,
-		ILineStylePtr const& lineStyle
+		RectF const& frame = RectF(0, 0, 0, 0),
+		IStylePtr const& fillStyle = nullptr,
+		ILineStylePtr const& lineStyle = nullptr
 	);
 
 private:

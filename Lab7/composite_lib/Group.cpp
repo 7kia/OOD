@@ -58,23 +58,35 @@ void CGroup::SetFrame(const RectF & rect)
 			shape->SetFrame(shapeFrame);
 		}
 	}
+	else
+	{
+		throw std::runtime_error("No shapes to group");
+	}
+
 }
 
 ILineStylePtr CGroup::GetLineStyle() const
 {
-	ILineStylePtr lineStyle;
 	if (!m_shapes.empty())
 	{
 		bool stylesEqual = std::all_of(m_shapes.cbegin(), m_shapes.cend(), [&](auto & shape) {
 			return (shape->GetLineStyle() == m_shapes.front()->GetLineStyle());
 		});
-		lineStyle = stylesEqual ? m_shapes.front()->GetLineStyle() : nullptr;
+		return stylesEqual ? m_shapes.front()->GetLineStyle() : nullptr;
 	}
-	return lineStyle;
+	else
+	{
+		throw std::runtime_error("No shapes to group");
+	}
+
 }
 
 void CGroup::SetLineStyle(ILineStylePtr const& style)
 {
+	if (!m_shapes.size())
+	{
+		throw std::runtime_error("No shapes to group");
+	}
 	for(auto & shape : m_shapes) {
 		shape->SetLineStyle(style);
 	}
@@ -82,19 +94,27 @@ void CGroup::SetLineStyle(ILineStylePtr const& style)
 
 IStylePtr CGroup::GetFillStyle() const
 {
-	IStylePtr fillStyle;
 	if (!m_shapes.empty())
 	{
 		bool stylesEqual = std::all_of(m_shapes.cbegin(), m_shapes.cend(), [&](auto & shape) {
 			return (shape->GetFillStyle() == m_shapes.front()->GetFillStyle());
 		});
-		fillStyle = stylesEqual ? m_shapes.front()->GetFillStyle() : nullptr;
+		return stylesEqual ? m_shapes.front()->GetFillStyle() : nullptr;
 	}
-	return fillStyle;
+	else
+	{
+		throw std::runtime_error("No shapes to group");
+	}
+	return IStylePtr();
 }
 
 void CGroup::SetFillStyle(IStylePtr const& style)
 {
+	if (!m_shapes.size())
+	{
+		throw std::runtime_error("No shapes to group");
+	}
+
 	for(auto & shape : m_shapes) {
 		shape->SetFillStyle(style);
 	}
@@ -102,7 +122,6 @@ void CGroup::SetFillStyle(IStylePtr const& style)
 
 boost::optional<float> CGroup::GetLineThickness() const
 {
-	boost::optional<float> thickness;
 	if (!m_shapes.empty())
 	{
 		bool thicknessesEqual = std::all_of(m_shapes.begin(), m_shapes.end(),
@@ -113,13 +132,21 @@ boost::optional<float> CGroup::GetLineThickness() const
 				&& (shape->GetLineThickness().get() == m_shapes.front()->GetLineThickness().get());
 			}
 		);
-		thickness = thicknessesEqual ? m_shapes.front()->GetLineThickness() : boost::none;
+		return thicknessesEqual ? m_shapes.front()->GetLineThickness() : boost::none;
 	}
-	return thickness;
+	else
+	{
+		throw std::runtime_error("No shapes to group");
+	}
 }
 
 void CGroup::SetLineThickness(float thickness)
 {
+	if (!m_shapes.size())
+	{
+		throw std::runtime_error("No shapes to group");
+	}
+
 	for(auto & shape : m_shapes) {
 		shape->SetLineThickness(thickness);
 	}
@@ -144,6 +171,11 @@ size_t CGroup::GetShapesCount() const
 
 std::shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index)
 {
+	if (m_shapes.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+
 	CheckIndex(index, m_shapes.size());
 	return m_shapes[index];
 }
@@ -169,6 +201,11 @@ void CGroup::InsertShape(std::shared_ptr<IShape> const& pShape, size_t index)
 
 void CGroup::RemoveShapeAtIndex(size_t index)
 {
+	if (m_shapes.size() == 0)
+	{
+		throw std::out_of_range("Index out range");
+	}
+
 	CheckIndex(index, m_shapes.size() + 1);
 	m_shapes.erase(m_shapes.begin() + index);
 }
