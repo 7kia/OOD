@@ -4,6 +4,7 @@
 #include <boost/mpl/vector.hpp>
 
 #include <memory>
+#include <vector>
 
 #include "Group.h"
 #include "LineStyle.h"

@@ -176,7 +176,7 @@ std::shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index)
 		throw std::out_of_range("Index out range");
 	}
 
-	CheckIndex(index, m_shapes.size());
+	CheckIndex(index, m_shapes.size() - 1);
 	return m_shapes[index];
 }
 
@@ -206,7 +206,7 @@ void CGroup::RemoveShapeAtIndex(size_t index)
 		throw std::out_of_range("Index out range");
 	}
 
-	CheckIndex(index, m_shapes.size() + 1);
+	CheckIndex(index, m_shapes.size() - 1);
 	m_shapes.erase(m_shapes.begin() + index);
 }
 
