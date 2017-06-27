@@ -184,15 +184,16 @@ void CGroup::InsertShape(std::shared_ptr<IShape> const& pShape, size_t index)
 {
 	CheckIndex(index, m_shapes.size());
 	const bool getThis = (pShape.get() == this);
-	auto parent = pShape->GetGroup();
 	if (!getThis)
 	{
 		m_shapes.insert(m_shapes.begin() + index, pShape);
 	}
+
+	auto parent = pShape->GetGroup();
 	if (parent)
 	{
 		size_t indexToParent = parent->GetShapesIndex(pShape);
-		if (indexToParent >= parent->GetShapesCount())
+		if (indexToParent > parent->GetShapesCount())
 		{
 			parent->RemoveShapeAtIndex(indexToParent);
 		}
