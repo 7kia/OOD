@@ -202,9 +202,11 @@
     <ClInclude Include="FormDataExtractor.h" />
     <ClInclude Include="View\AddHarmonicDlg.h" />
     <ClInclude Include="View\ChartView.h" />
+    <ClInclude Include="View\ChartViewDlg.h" />
     <ClInclude Include="View\IChartView.h" />
     <ClInclude Include="View\IMainDlgView.h" />
     <ClInclude Include="View\MainDlgView.h" />
+    <ClInclude Include="View\TableViewDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Model\ApplicationModel.cpp" />
@@ -222,7 +224,9 @@
     <ClCompile Include="FormDataExtractor.cpp" />
     <ClCompile Include="View\AddHarmonicDlg.cpp" />
     <ClCompile Include="View\ChartView.cpp" />
+    <ClCompile Include="View\ChartViewDlg.cpp" />
     <ClCompile Include="View\MainDlgView.cpp" />
+    <ClCompile Include="View\TableViewDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ModelViewPresenter.rc" />

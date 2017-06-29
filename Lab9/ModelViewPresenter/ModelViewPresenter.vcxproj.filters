@@ -87,6 +87,12 @@
     <ClInclude Include="ConnectionsStorage.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="View\TableViewDlg.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ChartViewDlg.h">
+      <Filter>View</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -121,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="Presenter\ApplicationPresenter.cpp">
       <Filter>Presenter</Filter>
+    </ClCompile>
+    <ClCompile Include="View\TableViewDlg.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\ChartViewDlg.cpp">
+      <Filter>View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,8 @@ void CApplicationPresenter::ConnectSignalsForMainDlgView()
 	m_connections += m_mainDlgView.DoOnInit(boost::bind(&CApplicationPresenter::Update, this));
 	m_connections += m_mainDlgView.DoOnPhaseChange(boost::bind(&CApplicationPresenter::ChangePhase, this, _1, _2));
 	m_connections += m_mainDlgView.DoOnChangeSelect(boost::bind(&CApplicationPresenter::ChangeSelection, this, _1));
+	m_connections += m_mainDlgView.DoOnChangeTab(boost::bind(&CApplicationPresenter::Update, this));
+
 }
 
 void CApplicationPresenter::ConnectSignalsForHarmonicCollection()

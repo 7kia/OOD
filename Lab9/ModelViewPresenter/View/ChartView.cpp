@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "ChartView.h"
 
+IMPLEMENT_DYNAMIC(CChartView, CStatic)
+
+BEGIN_MESSAGE_MAP(CChartView, CStatic)
+	ON_WM_PAINT()
+END_MESSAGE_MAP()
+
 
 CChartView::CChartView()
 {
@@ -9,6 +15,12 @@ CChartView::CChartView()
 CChartView::~CChartView()
 {
 }
+
+void CChartView::PreSubclassWindow()
+{
+	CStatic::PreSubclassWindow();
+}
+
 
 void CChartView::SetData(const Points2D& data)
 {
@@ -44,14 +56,20 @@ void CChartView::UpdateBounds()
 	}
 }
 
-void CChartView::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
+void CChartView::OnPaint()
 {
+	CPaintDC dc(this); // device context for painting
+					   // TODO: Add your message handler code here
+					   // Do not call __super::OnPaint() for painting messages
+
 	if (m_points.empty())
 	{
 		return;
 	}
 
-	CRect rc = lpDrawItemStruct->rcItem;
+	CRect rc;
+
+	GetClientRect(rc);
 	int w = rc.Width();
 	int h = rc.Height();
 	double graphWidth = m_rightBottom.x - m_leftTop.x;
@@ -66,37 +84,25 @@ void CChartView::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 		return int((y - m_leftTop.y) * scaleY);
 	};
 
-	auto dc = CDC::FromHandle(lpDrawItemStruct->hDC);
+	dc.FillSolidRect(0, 0, w, h, RGB(255, 255, 255));
 
-	dc->FillSolidRect(0, 0, w, h, RGB(255, 255, 255));
+	dc.MoveTo(TransformX(0), TransformY(m_leftTop.y));
+	dc.LineTo(TransformX(0), TransformY(m_rightBottom.y));
 
-	dc->MoveTo(TransformX(0), TransformY(m_leftTop.y));
-	dc->LineTo(TransformX(0), TransformY(m_rightBottom.y));
-
-	dc->MoveTo(TransformX(m_leftTop.x), TransformY(0));
-	dc->LineTo(TransformX(m_rightBottom.x), TransformY(0));
+	dc.MoveTo(TransformX(m_leftTop.x), TransformY(0));
+	dc.LineTo(TransformX(m_rightBottom.x), TransformY(0));
 
 	CPen pen;
 	pen.CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 
-	auto oldPen = dc->SelectObject(&pen);
+	auto oldPen = dc.SelectObject(&pen);
 
-	double scaleXForPoints = w / graphWidth * 10.f;
-	double scaleYForPoints = h / graphHeight * 10.f;
-
-	auto TransformXForPoints = [&](double x) {
-		return int((x - m_leftTop.x) * scaleX);
-	};
-	auto TransformYForPoints = [&](double y) {
-		return int((y - m_leftTop.y) * scaleY);
-	};
-
-	dc->MoveTo(TransformXForPoints(m_points.front().x), TransformYForPoints(m_points.front().y));
+	dc.MoveTo(TransformX(m_points.front().x), TransformY(m_points.front().y));
 	for (size_t i = 1; i < m_points.size(); ++i)
 	{
 		auto & pt = m_points[i];
-		dc->LineTo(TransformXForPoints(pt.x), TransformYForPoints(pt.y));
+		dc.LineTo(TransformX(pt.x), TransformY(pt.y));
 	}
 
-	dc->SelectObject(oldPen);
+	dc.SelectObject(oldPen);
 }
