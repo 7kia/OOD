@@ -5,7 +5,7 @@ class CHarmonic : public IHarmonic
 public:
 	CHarmonic(
 		float amplitude,
-		FunctionType const& function,
+		FunctionType  function,
 		float frequency,
 		float phase
 	);
@@ -13,7 +13,7 @@ public:
 	// Methods
 public:
 	FunctionType GetType() const override final;
-	void SetType(FunctionType const& type) override final;
+	void SetType(FunctionType  type) override final;
 
 	float GetAmplitude() const override final;
 	void SetAmplitude(float amplitude) override final;

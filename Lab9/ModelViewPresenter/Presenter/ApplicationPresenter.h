@@ -32,7 +32,7 @@ private:
 
 	void AddHarmonic(
 		float aplitude,
-		FunctionType const& type,
+		FunctionType type,
 		float frequency,
 		float phase
 	);

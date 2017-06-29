@@ -89,7 +89,7 @@ bool CApplicationPresenter::OpenAddDialog()
 
 void CApplicationPresenter::AddHarmonic(
 	float aplitude,
-	FunctionType const& type,
+	FunctionType  type,
 	float frequency,
 	float phase
 )
@@ -126,7 +126,7 @@ void CApplicationPresenter::UpdateView()
 	for (size_t i = 0; i < m_harmonicCollection.GetCount(); ++i)
 	{
 		auto pHarmonic = m_harmonicCollection.GetHarmonic(i);
-		auto harmonicString = CHarmonicStringGenerator::CreateHarmonicString(
+		auto harmonicString = HarmonicStringGenerator::CreateHarmonicString(
 			pHarmonic->GetAmplitude(), 
 			pHarmonic->GetType(), 
 			pHarmonic->GetFrequency(), 

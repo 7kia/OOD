@@ -50,7 +50,7 @@ void CAddHarmonicDlg::UpdatePreview()
 	float frequency = GetEditValue(m_editFrequency);
 	FunctionType function = m_useSin ? FunctionType::Sin : FunctionType::Cos;
 
-	auto previewString = CHarmonicStringGenerator::CreateHarmonicString(amplitude, function, frequency, phase);
+	auto previewString = HarmonicStringGenerator::CreateHarmonicString(amplitude, function, frequency, phase);
 	m_harmonicPreview.SetWindowTextW(previewString.c_str());
 }
 

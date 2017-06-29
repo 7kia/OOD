@@ -3,9 +3,9 @@
 #include <sstream>
 #include <boost\format.hpp>
 
-std::wstring CHarmonicStringGenerator::CreateHarmonicString(
+std::wstring HarmonicStringGenerator::CreateHarmonicString(
 	float amplitude,
-	FunctionType const& function,
+	FunctionType function,
 	float frequency,
 	float phase
 )

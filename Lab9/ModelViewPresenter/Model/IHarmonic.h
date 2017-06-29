@@ -10,7 +10,7 @@ public:
 	virtual ~IHarmonic() = default;
 	
 	virtual FunctionType GetType() const = 0;
-	virtual void SetType(FunctionType const& type) = 0;
+	virtual void SetType(FunctionType  type) = 0;
 
 	virtual float GetAmplitude() const = 0;
 	virtual void SetAmplitude(float amplitude) = 0;

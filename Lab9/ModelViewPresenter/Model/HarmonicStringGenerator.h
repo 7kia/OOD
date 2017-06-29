@@ -2,13 +2,12 @@
 #include "FunctionType.h"
 #include <string>
 
-class CHarmonicStringGenerator
+namespace HarmonicStringGenerator
 {
-public:
-	static std::wstring CreateHarmonicString(
+	std::wstring CreateHarmonicString(
 		float amplitude,
-		FunctionType const& function,
+		FunctionType function,
 		float frequency,
 		float phase
 	);
-};
+}

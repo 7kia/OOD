@@ -14,7 +14,7 @@ namespace
 
 CHarmonic::CHarmonic(
 	float amplitude,
-	FunctionType const& function,
+	FunctionType  function,
 	float frequency,
 	float phase
 )
@@ -31,7 +31,7 @@ FunctionType CHarmonic::GetType() const
 	return m_function;
 }
 
-void CHarmonic::SetType(FunctionType const& type)
+void CHarmonic::SetType(FunctionType  type)
 {
 	if (m_function != type)
 	{
