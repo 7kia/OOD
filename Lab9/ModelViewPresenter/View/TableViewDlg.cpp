@@ -26,7 +26,7 @@ void CTableViewDlg::SetData(const Points2D & data)
 {
 	m_pointsList.DeleteAllItems();
 
-	std::for_each(data.cbegin(), data.cend(), 
+	std::for_each(data.crbegin(), data.crend(), 
 		[&](auto & point) {
 			int index = m_pointsList.InsertItem(0, std::to_wstring(point.x).c_str());
 			m_pointsList.SetItemText(index, 1, std::to_wstring(point.y).c_str());

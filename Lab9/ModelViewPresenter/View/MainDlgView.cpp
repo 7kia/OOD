@@ -162,14 +162,6 @@ BOOL CMainDlgView::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	if (m_harmonicsList.GetCurSel() == -1)
-	{
-		DisableEditElements();
-	}
-	else
-	{
-		EnableEditElememts();
-	}
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
@@ -261,26 +253,6 @@ void CMainDlgView::OnKillFocusFrequency()
 	UpdateDataAndSaveSelect(m_frequencyEdit, m_changeFrequencySignal);
 }
 
-void CMainDlgView::DisableEditElements()
-{
-	m_amplitudeEdit.EnableWindow(FALSE);
-	m_frequencyEdit.EnableWindow(FALSE);
-	m_phaseEdit.EnableWindow(FALSE);
-
-	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(FALSE);
-	GetDlgItem(IDC_RADIO_COS)->EnableWindow(FALSE);
-}
-
-void CMainDlgView::EnableEditElememts()
-{
-	m_amplitudeEdit.EnableWindow(TRUE);
-	m_frequencyEdit.EnableWindow(TRUE);
-	m_phaseEdit.EnableWindow(TRUE);
-
-	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(TRUE);
-	GetDlgItem(IDC_RADIO_COS)->EnableWindow(TRUE);
-}
-
 void CMainDlgView::UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & useSignal)
 {
 	if (UpdateData())
@@ -298,10 +270,8 @@ void CMainDlgView::OnBnClickedButtonAdd()
 {
 	if (m_addHarmonicSignal())
 	{
-		EnableEditElememts();
+		UpdateEdits();
 	}
-	UpdateEdits();
-	
 }
 
 
@@ -313,8 +283,6 @@ void CMainDlgView::OnBnClickedButtonDelete()
 		m_deleteHarmonicSignal(index);
 		UpdateEdits();
 	}
-
-
 }
 
 
@@ -358,18 +326,22 @@ void CMainDlgView::OnBtnClickedRadiocos()
 
 void CMainDlgView::OnTcnSelchangeTabView(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	int curSel = m_tabs.GetCurSel();
-	std::map<int, std::pair<bool, bool>> tabsMap = {
-		{ 0,{ true, false } },
-		{ 1,{ false, true } },
+	(void)pNMHDR;
+	(void)pResult;
+	int cuerrentSelection = m_tabs.GetCurSel();
 
-	};
-	auto it = tabsMap.find(curSel);
-	if (it != tabsMap.cend())
+	if (cuerrentSelection == 0)
 	{
-		m_chartDlg->ShowWindow(it->second.first);
-		m_tableDlg->ShowWindow(it->second.second);
+		m_chartDlg->ShowWindow(TRUE);
+		m_tableDlg->ShowWindow(FALSE);
 		m_changeTabSignal();
+		EnableEdits(false);
 	}
-	*pResult = 0;
+	else if(cuerrentSelection == 1)
+	{
+		m_chartDlg->ShowWindow(FALSE);
+		m_tableDlg->ShowWindow(TRUE);
+		m_changeTabSignal();
+		EnableEdits(false);
+	}
 }

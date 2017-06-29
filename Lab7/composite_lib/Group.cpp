@@ -105,7 +105,6 @@ IStylePtr CGroup::GetFillStyle() const
 	{
 		throw std::runtime_error("No shapes to group");
 	}
-	return IStylePtr();
 }
 
 void CGroup::SetFillStyle(IStylePtr const& style)
