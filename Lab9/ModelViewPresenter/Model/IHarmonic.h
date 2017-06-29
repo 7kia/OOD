@@ -1,6 +1,6 @@
 #pragma once
 #include "FunctionType.h"
-#include "Signals.h"
+#include "../Signals.h"
 
 class IHarmonic
 {
