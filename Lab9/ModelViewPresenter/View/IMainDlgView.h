@@ -14,6 +14,7 @@ public:
 	typedef signals::Signal<void(int)> DeleteHarmonicSignal;
 	typedef signals::Signal<void(int)> ChangeSelectionSignal;
 	typedef signals::Signal<void()> InitSignal;
+	typedef signals::Signal<void()> ChangeTabSignal;
 
 	virtual IChartView & GetChartView() = 0;
 	//virtual ITableView & GetTableView() = 0;
@@ -29,6 +30,7 @@ public:
 	virtual signals::Connection DoOnDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler) = 0;
 	virtual signals::Connection DoOnAddHarmonic(const AddHarmonicSignal::slot_type & handler) = 0;
 	virtual signals::Connection DoOnChangeSelect(const ChangeSelectionSignal::slot_type & handler) = 0;
+	virtual signals::Connection DoOnChangeTab(const ChangeTabSignal::slot_type & handler) = 0;
 
 	virtual ~IMainDlgView() = default;
 };

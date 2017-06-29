@@ -2,6 +2,8 @@
 #include "IMainDlgView.h"
 #include "afxwin.h"
 #include "ChartView.h"
+#include "ChartViewDlg.h"
+#include "TableViewDlg.h"
 
 class CMainDlgView : public CDialogEx, public IMainDlgView
 {
@@ -32,6 +34,7 @@ protected:
 	signals::Connection DoOnDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler) override final;
 	signals::Connection DoOnAddHarmonic(const AddHarmonicSignal::slot_type & handler) override final;
 	signals::Connection DoOnChangeSelect(const ChangeSelectionSignal::slot_type & handler) override final;
+	signals::Connection DoOnChangeTab(const ChangeTabSignal::slot_type & handler) override final;
 	//--------------------------------------------
 // Implementation
 protected:
@@ -55,6 +58,9 @@ private:
 	void EnableEditElememts();
 	void UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & signal);
 
+	void UpdateEdits();
+	void EnableEdits(bool enabled);
+
 	InitSignal m_initSignal;
 	ChangeHarmonicSignal m_changeAmplitudeSignal;
 	ChangeHarmonicSignal m_changeFrequencySignal;
@@ -63,9 +69,12 @@ private:
 	AddHarmonicSignal m_addHarmonicSignal;
 	DeleteHarmonicSignal m_deleteHarmonicSignal;
 	ChangeSelectionSignal m_changeSelection;
-	
-	CChartView m_chart;
+	ChangeTabSignal m_changeTabSignal;
 
+	std::shared_ptr<CChartViewDlg> m_chartDlg;
+	std::shared_ptr<CTableViewDlg> m_tableDlg;
+
+	CTabCtrl m_tabs;
 	CListBox m_harmonicsList;
 	CEdit m_amplitudeEdit;
 	CEdit m_frequencyEdit;
@@ -79,4 +88,5 @@ public:
 	afx_msg void OnLbnSelchangeHarmonicsList();
 	afx_msg void OnBtnClickedRadiosin();
 	afx_msg void OnBtnClickedRadiocos();
+	afx_msg void OnTcnSelchangeTabView(NMHDR *pNMHDR, LRESULT *pResult);
 };

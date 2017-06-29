@@ -35,6 +35,7 @@ void CMainDlgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_AMPLITUDE, m_amplitudeEdit);
 	DDX_Control(pDX, IDC_EDIT_FREQUENCY, m_frequencyEdit);
 	DDX_Control(pDX, IDC_EDIT_PHASE, m_phaseEdit);
+	DDX_Control(pDX, IDC_TAB_VIEW, m_tabs);
 }
 
 void CMainDlgView::SetListItems(std::vector<std::wstring> const& list)
@@ -66,7 +67,33 @@ void CMainDlgView::UpdateSelectedHarmonic(
 
 IChartView & CMainDlgView::GetChartView()
 {
-	return m_chart;
+	std::map<int, IChartView&> chartsMap = {
+		{ 0, m_chartDlg->GetChart()},
+		{ 1, *m_tableDlg },
+	};
+	int currentTab = m_tabs.GetCurSel();
+	auto it = chartsMap.find(currentTab);
+	if (it != chartsMap.cend())
+	{
+		return it->second;
+	}
+	throw std::runtime_error("Invalid tab");
+	
+}
+
+void CMainDlgView::EnableEdits(bool enabled)
+{
+	m_amplitudeEdit.EnableWindow(enabled);
+	m_frequencyEdit.EnableWindow(enabled);
+	m_phaseEdit.EnableWindow(enabled);
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(enabled);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(enabled);
+}
+
+void CMainDlgView::UpdateEdits()
+{
+	int index = m_harmonicsList.GetCurSel();
+	EnableEdits(index > -1);
 }
 
 signals::Connection CMainDlgView::DoOnInit(const InitSignal::slot_type & handler)
@@ -109,6 +136,11 @@ signals::Connection CMainDlgView::DoOnChangeSelect(const ChangeSelectionSignal::
 	return 	m_changeSelection.connect(handler);
 }
 
+signals::Connection CMainDlgView::DoOnChangeTab(const ChangeTabSignal::slot_type & handler)
+{
+	return m_changeTabSignal.connect(handler);
+}
+
 BEGIN_MESSAGE_MAP(CMainDlgView, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -120,6 +152,7 @@ BEGIN_MESSAGE_MAP(CMainDlgView, CDialogEx)
 	ON_EN_KILLFOCUS(IDC_EDIT_PHASE, &CMainDlgView::OnKillFocusPhase)
 	ON_BN_CLICKED(IDC_RADIO_SIN, &CMainDlgView::OnBtnClickedRadiosin)
 	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlgView::OnBtnClickedRadiocos)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB_VIEW, &CMainDlgView::OnTcnSelchangeTabView)
 END_MESSAGE_MAP()
 
 
@@ -141,9 +174,32 @@ BOOL CMainDlgView::OnInitDialog()
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
-	m_chart.SubclassDlgItem(IDC_CHART, this);
+	m_tabs.InsertItem(0, L"Chart");
+	m_tabs.InsertItem(1, L"Table");
+			
+	m_chartDlg = std::make_shared<CChartViewDlg>(&m_tabs);
+	m_chartDlg->Create(IDD_CHART_VIEW_DIALOG, &m_tabs);
+	m_chartDlg->SubclassDlgItem(IDD_CHART_VIEW_DIALOG, this);
+	
+	m_tableDlg = std::make_shared<CTableViewDlg>(&m_tabs);
+	m_tableDlg->Create(IDD_TABLE_VIEW_DIALOG, &m_tabs);
+	
+	CRect rc;
+	m_tabs.GetClientRect(rc);
+	rc.top += 20;
+	rc.bottom -= 10;
+	rc.left += 10;
+	rc.right -= 10;
+	m_chartDlg->MoveWindow(&rc);
+	m_tableDlg->MoveWindow(&rc);
+	
+	m_chartDlg->ShowWindow(TRUE);
+	m_tableDlg->ShowWindow(FALSE);
+
+	m_tabs.SetCurSel(0);
 
 	m_initSignal();
+	EnableEdits(false);
 
 	// TODO: Add extra initialization here
 
@@ -244,7 +300,7 @@ void CMainDlgView::OnBnClickedButtonAdd()
 	{
 		EnableEditElememts();
 	}
-	
+	UpdateEdits();
 	
 }
 
@@ -255,6 +311,7 @@ void CMainDlgView::OnBnClickedButtonDelete()
 	if (index >= 0)
 	{
 		m_deleteHarmonicSignal(index);
+		UpdateEdits();
 	}
 
 
@@ -267,6 +324,7 @@ void CMainDlgView::OnLbnSelchangeHarmonicsList()
 	if (index >= 0)
 	{
 		m_changeSelection(index);
+		UpdateEdits();
 	}
 }
 
@@ -296,4 +354,22 @@ void CMainDlgView::OnBtnClickedRadiocos()
 		}
 		m_harmonicsList.SetCurSel(index);
 	}
+}
+
+void CMainDlgView::OnTcnSelchangeTabView(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	int curSel = m_tabs.GetCurSel();
+	std::map<int, std::pair<bool, bool>> tabsMap = {
+		{ 0,{ true, false } },
+		{ 1,{ false, true } },
+
+	};
+	auto it = tabsMap.find(curSel);
+	if (it != tabsMap.cend())
+	{
+		m_chartDlg->ShowWindow(it->second.first);
+		m_tableDlg->ShowWindow(it->second.second);
+		m_changeTabSignal();
+	}
+	*pResult = 0;
 }
